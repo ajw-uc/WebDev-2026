@@ -10,6 +10,17 @@ Route::get('/post', function () {
     return 'Ini halaman post';
 });
 
-Route::get('/user', function () {
-    return 'Ini halaman user';
+Route::get('/post/{id}', function ($id) {
+    return view('post.show', ['id' => $id]);
+});
+
+Route::get('/me', function () {
+    $user = [
+        'name' => 'John Doe',
+        'username' => '@john.doe'
+    ];
+
+    return view('user.index', [
+        'user' => $user
+    ]);
 });
