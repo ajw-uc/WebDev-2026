@@ -11,7 +11,7 @@
         <article>
             <a href="{{ route('user.show', $post['author_id']) }}">
                 <header>
-                    <img src="{{ asset('img/profile-avatar.svg') }}" alt="{{ $post['author_name'] }}" class="profile-avatar">
+                    <img src="{{ asset('images/profile-avatar.svg') }}" alt="{{ $post['author_name'] }}" class="profile-avatar">
                     <h3>{{ $post['author_name'] }}</h3>
                     <div>
                         {{ $post['author_username'] }} · {{ $post['time'] }}
