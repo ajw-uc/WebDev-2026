@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Me - Mini Social Media</title>
-</head>
-<body>
+@extends('layout.default')
+
+@section('title', 'My Profile')
+
+@section('content')
     <h1>Profile</h1>
     <p>Nama: {{ $user['name'] }}</p>
     <p>Username: {{ $user['username'] }}</p>
-</body>
-</html>
+@endsection

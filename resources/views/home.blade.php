@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Mini Social Media</title>
-</head>
-<body>
+@extends('layout.default')
+
+@section('title', 'Home')
+
+@section('content')
     @foreach ($posts as $post)
         <article>
             <a href="{{ route('user.show', $post['author_id']) }}">
@@ -26,5 +23,4 @@
         </article>
         <hr/>
     @endforeach
-</body>
-</html>
+@endsection
