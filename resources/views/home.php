@@ -10,9 +10,9 @@
         <article>
             <a href="<?= route('user.show', $post['author_id']) ?>">
                 <header>
-                    <h3><?= $post['author'] ?></h3>
+                    <h3><?= $post['author_name'] ?></h3>
                     <div>
-                        <?= $post['username'] ?> · <?= $post['time'] ?>
+                        <?= $post['author_username'] ?> · <?= $post['time'] ?>
                     </div>
                 </header>
             </a>
@@ -21,7 +21,7 @@
             </a>
             <div>
                 <a href="<?= route('post.show', $post['id']) ?>#likes"><?= $post['likes'] ?> likes</a>
-                <a href="<?= route('post.show', $post['id']) ?>#comments"><?= $post['comments'] ?> comments</a>
+                <a href="<?= route('post.show', $post['id']) ?>#comments"><?= count($post['comments']) ?> comments</a>
             </div>
         </article>
         <hr/>
