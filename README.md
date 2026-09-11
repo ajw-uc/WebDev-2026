@@ -1,58 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sesi 1: Instalasi Laravel
+Sesi ini mempelajari cara instalasi Laravel dan melakukan push ke GitHub
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Cara Instalasi
+1. Install Herd (https://herd.laravel.com/)
+2. Buka Herd
+3. Buka Sites
+4. Klik "+ Add Site"
+5. Pilih "New Laravel Project"
+6. Untuk starter kit, pilih "No Starter Kit"
+7. Isi nama project, misalkan "Webdev"
+8. Pilih project path (lokasi penyimpanan project)
+9. Pilih testing framework "Pest"
+10. Aktifkan Laravel Boost jika akan menggunakan AI Agent untuk membantu coding
+11. Aktifkan Initialize a Git repository
+12. Klik "Next", tunggu hingga proses instalasi selesai
 
-## About Laravel
+## Membuka Project
+Setelah project berhasil dibuat, Herd akan mengaktifkan URL http://webdev.test
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Membuat repository GitHub
+1. Buka GitHub (https://github.com)
+2. Sign up, jika belum memiliki akun
+3. Masuk ke GitHub
+4. Buat repository baru, klik tombol "+" di kanan atas, lalu pilih "New repository"
+5. Masukkan nama repository, misalkan "webdev"
+6. Pastikan visibility yang dipilih adalah "public"
+7. Klik "Create Repository"
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+## Instalasi Git
+1. Buka terminal di komputer
+2. Jalankan perintah:
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git --version
 ```
+Jika Git belum terinstal, install Git terlebih dahulu dengan mengikuti panduan di https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Menyimpan source code ke GitHub
+1. Buka halaman repository GitHub, lalu copy URL repository, contoh: https://github.com/ajw-uc/webdev.git
+2. Buka terminal di komputer
+3. Pindah ke direktori project dengan perintah `cd`, contoh: 
+```bash
+cd /Users/user/Herd/WebDev
+```
+4. Hubungkan project dengan repository GitHub 
+```bash
+git remote add origin <URL Repository>
+```
+5. Buat branch bernama "main" 
+```bash
+git branch -M main
+```
+6. Tambahkan semua file ke staging area 
+```bash
+git add .
+```
+7. Commit semua file dengan perintah 
+```
+git commit -m "Initial commit"
+```
+8. Push semua file ke repository GitHub dengan perintah 
+```
+git push -u origin main
+```
+9. Lihat repository GitHub, source code sekarang sudah tersimpan di GitHub
