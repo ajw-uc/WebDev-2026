@@ -1,14 +1,10 @@
-# Sesi 3.A. Blade Template
-Berikut ini adalah aktivitas yang dilakukan pada bagian ini:
-- View yang telah dibuat pada sesi 2 akan diubah menjadi Blade template dengan mengubah extension file menjadi .blade.php. 
-- Menggunakan blade directive seperti `@foreach` untuk menggantikan `<?php foreach () ?>` dan `{{ }}` untuk menampilkan data menggantikan `<?php echo ?>` atau `<?= ?>`. 
-- Menggunakan file asset untuk menampilkan gambar dan mengubah style CSS.
+# Sesi 3.B. Layout dan Component
+Boilerplate html yang semula ada di semua view, akan dipindahkan ke layout template agar tidak perlu ditulis berulang-ulang. Untuk membuat design post yang konsisten, Blade component akan digunakan.
 
 ## File terkait
-- `public/css` - folder untuk menyimpan file styling CSS
-- `public/images` - folder untuk menyimpan gambar
-- `resources/views/home.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
-- `resources/views/post/show.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
-- `resources/views/post/form.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
-- `resources/views/user/index.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
-- `resources/views/user/show.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
+- `resources/views/components/post-card.blade.php` - komponen untuk menampilkan card post
+- `resources/views/home.blade.php` - menggunakan layout dan memanggil komponen post-card
+- `resources/views/post/show.blade.php` - menggunakan layout dan memanggil komponen post-card
+- `resources/views/post/form.blade.php` - menggunakan layout
+- `resources/views/user/index.blade.php` - menggunakan layout
+- `resources/views/user/show.blade.php` - menggunakan layout dan memanggil komponen post-card
