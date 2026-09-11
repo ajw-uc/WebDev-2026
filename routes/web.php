@@ -1,26 +1,29 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Home
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/post', function () {
-    return 'Ini halaman post';
-});
+// Show User Profile
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 
-Route::get('/post/{id}', function ($id) {
-    return view('post.show', ['id' => $id]);
-});
+// Current User
+Route::get('/me', [UserController::class, 'index'])->name('me');
+Route::get('/me/edit', [UserController::class, 'edit'])->name('me.edit');
+Route::put('/me', [UserController::class, 'update'])->name('me.update');
 
-Route::get('/me', function () {
-    $user = [
-        'name' => 'John Doe',
-        'username' => '@john.doe'
-    ];
-
-    return view('user.index', [
-        'user' => $user
-    ]);
+// Post
+Route::group(['prefix' => 'post', 'controller' => PostController::class], function () {
+    Route::get('/', 'index')->name('post');
+    Route::get('/create', 'create')->name('post.create');
+    Route::post('/', 'store')->name('post.store');
+    Route::get('/{id}', 'show')->name('post.show');
+    Route::post('/{id}/comments', 'storeComment')->name('post.comments.store');
+    Route::get('/{id}/edit', 'edit')->name('post.edit');
+    Route::put('/{id}', 'update')->name('post.update');
+    Route::delete('/{id}', 'destroy')->name('post.destroy');
 });

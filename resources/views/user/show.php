@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Detail - Mini Social Media</title>
+    <title>Profile - Mini Social Media</title>
 </head>
 <body>
-    <h1>Post detail</h1>
-    <p>Content: <?= $post['content'] ?></p>
+    <h1>Profile</h1>
+    <p>Nama: <?= $user['name'] ?></p>
+    <p>Username: <?= $user['username'] ?></p>
 </body>
 </html>
