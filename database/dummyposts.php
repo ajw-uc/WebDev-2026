@@ -6,7 +6,6 @@ return [
         'id' => 1,
         'author_id' => 1,
         'author_name' => 'Alya Putri',
-        'author_image' => '/profile-avatar.svg',
         'author_username' => '@alyaputri',
         'time' => '2026-09-11 14:29:19',
         'content' => 'Hari ini akhirnya selesai bikin landing page pertama pakai Laravel! Ternyata yang paling seru itu melihat ide sederhana berubah jadi sesuatu yang bisa dipakai. Pelan-pelan, yang penting terus belajar 🌱',
@@ -34,7 +33,6 @@ return [
         'id' => 2,
         'author_id' => 2,
         'author_name' => 'Raka Wijaya',
-        'author_image' => '/profile-avatar.svg',
         'author_username' => '@rakawijaya',
         'time' => '2026-09-11 14:29:25',
         'content' => 'Keren! Selamat untuk landing page pertamanya. Semangat terus belajarnya!',
@@ -62,11 +60,9 @@ return [
         'id' => 3,
         'author_id' => 3,
         'author_name' => 'Nadia Salsabila',
-        'author_image' => '/profile-avatar.svg',
         'author_username' => '@nadiasalsabila',
         'time' => '2026-09-11 14:29:30',
         'content' => 'Setuju, mulai dari yang sederhana dulu. Ditunggu karya berikutnya 🌱',
-        'initials' => 'NS',
         'likes' => 8,
         'comments' => [
             [
