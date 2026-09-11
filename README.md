@@ -1,5 +1,5 @@
 # Sesi 3.A. Blade Template
-Beriku ini adalah aktivitas yang dilakukan pada bagian ini:
+Berikut ini adalah aktivitas yang dilakukan pada bagian ini:
 - View yang telah dibuat pada sesi 2 akan diubah menjadi Blade template dengan mengubah extension file menjadi .blade.php. 
 - Menggunakan blade directive seperti `@foreach` untuk menggantikan `<?php foreach () ?>` dan `{{ }}` untuk menampilkan data menggantikan `<?php echo ?>` atau `<?= ?>`. 
 - Menggunakan file asset untuk menampilkan gambar dan mengubah style CSS.
