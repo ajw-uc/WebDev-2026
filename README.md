@@ -1,4 +1,4 @@
-# Sesi 2a: Routing Dasar dan Penggunaan View
+# Sesi 2.A. Routing Dasar dan Penggunaan View
 Sesi ini mempelajari cara membuat routing dasar di Laravel dan cara menampilkan view. Akan ada 3 jenis route:
 1. Route yang mengembalikan string
 2. Route yang mengembalikan view
