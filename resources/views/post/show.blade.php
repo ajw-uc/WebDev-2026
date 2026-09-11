@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Post detail</h1>
-    <p>Content: <?= $post['content'] ?></p>
+    <p>Content: {{ $post['content'] }}</p>
 </body>
 </html>

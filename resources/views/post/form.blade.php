@@ -6,7 +6,7 @@
     <title>Home - Mini Social Media</title>
 </head>
 <body>
-    <form action="/post" method="POST">
+    <form action="{{ route('post.store') }}" method="POST">
         <div>
             <textarea name="content" placeholder="What's on your mind?" rows="5"></textarea>
         </div>
