@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -23,10 +24,9 @@ class PostController extends Controller
     // Menampilkan detail post
     public function show(Request $request, string $id): View
     {
-        $posts = include app_path('../database/dummyposts.php');
-        $posts = array_filter($posts, fn (array $post): bool => (string) $post['id'] === $id);
-        $post = array_pop($posts);
-        abort_if($post === null, 404);
+        $post = Post::findOrFail($id);
+
+        dd($post, $post->content, $post->formattedCreatedAt, $post->formatted_created_at, $post->user->name);
 
         return view('post.show', ['post' => $post]);
     }
