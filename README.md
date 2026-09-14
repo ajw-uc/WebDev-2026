@@ -9,3 +9,7 @@ Boilerplate html yang semula ada di semua view, akan dipindahkan ke layout templ
 - `resources/views/post/form.blade.php` - menggunakan layout
 - `resources/views/user/index.blade.php` - menggunakan layout
 - `resources/views/user/show.blade.php` - menggunakan layout dan memanggil komponen post-card
+
+## Reference
+- Layout: https://laravel.com/framework/docs/13.x/blade#layouts-using-template-inheritance
+- Components: https://laravel.com/framework/docs/13.x/blade#components
