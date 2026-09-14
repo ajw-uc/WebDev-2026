@@ -19,3 +19,6 @@ php artisan make:controller UserController
 - `resources/views/user/show.php` - halaman profil user lain
 - `database/dummyusers.php` - data dummy untuk user
 - `database/dummyposts.php` - data dummy untuk post
+
+## Reference
+- Controller: https://laravel.com/docs/13.x/controllers
