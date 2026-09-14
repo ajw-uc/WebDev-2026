@@ -12,3 +12,6 @@ Membuat tampilan lebih modern dan responsive dengan menggunakan Bootstrap CSS fr
 - `resources/views/post/form.blade.php` - ubah ke versi bootstrap
 - `resources/views/user/edit.blade.php` - form untuk edit profil
 - `resources/views/user/index.blade.php` - menambahkan link untuk edit profile dan create post
+
+## Reference
+- Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
