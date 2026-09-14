@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('following_user_id');
             $table->foreign('follower_user_id')->references('id')->on('users');
             $table->foreign('following_user_id')->references('id')->on('users');
+            $table->unique(['follower_user_id', 'following_user_id']);
             $table->timestamps();
         });
     }
