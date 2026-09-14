@@ -6,7 +6,7 @@ MySQL sudah terinstall dan running (bisa menggunakan XAMPP atau standalone)
 
 ## Pengaturan
 Masukkan credentials database di file `.env`:
-1. Buka file `.env` (jika belum ada, maka copy dan rename `.env.example`)
+1. Buka file `.env` (jika belum ada, maka copy dan rename file `.env.example` menjadi `.env`)
 2. Ubah credentials database `.env`:
 ```
 DB_CONNECTION=mysql
