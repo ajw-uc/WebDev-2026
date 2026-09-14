@@ -10,36 +10,33 @@
     @yield('head')
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('home') }}">Mini Social</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Notification
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Notification 1</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 2</a></li>
-                            <li><a class="dropdown-item" href="#">Notification 3</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('me') }}">My Profile</a>
-                    </li>
-                </ul>
+    <nav class="navbar social-navbar" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <span class="brand-mark" aria-hidden="true">✳</span>
+                <span class="d-none d-sm-inline">
+                    Mini Social<span class="brand-dot">.</span>
+                </span>
+            </a>
+            <div class="nav-actions">
+                <a class="home-link" href="{{ route('home') }}" @if(request()->routeIs('home')) aria-current="page"@endif>Home</a>
+                <details class="notification-menu">
+                    <summary class="notification-toggle" aria-label="Notifications">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9Z"/><path d="M10 21h4"/></svg>
+                    </summary>
+                    <section class="notification-panel" aria-labelledby="notification-heading">
+                        <h2 id="notification-heading">Notifications</h2>
+                        <div class="notification-empty"><span aria-hidden="true">✧</span><h3>You’re all caught up.</h3><p>No notifications yet. New activity will appear here.</p></div>
+                    </section>
+                </details>
+                <a class="nav-profile" href="{{ route('me') }}" aria-label="My profile" @if(request()->routeIs('me')) aria-current="page"@endif>
+                    <img src="{{ asset('images/profile-avatar.svg') }}" width="40" height="40" alt="My profile picture">
+                </a>
             </div>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container mt-4">
         @yield('content')
     </div>
 </body>

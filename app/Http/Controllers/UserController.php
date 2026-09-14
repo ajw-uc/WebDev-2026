@@ -20,7 +20,7 @@ class UserController extends Controller
             'following' => 0
         ];
 
-        return view('user.index', ['user' => $user]);
+        return view('user.index', ['user' => $user, 'posts' => []]);
     }
 
     // Menampilkan profil pengguna berdasarkan ID
