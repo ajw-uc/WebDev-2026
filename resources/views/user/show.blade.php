@@ -10,11 +10,11 @@
             <img class="profile-picture public-profile-avatar" src="{{ asset('images/profile-avatar.svg') }}" width="104" height="104" alt="Foto profil {{ $user['name'] }}">
             <span class="profile-label">Community profile</span>
             <h1 id="profile-heading">{{ $user['name'] }}</h1><p class="text-muted mb-2">{{ $user['username'] }}</p>
-            <p class="profile-bio"><?= $user['caption'] ?></p>
+            <p class="profile-bio">{{ $user['caption'] }}</p>
             <div class="d-sm-flex gap-3">
-                <div class="profile-count"><strong><?= count($posts) ?></strong> posts</div>
-                <div class="profile-count"><strong><?= $user['followers'] ?></strong> followers</div>
-                <div class="profile-count"><strong><?= $user['following'] ?></strong> following</div>
+                <div class="profile-count"><strong>{{ count($posts) }}</strong> posts</div>
+                <div class="profile-count"><strong>{{ $user['followers'] }}</strong> followers</div>
+                <div class="profile-count"><strong>{{ $user['following'] }}</strong> following</div>
             </div>
         </div>
     </section>
