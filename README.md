@@ -21,6 +21,10 @@ Sesuaikan credential dengan database yang Anda gunakan.
 ## Cara membuat migration
 ```bash
 php artisan make:migration create_posts_table
+php artisan make:migration create_comments_table
+php artisan make:migration create_likes_table
+php artisan make:migration create_follows_table
+php artisan make:migration add_username_bio_image_to_users_table
 ```
 
 ## File terkait
