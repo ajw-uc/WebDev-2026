@@ -1,42 +1,103 @@
-# Sesi 4. Migration
-Memahami cara membuat migration dan tipe kolom untuk membuat table baru, mengupdate table yang sudah ada, menjalankan migration, rollback migration.
+# Sesi 5. Model
+Membuat model sesuai dengan database yang telah dibuat. Menambahkan, mengubah, menghapus, dan menampilkan data lewat Laravel Tinker REPL (read, eval, print, loop). Menggunakan factory dan faker untuk membuat data dummy secara otomatis dan membuat seeder untuk mempersiapkan demo data.
 
-## Prasyarat
-MySQL sudah terinstall dan running (bisa menggunakan XAMPP atau standalone)
-
-## Pengaturan
-Masukkan credentials database di file `.env`:
-1. Buka file `.env` (jika belum ada, maka copy dan rename file `.env.example` menjadi `.env`)
-2. Ubah credentials database `.env`:
-```
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laravel
-DB_USERNAME=root
-DB_PASSWORD=
-```
-Sesuaikan credential dengan database yang Anda gunakan.
-
-## Cara membuat migration
+## Membuat Model
 ```bash
-php artisan make:migration create_posts_table
+php artisan make:model Post
+php artisan make:model Comment
+php artisan make:model Like
+php artisan make:model Follow
 ```
+Setelah membuat model, atur variable `$fillable` untuk menentukan kolom apa saja yang boleh diisi secara massal.
+
+## Membuka Tinker
+Jalankan perintah berikut di terminal:
+```bash
+php artisan tinker
+```
+
+## Menambahkan data
+Jalankan perintah berikut di Tinker:
+```
+User::create([
+    'name' => 'John Doe',
+    'email' => 'john.doe@example.com',
+    'username' => 'johndoe',
+    'password' => 'password',
+]);
+```
+
+## Mendapatkan semua data
+Jalankan perintah berikut di Tinker:
+```
+User::all();
+```
+
+## Mendapatkan data berdasarkan ID
+Jalankan perintah berikut di Tinker:
+```
+User::find(1);
+```
+
+## Mendapatkan data berdasarkan username
+Jalankan perintah berikut di Tinker:
+```
+User::where('username', 'johndoe')->first();
+```
+
+## Mengubah data
+Jalankan perintah berikut di Tinker:
+```
+$user = User::find(1);
+$user->name = 'Jane Doe';
+$user->save();
+```
+
+## Menghapus data
+Jalankan perintah berikut di Tinker:
+```
+$user->delete();
+```
+
+## Membuat factory
+Jalankan perintah berikut di terminal:
+```
+php artisan make:factory PostFactory
+```
+
+## Menjalankan factory
+Jalankan perintah berikut di Tinker:
+```
+\App\Models\User::factory()->count(5)->create();
+\App\Models\Post::factory()->count(100)->create();
+```
+
+## Membuat seeder
+Jalankan perintah berikut di terminal:
+```
+php artisan make:seeder DemoSeeder
+```
+
+## Menjalankan seeder
+Jalankan perintah berikut di terminal:
+```
+php artisan db:seed --class=DemoSeeder
+php artisan db:seed
+```
+
+## Rollback dan seed
+```
+php artisan migration:rollback --seed
+```
+
 
 ## File terkait
-- `database/erd.png` - ERD struktur database yang akan dibuat
-- `database/migrations/2026_09_14_021532_create_posts_table.php` - membuat table posts dengan soft delete
-- `database/migrations/2026_09_14_021627_create_comments_table.php` - membuat table comments dengan soft delete
-- `database/migrations/2026_09_14_025152_create_likes_table.php` - membuat table likes
-- `database/migrations/2026_09_14_025157_create_follows_table.php` - membuat table follows
-- `database/migrations/2026_09_14_030430_add_username_bio_image_to_users_table.php` - menambahkan kolom username, bio, dan image ke table users
-
-## Cara menjalankan migration
-```bash
-php artisan migrate
-```
-
-## Cara rollback migration
-```bash
-php artisan migrate:rollback
-```
+- `app/Models/Comment.php` - Model yang terhubung dengan table comment
+- `app/Models/Follow.php` - Model yang terhubung dengan table follow
+- `app/Models/Like.php` - Model yang terhubung dengan table like
+- `app/Models/Post.php` - Model yang terhubung dengan table post
+- `app/Models/User.php` - Model yang terhubung dengan table user
+- `database/factories/UserFactory.php` - Factory untuk membuat user
+- `database/factories/PostFactory.php` - Factory untuk membuat post
+- `database/seeders/DemoSeeder.php` - Seeder untuk demo program
+- `database/seeders/DatabaseSeeder.php` - Seeder default
