@@ -12,3 +12,8 @@ Berikut ini adalah aktivitas yang dilakukan pada bagian ini:
 - `resources/views/post/form.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
 - `resources/views/user/index.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
 - `resources/views/user/show.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
+
+## Reference
+- Blade Template: https://laravel.com/docs/13.x/blade
+- Layout: https://laravel.com/framework/docs/13.x/blade#layouts-using-template-inheritance
+- Components: https://laravel.com/framework/docs/13.x/blade#components
