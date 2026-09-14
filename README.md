@@ -44,3 +44,6 @@ php artisan migrate
 ```bash
 php artisan migrate:rollback
 ```
+
+## Reference
+- Migrations: https://laravel.com/framework/docs/migrations
