@@ -1,6 +1,13 @@
 # Sesi 2.B. Controller
 Sesi ini mempelajari cara membuat controller di Laravel dan menghubungkannya dengan route dan view, memberi nama route, dan melakukan pengelompokan route berdasarkan prefix URL dan controller.
 
+## Membuat controller
+```
+php artisan make:controller HomeController
+php artisan make:controller PostController
+php artisan make:controller UserController
+```
+
 ## File terkait
 - `routes/web.php` - mengubah format route dan mendefinisikan route baru
 - `app/Http/Controllers/HomeController.php` - controller untuk halaman home
