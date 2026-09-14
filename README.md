@@ -8,3 +8,7 @@ Sesi ini mempelajari cara membuat routing dasar di Laravel dan cara menampilkan 
 - `routes/web.php` - untuk mendefinisikan route
 - `resources/views/post/show.php` - untuk menampilkan halaman post
 - `resources/views/user/index.php` - untuk menampilkan halaman user
+
+## Reference
+- Routing: https://laravel.com/docs/13.x/routing
+- Views: https://laravel.com/docs/13.x/views
