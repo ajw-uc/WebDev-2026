@@ -63,3 +63,8 @@ git commit -m "Initial commit"
 git push -u origin main
 ```
 9. Lihat repository GitHub, source code sekarang sudah tersimpan di GitHub
+
+## Referensi
+- Herd: https://herd.laravel.com/
+- Git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+- Laravel Installation: https://laravel.com/framework/docs/13.x/installation
