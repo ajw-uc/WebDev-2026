@@ -4,14 +4,14 @@
 
 @section('content')
     <a class="detail-back" href="{{ route('home') }}">← Back to home</a>
-    <div class="detail-heading"><div><div class="eyebrow">A little conversation</div><h1><?= $post['author_name'] ?>'s post</h1></div></div>
+    <div class="detail-heading"><div><div class="eyebrow">A little conversation</div><h1>{{ $post['author_name'] }}'s post</h1></div></div>
     <div class="card mb-4">
         <div class="card-body">
             <x-post-card :post="$post"></x-post-card>
         </div>
     </div>
     <section class="card" id="comments" aria-labelledby="comments-heading">
-        <div class="card-header profile-posts-header"><h2 id="comments-heading">Comments <span><?= count($post['comments']) ?></span></h2></div>
+        <div class="card-header profile-posts-header"><h2 id="comments-heading">Comments <span>{{ count($post['comments']) }}</span></h2></div>
         <div class="card-body">
             <form class="comment-form" action="{{ route('post.comments.store', $post['id']) }}" method="POST">
                 @csrf
