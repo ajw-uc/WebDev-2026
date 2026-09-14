@@ -9,12 +9,12 @@
         <div class="card-body profile-details">
             <img class="profile-picture" src="{{ asset('images/profile-avatar.svg') }}" width="104" height="104" alt="My profile picture">
             <span class="profile-label">My profile</span>
-            <h1 id="profile-heading"><?= $user['name'] ?></h1><p class="text-muted mb-2">{{ $user['username'] }}</p>
-            <p class="profile-bio"><?= $user['caption'] ?></p>
+            <h1 id="profile-heading">{{ $user['name'] }}</h1><p class="text-muted mb-2">{{ $user['username'] }}</p>
+            <p class="profile-bio">{{ $user['caption'] }}</p>
             <div class="d-sm-flex gap-3">
-                <div class="profile-count"><strong><?= count($posts) ?></strong> posts</div>
-                <div class="profile-count"><strong><?= $user['followers'] ?></strong> followers</div>
-                <div class="profile-count"><strong><?= $user['following'] ?></strong> following</div>
+                <div class="profile-count"><strong>{{ count($posts) }}</strong> posts</div>
+                <div class="profile-count"><strong>{{ $user['followers'] }}</strong> followers</div>
+                <div class="profile-count"><strong>{{ $user['following'] }}</strong> following</div>
             </div>
         </div>
     </section>
