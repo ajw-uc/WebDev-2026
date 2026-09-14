@@ -12,7 +12,7 @@ Masukkan credentials database di file `.env`:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=laravel
+DB_DATABASE=webdev
 DB_USERNAME=root
 DB_PASSWORD=
 ```
