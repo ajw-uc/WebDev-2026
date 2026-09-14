@@ -18,6 +18,11 @@ DB_PASSWORD=
 ```
 Sesuaikan credential dengan database yang Anda gunakan.
 
+## Cara membuat migration
+```bash
+php artisan make:migration create_posts_table
+```
+
 ## File terkait
 - `database/erd.png` - ERD struktur database yang akan dibuat
 - `database/migrations/2026_09_14_021532_create_posts_table.php` - membuat table posts dengan soft delete
