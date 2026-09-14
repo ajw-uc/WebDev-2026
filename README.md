@@ -100,4 +100,12 @@ php artisan migration:rollback --seed
 - `database/factories/UserFactory.php` - Factory untuk membuat user
 - `database/factories/PostFactory.php` - Factory untuk membuat post
 - `database/seeders/DemoSeeder.php` - Seeder untuk demo program
-- `database/seeders/DatabaseSeeder.php` - Seeder default
+- `database/seeders/DatabaseSeeder.php` - Seeder 
+
+## Referensi
+- Migrations: https://laravel.com/framework/docs/migrations
+- Eloquent Model: https://laravel.com/framework/docs/13.x/eloquent
+- Tinker: https://laravel.com/framework/docs/13.x/artisan#tinker
+- Factory: https://laravel.com/framework/docs/13.x/eloquent-factories
+- Faker: https://fakerphp.org/
+- Seeding: https://laravel.com/framework/docs/13.x/seeding#writing-seeders
