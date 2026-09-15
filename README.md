@@ -1,13 +1,10 @@
 # Sesi 2.A. Routing Dasar dan Penggunaan View
-Sesi ini mempelajari cara membuat routing dasar di Laravel dan cara menampilkan view. Akan ada 3 jenis route:
-1. Route yang mengembalikan string
-2. Route yang mengembalikan view
-3. Route yang menerima parameter
+Menambahkan routing dasar Laravel untuk halaman utama, post, dan profil user. Menerapkan route yang mengembalikan string, route yang menampilkan view, serta route dengan parameter dan data user.
 
 ## File terkait
-- `routes/web.php` - untuk mendefinisikan route
-- `resources/views/post/show.php` - untuk menampilkan halaman post
-- `resources/views/user/index.php` - untuk menampilkan halaman user
+- `routes/web.php` - Mendefinisikan route `/`, `/post`, `/post/{id}`, dan `/me`, termasuk pengiriman parameter post serta data user ke view
+- `resources/views/post/show.php` - Menampilkan halaman post berdasarkan id dari route
+- `resources/views/user/index.php` - Menampilkan nama dan username user dari data yang dikirim route
 
 ## Reference
 - Routing: https://laravel.com/docs/13.x/routing
