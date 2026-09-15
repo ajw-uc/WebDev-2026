@@ -1,4 +1,4 @@
-# Sesi 7. Create dan Read
+# Sesi 7.A. Create dan Read
 Menambahkan fitur buat post dan menampilkan post. Membuat komponen untuk inputan agar bisa menampilkan old input dan error validation.
 
 ## File terkait
