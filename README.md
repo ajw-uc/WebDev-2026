@@ -1,17 +1,19 @@
 # Sesi 3.A. Blade Template
 Berikut ini adalah aktivitas yang dilakukan pada bagian ini:
-- View yang telah dibuat pada sesi 2 akan diubah menjadi Blade template dengan mengubah extension file menjadi .blade.php. 
-- Menggunakan blade directive seperti `@foreach` untuk menggantikan `<?php foreach () ?>` dan `{{ }}` untuk menampilkan data menggantikan `<?php echo ?>` atau `<?= ?>`. 
-- Menggunakan file asset untuk menampilkan gambar dan mengubah style CSS.
+- Mengubah view dari sesi sebelumnya menjadi Blade template dengan extension `.blade.php`.
+- Menggunakan Blade directive seperti `@foreach` dan ekspresi `{{ }}` untuk menampilkan data secara lebih ringkas dan aman.
+- Menggunakan helper `asset()` untuk memuat stylesheet dan gambar dari folder `public`.
+- Menambahkan stylesheet dan avatar default untuk memperbarui tampilan halaman home, post, dan profil user.
 
 ## File terkait
-- `public/css` - folder untuk menyimpan file styling CSS
-- `public/images` - folder untuk menyimpan gambar
-- `resources/views/home.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
-- `resources/views/post/show.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
-- `resources/views/post/form.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
-- `resources/views/user/index.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
-- `resources/views/user/show.blade.php` - menambahkan link css dan mengubah syntax ke bentuk Blade directives
+- `public/css/style.css` - Stylesheet untuk halaman aplikasi
+- `public/images/profile-avatar.svg` - Avatar default untuk profil dan post
+- `resources/views/home.blade.php` - Halaman home dengan loop post, route link, dan asset Blade
+- `resources/views/post/form.blade.php` - Form pembuatan post dengan syntax Blade
+- `resources/views/post/show.blade.php` - Detail post dan daftar komentar dengan `@foreach`
+- `resources/views/user/index.blade.php` - Profil user saat ini dengan data Blade
+- `resources/views/user/show.blade.php` - Profil user lain beserta daftar postnya
 
-## Reference
+## Referensi
 - Blade Template: https://laravel.com/docs/13.x/blade
+- Asset URL: https://laravel.com/docs/13.x/helpers#method-asset
