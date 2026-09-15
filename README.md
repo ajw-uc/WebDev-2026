@@ -1,15 +1,15 @@
 # Sesi 3.B. Layout dan Component
-Boilerplate html yang semula ada di semua view, akan dipindahkan ke layout template agar tidak perlu ditulis berulang-ulang. Untuk membuat design post yang konsisten, Blade component akan digunakan.
+Memindahkan boilerplate HTML yang semula ada di setiap view ke layout template agar dapat digunakan kembali. Menambahkan Blade component untuk membuat tampilan card post yang konsisten di halaman home, detail post, dan profil user.
 
 ## File terkait
-- `resources/views/layout/default.blade.php` - pindah boilerplate ke layout
-- `resources/views/components/post-card.blade.php` - komponen untuk menampilkan card post
-- `resources/views/home.blade.php` - menggunakan layout dan memanggil komponen post-card
-- `resources/views/post/show.blade.php` - menggunakan layout dan memanggil komponen post-card
-- `resources/views/post/form.blade.php` - menggunakan layout
-- `resources/views/user/index.blade.php` - menggunakan layout
-- `resources/views/user/show.blade.php` - menggunakan layout dan memanggil komponen post-card
+- `resources/views/layout/default.blade.php` - Layout utama berisi boilerplate HTML, navigasi, asset, dan section content
+- `resources/views/components/post-card.blade.php` - Blade component untuk menampilkan card post dan data terkait
+- `resources/views/home.blade.php` - Menggunakan layout dan memanggil component post-card untuk feed
+- `resources/views/post/show.blade.php` - Menggunakan layout dan component post-card pada detail post
+- `resources/views/post/form.blade.php` - Menggunakan layout untuk form post
+- `resources/views/user/index.blade.php` - Menggunakan layout untuk halaman profil user
+- `resources/views/user/show.blade.php` - Menggunakan layout dan component post-card untuk profil publik
 
-## Reference
-- Layout: https://laravel.com/framework/docs/13.x/blade#layouts-using-template-inheritance
-- Components: https://laravel.com/framework/docs/13.x/blade#components
+## Referensi
+- Layout: https://laravel.com/docs/13.x/blade#layouts-using-template-inheritance
+- Components: https://laravel.com/docs/13.x/blade#components
