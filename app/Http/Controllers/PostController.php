@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -11,9 +12,23 @@ use Illuminate\View\View;
 class PostController extends Controller
 {
     // Menampilkan post dengan filter
-    public function index(): View
+    public function index(Request $request): View
     {
-        $posts = Post::latest()->paginate(10);
+        $search = trim($request->query('search', ''));
+        $sort = $request->query('sort', 'latest');
+
+        // cari post berdasarkan content, username, atau nama user
+        $posts = Post::where(function (Builder $query) use ($search) {
+                $query->where('content', 'like', "%{$search}%")
+                    ->orWhereHas('user', function (Builder $userQuery) use ($search) {
+                        $userQuery->where('name', 'like', "%{$search}%")
+                            ->orWhere('username', 'like', "%{$search}%");
+                    });
+            })
+            ->orderBy('created_at', $sort === 'oldest' ? 'asc' : 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
         return view('post.index', ['posts' => $posts]);
     }
 
@@ -27,12 +42,13 @@ class PostController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'content' => 'required|string|max:255'
+            'content' => 'required|string|max:255',
         ]);
         $post = Post::create([
             'user_id' => User::inRandomOrder()->first()->id,
-            'content' => $validated['content']
+            'content' => $validated['content'],
         ]);
+
         return redirect()->route('post.show', ['id' => $post->id]);
     }
 
