@@ -10,9 +10,12 @@
             </a>
         </header>
         <p class="comment-content">{{ $comment->content }}</p>
+        @can('delete', $comment)
         <button class="comment-delete-button" type="button" data-bs-toggle="modal" data-bs-target="#deleteCommentModal{{ $comment->id }}" aria-label="Delete comment" title="Delete comment">×</button>
+        @endcan
     </div>
 
+    @can('delete', $comment)
     <div class="modal fade" id="deleteCommentModal{{ $comment->id }}" tabindex="-1" aria-labelledby="deleteCommentModalLabel{{ $comment->id }}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -32,4 +35,5 @@
             </div>
         </div>
     </div>
+    @endcan
 </article>

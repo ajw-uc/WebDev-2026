@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -93,6 +94,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $comment = $post->comments()->findOrFail($commentId);
+        Gate::authorize('delete', $comment);
         $comment->delete();
 
         return redirect()->route('post.show', ['id' => $post->id])->with('comment_status', 'Comment deleted.');
@@ -101,13 +103,17 @@ class PostController extends Controller
     // Menampilkan form untuk mengedit post
     public function edit(string $id): View
     {
-        return view('post.edit', ['post' => Post::findOrFail($id)]);
+        $post = Post::findOrFail($id);
+        Gate::authorize('update', $post);
+
+        return view('post.edit', ['post' => $post]);
     }
 
     // Mengubah post
     public function update(Request $request, string $id): RedirectResponse
     {
         $post = Post::findOrFail($id);
+        Gate::authorize('update', $post);
         $validated = $request->validate([
             'content' => 'required|string|max:255',
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
@@ -136,6 +142,7 @@ class PostController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         $post = Post::findOrFail($id);
+        Gate::authorize('delete', $post);
         $post->delete();
 
         return redirect()->route('post');
