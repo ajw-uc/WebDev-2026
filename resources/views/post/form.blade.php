@@ -11,7 +11,7 @@
                 <h4 class="mb-0">Create New Post</h4>
             </div>
             <div class="card-body">
-                <form action="/post" method="POST">
+                <form action="{{ route('post.store') }}" method="POST">
                         <x-form.group>
                             <label for="content" class="form-label">Post Content</label>
                             <textarea class="form-control" id="content" name="content" rows="5" placeholder="What's on your mind?"></textarea>
