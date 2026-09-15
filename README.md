@@ -1,19 +1,13 @@
-# Sesi 7. Create dan Read
-Menambahkan fitur buat post dan menampilkan post. Membuat komponen untuk inputan agar bisa menampilkan old input dan error validation.
+# Sesi 7.B. Create dan Read
+Menampilkan post dengan pagination.
 
 ## File terkait
-- `app/Http/Controllers/HomeController.php` - Menampilkan 10 post terbaru
-- `app/Http/Controllers/PostController.php` - Validasi dan simpan post
-- `app/Models/User.php` - Menampilkan username dengan awalan @
-- `resources/views/components/post-card.blade.php` - Menampilkan data dari object model
-- `resources/views/components/post-comment.blade.php` - Menampilkan data dari object model
-- `resources/views/components/form/error.blade.php` - Menampilkan error validation
-- `resources/views/components/form/input.blade.php` - Input field dengan old input dan error validation
-- `resources/views/components/form/label.blade.php` - Label field
-- `resources/views/components/form/textarea.blade.php` - Textarea field dengan old input dan error validation
-- `resources/views/post/show.blade.php` - Menampilkan data dari object model
+- `app/Providers/AppServiceProvider.php` - Mengaktifkan style pagination bootstrap 5
+- `app/Http/Controllers/HomeController.php` - Paginate post
+- `app/Http/Controllers/PostController.php` - Menampilkan post di index
+- `public/css/style.css` - Update style pagination
+- `resources/views/home.blade.php` - Menampilkan pagination
+- `resources/views/post/index.blade.php` - Halaman daftar post dengan pagination
 
 ## Referensi
-- Eloquent: https://laravel.com/framework/docs/eloquent
-- Validation: https://laravel.com/framework/docs/13.x/validation
-- Old input: https://laravel.com/framework/docs/13.x/requests#old-input
+- Pagination: https://laravel.com/framework/docs/pagination

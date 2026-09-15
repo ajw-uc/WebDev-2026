@@ -31,6 +31,9 @@
                     <x-post-card :post="$post"></x-post-card>
                 <?php endforeach; ?>
             </div>
+            <div class="mt-3">
+                {{ $posts->links()}}
+            </div>
         </div>
     </div>
 @endsection

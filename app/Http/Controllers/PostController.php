@@ -10,6 +10,13 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
+    // Menampilkan post dengan filter
+    public function index(): View
+    {
+        $posts = Post::latest()->paginate(10);
+        return view('post.index', ['posts' => $posts]);
+    }
+
     // Menampilkan form untuk membuat post baru
     public function create(): View
     {
@@ -33,7 +40,7 @@ class PostController extends Controller
     public function show(Request $request, string $id): View
     {
         $post = Post::findOrFail($id);
-        
+
         return view('post.show', ['post' => $post]);
     }
 
