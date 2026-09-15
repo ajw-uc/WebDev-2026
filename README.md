@@ -2,7 +2,6 @@
 Menambahkan fitur search dan sort.
 
 ## File terkait
-- `app/Http/Controllers/HomeController.php` - Paginate post
 - `app/Http/Controllers/PostController.php` - Menampilkan query builder untuk search dan sort
 - `public/css/style.css` - Tambah style search box
 - `resources/views/layout/default.blade.php` - Menambahkan search box
