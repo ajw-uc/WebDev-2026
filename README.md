@@ -1,5 +1,5 @@
 # Sesi 5. Model
-Membuat model sesuai dengan database yang telah dibuat. Menambahkan, mengubah, menghapus, dan menampilkan data lewat Laravel Tinker REPL (read, eval, print, loop). Menggunakan factory dan faker untuk membuat data dummy secara otomatis dan membuat seeder untuk mempersiapkan demo data.
+Membuat Eloquent model sesuai dengan tabel database pada sesi sebelumnya. Model dikonfigurasi dengan mass assignment, soft delete, factory, dan casting password. Data dapat diuji melalui Laravel Tinker, sedangkan factory dan seeder digunakan untuk menghasilkan data demo user dan post secara otomatis.
 
 ## Membuat Model
 ```bash
@@ -87,25 +87,25 @@ php artisan db:seed
 
 ## Rollback dan seed
 ```
-php artisan migration:rollback --seed
+php artisan migrate:rollback --seed
 ```
 
 
 ## File terkait
-- `app/Models/Comment.php` - Model yang terhubung dengan table comment
-- `app/Models/Follow.php` - Model yang terhubung dengan table follow
-- `app/Models/Like.php` - Model yang terhubung dengan table like
-- `app/Models/Post.php` - Model yang terhubung dengan table post
-- `app/Models/User.php` - Model yang terhubung dengan table user
-- `database/factories/UserFactory.php` - Factory untuk membuat user
-- `database/factories/PostFactory.php` - Factory untuk membuat post
-- `database/seeders/DemoSeeder.php` - Seeder untuk demo program
-- `database/seeders/DatabaseSeeder.php` - Seeder 
+- `app/Models/Comment.php` - Model comment dengan atribut fillable dan soft delete
+- `app/Models/Follow.php` - Model relasi follower dan following dengan atribut fillable
+- `app/Models/Like.php` - Model like dengan atribut fillable
+- `app/Models/Post.php` - Model post dengan atribut fillable, factory, dan soft delete
+- `app/Models/User.php` - Model user dengan atribut fillable, hidden, factory, dan casting password
+- `database/factories/UserFactory.php` - Factory user dengan data Faker dan password default
+- `database/factories/PostFactory.php` - Factory post dengan user acak dan isi paragraph Faker
+- `database/seeders/DemoSeeder.php` - Membuat 5 user dan 100 post untuk data demo
+- `database/seeders/DatabaseSeeder.php` - Memanggil `DemoSeeder` sebagai seeder utama
 
 ## Referensi
-- Migrations: https://laravel.com/framework/docs/migrations
-- Eloquent Model: https://laravel.com/framework/docs/13.x/eloquent
-- Tinker: https://laravel.com/framework/docs/13.x/artisan#tinker
-- Factory: https://laravel.com/framework/docs/13.x/eloquent-factories
+- Migrations: https://laravel.com/docs/13.x/migrations
+- Eloquent Model: https://laravel.com/docs/13.x/eloquent
+- Tinker: https://laravel.com/docs/13.x/artisan#tinker
+- Factory: https://laravel.com/docs/13.x/eloquent-factories
 - Faker: https://fakerphp.org/
-- Seeding: https://laravel.com/framework/docs/13.x/seeding#writing-seeders
+- Seeding: https://laravel.com/docs/13.x/seeding#writing-seeders
