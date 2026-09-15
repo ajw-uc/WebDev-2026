@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,12 +20,12 @@ class PostController extends Controller
 
         // cari post berdasarkan content, username, atau nama user
         $posts = Post::where(function (Builder $query) use ($search) {
-                $query->where('content', 'like', "%{$search}%")
-                    ->orWhereHas('user', function (Builder $userQuery) use ($search) {
-                        $userQuery->where('name', 'like', "%{$search}%")
-                            ->orWhere('username', 'like', "%{$search}%");
-                    });
-            })
+            $query->where('content', 'like', "%{$search}%")
+                ->orWhereHas('user', function (Builder $userQuery) use ($search) {
+                    $userQuery->where('name', 'like', "%{$search}%")
+                        ->orWhere('username', 'like', "%{$search}%");
+                });
+        })
             ->orderBy('created_at', $sort === 'oldest' ? 'asc' : 'desc')
             ->paginate(10)
             ->withQueryString();
@@ -35,7 +36,7 @@ class PostController extends Controller
     // Menampilkan form untuk membuat post baru
     public function create(): View
     {
-        return view('post.form');
+        return view('post.create');
     }
 
     // Menyimpan post baru
@@ -44,6 +45,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'content' => 'required|string|max:255',
         ]);
+
         $post = Post::create([
             'user_id' => User::inRandomOrder()->first()->id,
             'content' => $validated['content'],
@@ -53,7 +55,7 @@ class PostController extends Controller
     }
 
     // Menampilkan detail post
-    public function show(Request $request, string $id): View
+    public function show(string $id): View
     {
         $post = Post::findOrFail($id);
 
@@ -63,24 +65,56 @@ class PostController extends Controller
     // Menyimpan komentar pada post
     public function storeComment(Request $request, string $id): RedirectResponse
     {
-        return redirect()->route('post.show', $id);
+        $post = Post::findOrFail($id);
+        $validated = $request->validate([
+            'content' => 'required|string|max:1000',
+        ]);
+
+        Comment::create([
+            'post_id' => $post->id,
+            'user_id' => User::inRandomOrder()->first()->id,
+            'content' => $validated['content'],
+        ]);
+
+        return redirect()->route('post.show', ['id' => $post->id])->with('comment_status', 'Comment added.');
+    }
+
+    // Menghapus komentar pada post
+    public function destroyComment(string $id, string $commentId): RedirectResponse
+    {
+        $post = Post::findOrFail($id);
+        $comment = $post->comments()->findOrFail($commentId);
+        $comment->delete();
+
+        return redirect()->route('post.show', ['id' => $post->id])->with('comment_status', 'Comment deleted.');
     }
 
     // Menampilkan form untuk mengedit post
     public function edit(string $id): View
     {
-        return view('post.edit', ['id' => $id]);
+        return view('post.edit', ['post' => Post::findOrFail($id)]);
     }
 
     // Mengubah post
     public function update(Request $request, string $id): RedirectResponse
     {
-        return redirect()->route('post.index');
+        $post = Post::findOrFail($id);
+        $validated = $request->validate([
+            'content' => 'required|string|max:255',
+        ]);
+
+        $post->content = $validated['content'];
+        $post->save();
+
+        return redirect()->route('post.show', ['id' => $post->id]);
     }
 
     // Menghapus post
     public function destroy(string $id): RedirectResponse
     {
-        return redirect()->route('post.index');
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return redirect()->route('post');
     }
 }

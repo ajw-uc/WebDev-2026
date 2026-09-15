@@ -13,8 +13,8 @@
             <p class="profile-bio">{{ $user['caption'] }}</p>
             <div class="d-sm-flex gap-3">
                 <div class="profile-count"><strong>{{ count($posts) }}</strong> posts</div>
-                <div class="profile-count"><strong>{{ $user['followers'] }}</strong> followers</div>
-                <div class="profile-count"><strong>{{ $user['following'] }}</strong> following</div>
+                <div class="profile-count"><strong>{{ $user->followers->count() }}</strong> followers</div>
+                <div class="profile-count"><strong>{{ $user->following->count() }}</strong> following</div>
             </div>
         </div>
     </section>

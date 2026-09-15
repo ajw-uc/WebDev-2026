@@ -1,10 +1,16 @@
 @extends('layout.default')
 
-@section('title', $post['author_name'] . "'s post")
+@section('title', $post->user->name . "'s post")
 
 @section('content')
     <a class="detail-back" href="{{ route('home') }}">← Back to home</a>
-    <div class="detail-heading"><div><div class="eyebrow">A little conversation</div><h1><?= $post->user->name ?>'s post</h1></div></div>
+    <div class="detail-heading">
+        <div><div class="eyebrow">A little conversation</div><h1>{{ $post->user->name }}'s post</h1></div>
+        <div class="post-actions">
+            <a class="btn btn-secondary" href="{{ route('post.edit', ['id' => $post->id]) }}">Edit</a>
+            <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deletePostModal">Delete</button>
+        </div>
+    </div>
     <div class="card mb-4">
         <div class="card-body">
             <x-post-card :post="$post"></x-post-card>
@@ -25,11 +31,31 @@
             @if (session('comment_status'))
                 <p class="comment-success" role="status">{{ session('comment_status') }}</p>
             @endif
-            @forelse ($post->comments as $comment)
+            @forelse ($post->comments->sortByDesc('created_at') as $comment)
                 <x-post-comment :comment="$comment"></x-post-comment>
             @empty
                 <div class="empty-state"><div class="empty-icon" aria-hidden="true">✧</div><h3>No comments yet.</h3><p class="text-muted">It’s quiet here. Comments on this post will appear here.</p></div>
             @endforelse
         </div>
     </section>
+
+    <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="deletePostModalLabel">Delete this post?</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">This action cannot be undone.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <form action="{{ route('post.destroy', ['id' => $post->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit">Delete post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

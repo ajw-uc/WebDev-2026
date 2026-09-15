@@ -3,5 +3,5 @@
 ])
 
 <x-form.label :for="$attributes->get('name')" :name="$attributes->get('label')"></x-form.label>
-<input {{ $attributes->merge(['class' => 'form-control']) }}>
+<input {{ $attributes->except(['value', 'label'])->merge(['class' => 'form-control', 'value' => $value]) }}>
 <x-form.error :name="$attributes->get('name')" />

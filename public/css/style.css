@@ -756,6 +756,29 @@ a:focus-visible,button:focus-visible{outline:3px solid #94b577;outline-offset:4p
     gap:16px;
     margin-bottom:24px;
 }
+.post-actions{
+    display:flex;
+    gap:8px;
+}
+.btn-danger{
+    background:#b65c51;
+    border-color:#b65c51;
+    color:#fff;
+}
+.btn-danger:hover,
+.btn-danger:focus{
+    background:#98473e;
+    border-color:#98473e;
+    color:#fff;
+}
+.modal-content{
+    border:1px solid var(--line);
+    border-radius:20px;
+}
+.modal-header,
+.modal-footer{
+    border-color:var(--line);
+}
 .detail-heading h1{
     font-size:32px;
     letter-spacing:-1px;
@@ -782,6 +805,9 @@ a:focus-visible,button:focus-visible{outline:3px solid #94b577;outline-offset:4p
     border-top:1px solid var(--line);
     padding-top:22px;
     margin-top:22px;
+}
+.feed-comment {
+    position: relative;
 }
 .comment-avatar{
     width:36px;
@@ -845,6 +871,35 @@ a:focus-visible,button:focus-visible{outline:3px solid #94b577;outline-offset:4p
 }
 .comment-content {
     white-space: pre-wrap;
+}
+.comment-delete-form {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.comment-delete-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    color: var(--muted);
+    background: transparent;
+    font-size: 20px;
+    line-height: 20px;
+    opacity: .45;
+    cursor: pointer;
+    transition: color .15s ease, background-color .15s ease, opacity .15s ease;
+}
+.comment-delete-button:hover,
+.comment-delete-button:focus-visible {
+    color: #a34b4b;
+    background: #f8eeee;
+    opacity: 1;
+    outline: none;
 }
 @media (max-width: 575px) {
     .comment-form .composer-footer {
