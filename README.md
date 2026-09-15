@@ -8,6 +8,7 @@ Mengupload gambar di post dan menampilkannya.
 - `resources/views/post/_form.blade.php` - Tambah keterangan input gambar dan tampilkan gambar jika ada
 - `resources/views/post/create.blade.php` - Tambah form multipart
 - `resources/views/post/edit.blade.php` - Tambah form multipart
+- `resources/views/home.blade.php` - Tambah form multipart, fix form
 
 ## Referensi
 - Upload: https://laravel.com/docs/13.x/filesystem#file-uploads

@@ -9,13 +9,16 @@
             <h5 class="mb-0">Share something</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('post.store') }}" method="POST">
+            <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <x-form.group>
-                    <textarea class="form-control" aria-label="Post content" name="content" rows="3" placeholder="What's on your mind?"></textarea>
+                    <x-form.textarea id="content" name="content" rows="5" placeholder="What's on your mind?" />
                 </x-form.group>
                 <x-form.group>
-                    <input type="file" class="form-control" aria-label="Post image" name="image" placeholder="Upload an image (optional)">
+                    <x-form.input type="file" class="form-control" aria-label="Post image" name="image" accept="image/jpeg,image/png,image/webp" />
+                    <small class="form-text text-muted">JPG, PNG, atau WebP. max 2 MB.</small>
                 </x-form.group>
+
                 <div class="composer-footer"><span>Big ideas start with a little thought.</span><button type="submit" class="btn btn-primary">Share post <span aria-hidden="true" style="color:inherit">↗</span></button></div>
             </form>
         </div>

@@ -3,7 +3,7 @@
     <x-form.textarea id="content" name="content" rows="5" label="Post Content" :value="$post->content ?? ''" placeholder="What's on your mind?" />
 </x-form.group>
 <x-form.group>
-    <input type="file" class="form-control" aria-label="Post image" name="image" accept="image/jpeg,image/png,image/webp">
+    <x-form.input type="file" class="form-control" aria-label="Post image" name="image" accept="image/jpeg,image/png,image/webp" />
     <small class="form-text text-muted">JPG, PNG, atau WebP. max 2 MB.</small>
     @if (isset($post) && $post->image)
         <div class="mt-3">
