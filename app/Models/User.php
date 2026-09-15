@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 #[Fillable(['name', 'email', 'password', 'username', 'bio', 'image'])]
 #[Hidden(['password', 'remember_token'])]
@@ -45,5 +46,12 @@ class User extends Authenticatable
     public function following(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_user_id', 'following_user_id');
+    }
+
+    protected function usernameDisplay(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => '@' . $this->username
+        );
     }
 }

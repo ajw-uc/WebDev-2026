@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -18,16 +19,21 @@ class PostController extends Controller
     // Menyimpan post baru
     public function store(Request $request): RedirectResponse
     {
-        return redirect()->route('post.index');
+        $validated = $request->validate([
+            'content' => 'required|string|max:255'
+        ]);
+        $post = Post::create([
+            'user_id' => User::inRandomOrder()->first()->id,
+            'content' => $validated['content']
+        ]);
+        return redirect()->route('post.show', ['id' => $post->id]);
     }
 
     // Menampilkan detail post
     public function show(Request $request, string $id): View
     {
         $post = Post::findOrFail($id);
-
-        dd($post, $post->content, $post->formattedCreatedAt, $post->formatted_created_at, $post->user->name);
-
+        
         return view('post.show', ['post' => $post]);
     }
 
