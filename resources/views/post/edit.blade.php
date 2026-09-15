@@ -9,7 +9,7 @@
     </header>
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('post.update', ['id' => $post->id]) }}" method="POST">
+            <form action="{{ route('post.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @include('post._form', ['post' => $post])
                 <div class="d-flex gap-2">

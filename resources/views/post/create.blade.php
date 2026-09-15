@@ -9,7 +9,7 @@
             <h4 class="mb-0">Create New Post</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('post.store') }}" method="POST">
+            <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
                 @include('post._form')
 
                 <div class="d-flex gap-2">
