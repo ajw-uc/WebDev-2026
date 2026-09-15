@@ -7,7 +7,7 @@
     <section class="card profile-card" aria-labelledby="profile-heading">
         <div class="profile-cover" aria-hidden="true"><span>Make room for your story.</span></div>
         <div class="card-body profile-details">
-            <img src="{{ $user->image ? asset('storage/'.$user->image) : asset('images/profile-avatar.svg') }}" width="104" height="104" alt="Foto profil {{ $user['name'] }}">
+            <img class="profile-picture public-profile-avatar" src="{{ $user->image ? asset('storage/'.$user->image) : asset('images/profile-avatar.svg') }}" width="104" height="104" alt="Foto profil {{ $user['name'] }}">
             <div class="dropdown profile-settings">
                 <button class="profile-settings-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</button>
                 <div class="dropdown-menu dropdown-menu-end">
