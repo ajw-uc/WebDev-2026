@@ -13,6 +13,20 @@ php artisan make:notification LikeNotification
 php artisan make:notification FollowNotification
 ```
 
+## Konfigurasi email dengan Mailtrap
+Mailtrap adalah layanan email testing yang memungkinkan Anda mengirim email dari aplikasi Anda tanpa benar-benar mengirim ke alamat tujuan. Ini sangat berguna untuk testing email notification tanpa mengirim email ke penerima sebenarnya. Berikut adalah langkah untuk mengirimkan email via SMTP ke Mailtrap:
+1. Buat akun Mailtrap (https://mailtrap.io/)
+2. Masuk ke Sandboxes, lalu Add project
+3. Buka file .env di project Laravel
+4. Isi atribut .env berikut dengan Host, Port, Username, dan Password yang disediakan oleh Mailtrap
+```
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=<<username dari mailtrap>>
+MAIL_PASSWORD=<<password dari mailtrap>>
+```
+
 ## Alur notifikasi
 - Komentar baru mengirim `CommentNotification` kepada pemilik post.
 - Like baru mengirim `LikeNotification` kepada pemilik post.
