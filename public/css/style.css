@@ -173,6 +173,40 @@ body>.container{
     --bs-btn-active-bg:#173e30;
     --bs-btn-active-border-color:#173e30
 }
+.pagination {
+    gap: 7px;
+}
+.pagination .page-item {
+    margin: 0;
+}
+.pagination .page-link {
+    min-width: 32px;
+    padding: 6px 9px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--green);
+    font-size: 12px;
+    text-align: center;
+    transition: background .15s, border-color .15s, color .15s;
+}
+.pagination .page-link:hover,
+.pagination .page-link:focus {
+    border-color: var(--green);
+    background: #edf2eb;
+    color: var(--green);
+    box-shadow: none;
+}
+.pagination .page-item.active .page-link {
+    border-color: var(--green);
+    background: var(--green);
+    color: #fff;
+}
+.pagination .page-item.disabled .page-link {
+    border-color: var(--line);
+    background: #f5f5f0;
+    color: #a6afa8;
+}
 .btn-secondary{
     background:#edf1e9;
     border-color:#edf1e9;

@@ -10,7 +10,8 @@ class HomeController extends Controller
     // Menampilkan halaman utama dengan daftar post
     public function index(): View
     {
-        $posts = Post::limit(10)->latest()->get();
+        $posts = Post::latest()->paginate(10);
+        $posts->withPath(route('post'));
         return view('home', ['posts' => $posts]);
     }
 }
