@@ -1,4 +1,4 @@
-# Sesi 2.B. Controller
+# 3. Controller
 Menambahkan controller untuk halaman home, post, dan profil user, lalu menghubungkannya dengan route dan view. Route diberi nama serta dikelompokkan berdasarkan prefix URL dan controller. Menambahkan data dummy user dan post untuk menampilkan feed, detail post, komentar, serta profil pengguna.
 
 ## Membuat controller
