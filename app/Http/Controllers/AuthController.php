@@ -47,9 +47,7 @@ class AuthController extends Controller
             'username' => ['required', 'string', 'max:50', 'alpha_dash', 'unique:users,username'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', 'min:8'],
-            'captcha' => ['required', 'string', function (string $attribute, mixed $value, \Closure $fail) use ($request): void {
-
-            }],
+            'captcha' => ['required', 'string'],
         ]);
 
         $expectedPhrase = $request->session()->get('signup_captcha_phrase');
