@@ -1,4 +1,4 @@
-# Sesi 2.A. Routing Dasar dan Penggunaan View
+# 2. Routing Dasar dan Penggunaan View
 Menambahkan routing dasar Laravel untuk halaman utama, post, dan profil user. Menerapkan route yang mengembalikan string, route yang menampilkan view, serta route dengan parameter dan data user.
 
 ## File terkait
