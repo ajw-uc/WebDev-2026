@@ -1,7 +1,7 @@
 <article class="feed-post">
     <header class="feed-author">
         <a class="feed-author-link" href="{{ route('user.show', $post->user_id) }}">
-            <img class="feed-avatar feed-avatar-0" src="{{ asset('/images/profile-avatar.svg') }}" width="46" height="46" alt="Foto profil {{ $post->user->name }}" loading="lazy">
+            <img class="feed-avatar feed-avatar-0" src="{{ $post->user->image ? asset('storage/'.$post->user->image) : asset('/images/profile-avatar.svg') }}" width="46" height="46" alt="Foto profil {{ $post->user->name }}" loading="lazy">
             <div>
                 <h3>{{ $post->user->name }}</h3>
             <p>{{ $post->user->username_display }} · <?= $post->formatted_created_at ?>@if ($post->updated_at->ne($post->created_at)) · updated <?= $post->formatted_updated_at ?>@endif</p>

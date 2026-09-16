@@ -19,6 +19,7 @@
     <section class="card" id="comments" aria-labelledby="comments-heading">
         <div class="card-header profile-posts-header"><h2 id="comments-heading">Comments <span>{{ $post->comments->count() }}</span></h2></div>
         <div class="card-body">
+            @auth
             <form class="comment-form" action="{{ route('post.comments.store', ['id' => $post->id]) }}" method="POST">
                 @csrf
                 <label class="form-label" for="comment-content">Leave a comment</label>
@@ -28,6 +29,17 @@
                 @enderror
                 <div class="composer-footer mt-3"><span id="comment-help">Max 1,000 characters</span><button class="btn btn-primary" type="submit">Post comment ↗</button></div>
             </form>
+            @else
+            <div class="text-center my-4">
+                <h4>Let's build a connection to share your thoughts</h4>
+                <p class="text-muted">Sign in to leave comments and join the conversation.</p>
+                <div class="d-flex justify-content-center">
+                    <a href="{{ route('login') }}" class="btn btn-primary mx-2">Log in <span aria-hidden="true">↗</span></a>
+                    <a href="{{ route('signup') }}" class="btn btn-secondary mx-2">Create account</a>
+                </div>
+            </div>
+            @endif
+            
             @if (session('comment_status'))
                 <p class="comment-success" role="status">{{ session('comment_status') }}</p>
             @endif

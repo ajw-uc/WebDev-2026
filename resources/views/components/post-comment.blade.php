@@ -2,7 +2,7 @@
     <div class="position-relative">
         <header class="feed-author">
             <a class="feed-author-link" href="{{ $comment->user_id === null ? route('me') : route('user.show', $comment->user->id) }}">
-                <img class="feed-avatar comment-avatar" src="{{ asset('images/profile-avatar.svg') }}" width="36" height="36" alt="Foto profil {{ $comment->user->name }}" loading="lazy">
+                <img class="feed-avatar comment-avatar" src="{{ $comment->user->image ? asset('storage/'.$comment->user->image) : asset('images/profile-avatar.svg') }}" width="36" height="36" alt="Foto profil {{ $comment->user->name }}" loading="lazy">
                 <div>
                     <h3>{{ $comment->user->name }}</h3>
                     <p>{{ $comment->user->username_display }} · <?= $comment->formatted_created_at ?>@if ($comment->updated_at->ne($comment->created_at)) · updated <?= $comment->formatted_updated_at ?>@endif</p>

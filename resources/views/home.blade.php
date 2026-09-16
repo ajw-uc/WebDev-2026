@@ -4,6 +4,7 @@
 
 @section('content')
     <header class="page-intro"><div><div class="eyebrow">Your everyday community</div><h1>A little thought. A new connection.</h1><p>Share your moments, spark a conversation, and make yourself at home.</p></div><span class="intro-label">A space to connect</span></header>
+    @auth
     <div class="card mb-4">
         <div class="card-header bg-white">
             <h5 class="mb-0">Share something</h5>
@@ -23,6 +24,21 @@
             </form>
         </div>
     </div>
+    @else
+    <div class="card mb-4 text-center guest-placeholder">
+        <div class="card-header bg-white">
+            <span class="eyebrow">Welcome to Mini Social</span>
+        </div>
+        <div class="card-body pt-5">
+            <h4>Join the conversation</h4>
+            <p class="text-muted guest-placeholder-copy">Login to share your thoughts, connect with people, and join the community.</p>
+            <div class="guest-placeholder-actions">
+                <a href="{{ route('login') }}" class="btn btn-primary">Log in <span aria-hidden="true">↗</span></a>
+                <a href="{{ route('signup') }}" class="btn btn-secondary">Create account</a>
+            </div>
+        </div>
+    </div>
+    @endauth
 
     <div class="card mb-4">
         <div class="card-header bg-white">

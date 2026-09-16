@@ -49,7 +49,7 @@ class PostController extends Controller
         ]);
 
         $post = Post::create([
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => $request->user()->id,
             'content' => $validated['content'],
         ]);
 
@@ -81,7 +81,7 @@ class PostController extends Controller
 
         Comment::create([
             'post_id' => $post->id,
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => $request->user()->id,
             'content' => $validated['content'],
         ]);
 
