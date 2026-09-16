@@ -19,10 +19,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 
 // Show User Profile
 Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+Route::get('/user/{id}/network', [UserController::class, 'network'])->name('user.network');
+Route::post('/user/{id}/follow', [UserController::class, 'follow'])->middleware('auth')->name('user.follow');
+Route::delete('/user/{id}/follow', [UserController::class, 'unfollow'])->middleware('auth')->name('user.unfollow');
 
 // Current User
 Route::middleware('auth')->group(function () {
     Route::get('/me', [UserController::class, 'index'])->name('me');
+    Route::get('/me/network', [UserController::class, 'network'])->name('me.network');
     Route::get('/me/edit', [UserController::class, 'edit'])->name('me.edit');
     Route::put('/me', [UserController::class, 'update'])->name('me.update');
     Route::get('/me/password', [UserController::class, 'editPassword'])->name('password.edit');
@@ -36,6 +40,7 @@ Route::group(['prefix' => 'post', 'controller' => PostController::class], functi
     Route::post('/', 'store')->middleware('auth')->name('post.store');
     Route::get('/{id}', 'show')->name('post.show');
     Route::post('/{id}/comments', 'storeComment')->middleware('auth')->name('post.comments.store');
+    Route::post('/{id}/like', 'toggleLike')->middleware('auth')->name('post.like');
     Route::delete('/{id}/comments/{commentId}', 'destroyComment')->middleware('auth')->name('post.comments.destroy');
     Route::get('/{id}/edit', 'edit')->middleware('auth')->name('post.edit');
     Route::put('/{id}', 'update')->middleware('auth')->name('post.update');

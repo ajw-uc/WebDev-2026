@@ -11,10 +11,26 @@
             <span class="profile-label">Community profile</span>
             <h1 id="profile-heading">{{ $user->name }}</h1><p class="text-muted mb-2">{{ $user->username_display }}</p>
             <p class="profile-bio">{{ $user->bio }}</p>
+            @auth
+                @if (auth()->id() !== $user->id)
+                    @if ($isFollowing)
+                        <form action="{{ route('user.unfollow', $user->id) }}" method="POST" class="mb-3">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-secondary">Unfollow</button>
+                        </form>
+                    @else
+                        <form action="{{ route('user.follow', $user->id) }}" method="POST" class="mb-3">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Follow</button>
+                        </form>
+                    @endif
+                @endif
+            @endauth
             <div class="d-sm-flex gap-3">
                 <div class="profile-count"><strong>{{ count($posts) }}</strong> posts</div>
-                <div class="profile-count"><strong>{{ $user->followers->count() }}</strong> followers</div>
-                <div class="profile-count"><strong>{{ $user->following->count() }}</strong> following</div>
+                <a class="profile-count" href="{{ route('user.network', [$user->id, 'tab' => 'followers']) }}"><strong>{{ $user->followers->count() }}</strong> followers</a>
+                <a class="profile-count" href="{{ route('user.network', [$user->id, 'tab' => 'following']) }}"><strong>{{ $user->following->count() }}</strong> following</a>
             </div>
         </div>
     </section>

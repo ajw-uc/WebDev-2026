@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,13 +22,58 @@ class UserController extends Controller
         return view('user.index', ['user' => $user, 'posts' => $posts]);
     }
 
+    public function network(Request $request, ?string $id = null): View
+    {
+        $user = $id === null ? $request->user() : User::findOrFail($id);
+
+        $tab = $request->query('tab', 'followers');
+        if (!in_array($tab, ['followers', 'following'])) {
+            $tab = 'followers';
+        }
+
+        $people = $user->{$tab}()
+            ->orderBy('name')
+            ->paginate(15)
+            ->withQueryString();
+
+        $followingIds = $request->user()?->following()->pluck('users.id') ?? collect();
+        $isOwnNetwork = $request->user()?->is($user) ?? false;
+
+        return view($isOwnNetwork ? 'user.index_network' : 'user.show_network', compact('user', 'tab', 'people', 'followingIds'));
+    }
+
     // Menampilkan profil pengguna berdasarkan ID
-    public function show(string $id): View
+    public function show(Request $request, string $id): View
     {
         $user = User::findOrFail($id);
         $posts = $user->posts()->latest()->paginate(10);
 
-        return view('user.show', ['user' => $user, 'posts' => $posts]);
+        $isFollowing = $request->user()?->following()->where('following_user_id', $user->id)->exists() ?? false;
+
+        return view('user.show', ['user' => $user, 'posts' => $posts, 'isFollowing' => $isFollowing]);
+    }
+
+    public function follow(Request $request, string $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        abort_if($request->user()->is($user), 403, 'You cannot follow yourself.');
+
+        Follow::firstOrCreate([
+            'follower_user_id' => $request->user()->id,
+            'following_user_id' => $user->id,
+        ]);
+
+        return back();
+    }
+
+    public function unfollow(Request $request, string $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        $request->user()->following()->detach($user->id);
+
+        return back();
     }
 
     // Menampilkan form untuk mengedit profil

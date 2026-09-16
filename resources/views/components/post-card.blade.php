@@ -33,7 +33,24 @@
         </div>
     @endif
     <footer class="feed-stats">
-        <span>♡ {{ $post->likes->count() }} likes</span>
+        @auth
+            @php($isLiked = $post->likes->contains('user_id', auth()->id()))
+            <form action="{{ route('post.like', $post->id) }}" method="POST" class="feed-like-form" data-like-form>
+                @csrf
+                <button type="submit" class="feed-like-button {{ $isLiked ? 'is-liked' : '' }}" aria-label="{{ $isLiked ? 'Unlike' : 'Like' }} post" aria-pressed="{{ $isLiked ? 'true' : 'false' }}">
+                    <span data-like-icon>{{ $isLiked ? '♥' : '♡' }}</span>
+                    <span data-like-count>{{ $post->likes->count() }}</span> likes
+                </button>
+            </form>
+        @else
+            <span>♡ {{ $post->likes->count() }} likes</span>
+        @endauth
         <a href="{{ route('post.show', $post->id) }}#comments">↳ {{ $post->comments->count() }} comments</a>
     </footer>
 </article>
+
+@once
+    @push('scripts')
+        <script src="{{ asset('js/like.js') }}"></script>
+    @endpush
+@endonce
