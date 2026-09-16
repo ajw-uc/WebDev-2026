@@ -6,10 +6,15 @@
     <a class="detail-back" href="{{ route('home') }}">← Back to home</a>
     <div class="detail-heading">
         <div><div class="eyebrow">A little conversation</div><h1>{{ $post->user->name }}'s post</h1></div>
-        <div class="post-actions">
+        @canany(['update', 'delete'], $post)<div class="post-actions">
+            @can('update', $post)
             <a class="btn btn-secondary" href="{{ route('post.edit', ['id' => $post->id]) }}">Edit</a>
+            @endcan
+            @can('delete', $post)
             <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deletePostModal">Delete</button>
+            @endcan
         </div>
+        @endcanany
     </div>
     <div class="card mb-4">
         <div class="card-body">
@@ -39,7 +44,7 @@
                 </div>
             </div>
             @endif
-            
+
             @if (session('comment_status'))
                 <p class="comment-success" role="status">{{ session('comment_status') }}</p>
             @endif
@@ -51,6 +56,7 @@
         </div>
     </section>
 
+    @can('delete', $post)
     <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -70,4 +76,5 @@
             </div>
         </div>
     </div>
+    @endcan
 @endsection
