@@ -1,27 +1,19 @@
-# Sesi 2.B. Controller
-Menambahkan controller untuk halaman home, post, dan profil user, lalu menghubungkannya dengan route dan view. Route diberi nama serta dikelompokkan berdasarkan prefix URL dan controller. Menambahkan data dummy user dan post untuk menampilkan feed, detail post, komentar, serta profil pengguna.
-
-## Membuat controller
-```
-php artisan make:controller HomeController
-php artisan make:controller PostController
-php artisan make:controller UserController
-```
+# 4. Blade Template
+Berikut ini adalah aktivitas yang dilakukan pada bagian ini:
+- Mengubah view dari sesi sebelumnya menjadi Blade template dengan extension `.blade.php`.
+- Menggunakan Blade directive seperti `@foreach` dan ekspresi `{{ }}` untuk menampilkan data secara lebih ringkas dan aman.
+- Menggunakan helper `asset()` untuk memuat stylesheet dan gambar dari folder `public`.
+- Menambahkan stylesheet dan avatar default untuk memperbarui tampilan halaman home, post, dan profil user.
 
 ## File terkait
-- `routes/web.php` - Menghubungkan route dengan controller, memberi nama route, serta mengelompokkan route post dengan prefix dan controller
-- `app/Http/Controllers/HomeController.php` - Mengambil data post dan menampilkan halaman home
-- `app/Http/Controllers/PostController.php` - Menangani halaman list, create, detail, edit, update, delete post, dan komentar
-- `app/Http/Controllers/UserController.php` - Menampilkan profil user saat ini dan profil user berdasarkan id
-- `resources/views/home.php` - Halaman home dengan daftar post
-- `resources/views/post/form.php` - Form untuk membuat post
-- `resources/views/post/show.php` - Halaman detail post dan komentar
-- `resources/views/user/index.php` - Halaman profil user saat ini
-- `resources/views/user/show.php` - Halaman profil user lain beserta postnya
-- `database/dummyusers.php` - Data dummy untuk user
-- `database/dummyposts.php` - Data dummy untuk post dan komentar
+- `public/css/style.css` - Stylesheet untuk halaman aplikasi
+- `public/images/profile-avatar.svg` - Avatar default untuk profil dan post
+- `resources/views/home.blade.php` - Halaman home dengan loop post, route link, dan asset Blade
+- `resources/views/post/form.blade.php` - Form pembuatan post dengan syntax Blade
+- `resources/views/post/show.blade.php` - Detail post dan daftar komentar dengan `@foreach`
+- `resources/views/user/index.blade.php` - Profil user saat ini dengan data Blade
+- `resources/views/user/show.blade.php` - Profil user lain beserta daftar postnya
 
 ## Referensi
-- Controller: https://laravel.com/docs/13.x/controllers
-- Routing: https://laravel.com/docs/13.x/routing
-- Views: https://laravel.com/docs/13.x/views
+- Blade Template: https://laravel.com/docs/13.x/blade
+- Asset URL: https://laravel.com/docs/13.x/helpers#method-asset

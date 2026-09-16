@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Post - Mini Social Media</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <form action="<?= route('post.store') ?>" method="POST">
+    <form action="{{ route('post.store') }}" method="POST">
         <div>
             <textarea name="content" placeholder="What's on your mind?" rows="5"></textarea>
         </div>
