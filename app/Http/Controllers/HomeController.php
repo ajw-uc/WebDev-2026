@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -9,7 +10,8 @@ class HomeController extends Controller
     // Menampilkan halaman utama dengan daftar post
     public function index(): View
     {
-        $posts = include app_path('../database/dummyposts.php');
+        $posts = Post::limit(10)->latest()->get();
+        dd($posts);
         return view('home', ['posts' => $posts]);
     }
 }
