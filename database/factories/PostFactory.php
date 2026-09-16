@@ -31,20 +31,26 @@ class PostFactory extends Factory
     public function withComments(int $count = 3): static
     {
         return $this->afterCreating(function (Post $post) use ($count) {
-            Comment::factory()->count($count)->create([
-                'post_id' => $post->id,
-                'user_id' => User::inRandomOrder()->first()->id,
-            ]);
+            for ($i = 0; $i < $count; $i++) {
+                Comment::create([
+                    'post_id' => $post->id,
+                    'user_id' => User::inRandomOrder()->first()->id,
+                    'content' => fake()->sentence(),
+                ]);
+            }
         });
     }
 
     public function withLikes(int $count = 5): static
     {
         return $this->afterCreating(function (Post $post) use ($count) {
-            Like::factory()->count($count)->create([
-                'post_id' => $post->id,
-                'user_id' => User::inRandomOrder()->first()->id,
-            ]);
+            $users = User::inRandomOrder()->take($count)->get();
+            foreach ($users as $user) {
+                Like::create([
+                    'post_id' => $post->id,
+                    'user_id' => $user->id,
+                ]);
+            }
         });
     }
 }
