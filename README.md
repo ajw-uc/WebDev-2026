@@ -37,4 +37,3 @@ php artisan make:notification FollowNotification
 - Database Notifications: https://laravel.com/docs/13.x/notifications#database-notifications
 - Mail Notifications: https://laravel.com/docs/13.x/notifications#mail-notifications
 - Marking Notifications as Read: https://laravel.com/docs/13.x/notifications#marking-notifications-as-read
-- Pagination: https://laravel.com/docs/13.x/pagination
