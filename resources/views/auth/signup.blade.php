@@ -20,6 +20,11 @@
         <x-form.input type="password" name="password_confirmation" label="Confirm password" required />
     </x-form.group>
 </div>
+<x-form.group>
+    <x-form.label for="captcha" name="CAPTCHA" />
+    <img src="{{ $captchaImage }}" alt="CAPTCHA image" class="mb-2">
+    <x-form.input name="captcha" aria-label="CAPTCHA answer" required />
+</x-form.group>
 <button class="btn btn-primary w-100 mt-2" type="submit">Create account <span aria-hidden="true">↗</span></button></form>
 <p class="auth-switch">Already have an account? <a href="{{ route('login') }}">Log in</a></p></div></div>
 @endsection

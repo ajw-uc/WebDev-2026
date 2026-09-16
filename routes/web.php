@@ -11,9 +11,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login');
     Route::get('/signup', [AuthController::class, 'showSignup'])->name('signup');
-    Route::post('/signup', [AuthController::class, 'signup']);
+    Route::post('/signup', [AuthController::class, 'signup'])->middleware('throttle:signup');
 });
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
@@ -37,9 +37,9 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix' => 'post', 'controller' => PostController::class], function () {
     Route::get('/', 'index')->name('post');
     Route::get('/create', 'create')->middleware('auth')->name('post.create');
-    Route::post('/', 'store')->middleware('auth')->name('post.store');
+    Route::post('/', 'store')->middleware(['auth', 'throttle:post'])->name('post.store');
     Route::get('/{id}', 'show')->name('post.show');
-    Route::post('/{id}/comments', 'storeComment')->middleware('auth')->name('post.comments.store');
+    Route::post('/{id}/comments', 'storeComment')->middleware(['auth', 'throttle:comment'])->name('post.comments.store');
     Route::post('/{id}/like', 'toggleLike')->middleware('auth')->name('post.like');
     Route::delete('/{id}/comments/{commentId}', 'destroyComment')->middleware('auth')->name('post.comments.destroy');
     Route::get('/{id}/edit', 'edit')->middleware('auth')->name('post.edit');
