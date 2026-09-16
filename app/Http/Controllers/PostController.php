@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -44,12 +45,20 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'content' => 'required|string|max:255',
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $post = Post::create([
             'user_id' => User::inRandomOrder()->first()->id,
             'content' => $validated['content'],
         ]);
+
+        if ($request->hasFile('image')) {
+            $filePath = $request->file('image')->store("post/image/{$post->id}", 'public');
+            $post->update([
+                'image' => $filePath,
+            ]);
+        }
 
         return redirect()->route('post.show', ['id' => $post->id]);
     }
@@ -101,9 +110,23 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $validated = $request->validate([
             'content' => 'required|string|max:255',
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'remove_image' => ['nullable', 'boolean'],
         ]);
 
         $post->content = $validated['content'];
+
+        if ($request->hasFile('image')) {
+            $oldImage = $post->image;
+            $post->image = $request->file('image')->store("post/image/{$post->id}", 'public');
+            if ($oldImage) {
+                Storage::disk('public')->delete($oldImage);
+            }
+        } elseif ($request->boolean('remove_image') && $post->image) {
+            Storage::disk('public')->delete($post->image);
+            $post->image = null;
+        }
+
         $post->save();
 
         return redirect()->route('post.show', ['id' => $post->id]);

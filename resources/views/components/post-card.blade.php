@@ -14,6 +14,24 @@
             {{ $post['content'] }}
         </a>
     </p>
+    @if ($post->image)
+        <button class="post-image-preview-trigger" type="button" data-bs-toggle="modal" data-bs-target="#postImagePreviewModal{{ $post->id }}" aria-label="Preview post image">
+            <img class="post-image-thumbnail" src="{{ asset('storage/' . $post->image) }}" alt="Post image" loading="lazy">
+        </button>
+        <div class="modal fade" id="postImagePreviewModal{{ $post->id }}" tabindex="-1" aria-labelledby="postImagePreviewModalLabel{{ $post->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="postImagePreviewModalLabel{{ $post->id }}">Post image</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img class="post-image-preview" src="{{ asset('storage/' . $post->image) }}" alt="Larger preview of post image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <footer class="feed-stats">
         <span>♡ {{ $post->likes->count() }} likes</span>
         <a href="{{ route('post.show', $post->id) }}#comments">↳ {{ $post->comments->count() }} comments</a>
