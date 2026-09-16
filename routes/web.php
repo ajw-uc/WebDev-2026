@@ -23,6 +23,7 @@ Route::group(['prefix' => 'post', 'controller' => PostController::class], functi
     Route::post('/', 'store')->name('post.store');
     Route::get('/{id}', 'show')->name('post.show');
     Route::post('/{id}/comments', 'storeComment')->name('post.comments.store');
+    Route::delete('/{id}/comments/{commentId}', 'destroyComment')->name('post.comments.destroy');
     Route::get('/{id}/edit', 'edit')->name('post.edit');
     Route::put('/{id}', 'update')->name('post.update');
     Route::delete('/{id}', 'destroy')->name('post.destroy');
