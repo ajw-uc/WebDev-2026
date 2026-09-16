@@ -31,7 +31,16 @@
                     </summary>
                     <section class="notification-panel" aria-labelledby="notification-heading">
                         <h2 id="notification-heading">Notifications</h2>
-                        <div class="notification-empty"><span aria-hidden="true">✧</span><h3>You’re all caught up.</h3><p>No notifications yet. New activity will appear here.</p></div>
+                        @php($notifications = auth()->user()->notifications()->latest()->limit(10)->get())
+                        @forelse($notifications as $notification)
+                            <a class="notification-item {{ $notification->read_at ? '' : 'is-unread' }}" href="{{ route('notifications.open', ['id' => $notification->id]) }}">
+                                <span aria-hidden="true">✧</span>
+                                <span>{{ $notification->data['message'] }}</span>
+                            </a>
+                        @empty
+                            <div class="notification-empty"><span aria-hidden="true">✧</span><h3>You’re all caught up.</h3><p>No notifications yet. New activity will appear here.</p></div>
+                        @endforelse
+                        <a class="notification-view-all" href="{{ route('notifications.index') }}">View all notifications</a>
                     </section>
                 </details>
                 <a class="nav-profile" href="{{ route('me') }}" aria-label="My profile" @if(request()->routeIs('me')) aria-current="page"@endif>

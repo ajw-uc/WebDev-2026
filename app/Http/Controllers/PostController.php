@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Post;
-use App\Models\User;
+use App\Notifications\CommentNotification;
+use App\Notifications\LikeNotification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +14,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Throwable;
 
@@ -103,6 +103,10 @@ class PostController extends Controller
             'content' => $validated['content'],
         ]);
 
+        if (! $post->user->is($request->user())) {
+            $post->user->notify(new CommentNotification($request->user(), $post));
+        }
+
         return redirect()->route('post.show', ['id' => $post->id])->with('comment_status', 'Comment added.');
     }
 
@@ -116,6 +120,10 @@ class PostController extends Controller
             $like->delete();
         } else {
             Like::create(['post_id' => $post->id, 'user_id' => $request->user()->id]);
+
+            if (! $post->user->is($request->user())) {
+                $post->user->notify(new LikeNotification($request->user(), $post));
+            }
         }
 
         if ($request->expectsJson()) {
