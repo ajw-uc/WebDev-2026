@@ -1,0 +1,10 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Feed terbaru</title></head>
+<body style="margin:0;background:#f7f4ee;color:#263238;font-family:Arial,Helvetica,sans-serif;line-height:1.6"><div style="width:100%;padding:32px 12px;box-sizing:border-box"><div style="max-width:620px;margin:0 auto">
+<div style="background:#263238;border-radius:20px 20px 0 0;padding:28px 32px;color:#fff"><div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#b9e4c9;font-weight:bold">Mini Social</div><h1 style="margin:10px 0 0;font-size:30px;line-height:1.2">Feed terbaru untuk Anda ✦</h1></div>
+<div style="background:#fff;border-radius:0 0 20px 20px;padding:32px;box-shadow:0 8px 28px rgba(38,50,56,.08)"><p style="margin:0 0 24px;font-size:16px">Halo <strong>{{ $recipient->name }}</strong>, berikut post terbaru dari akun yang Anda ikuti.</p>
+@forelse ($posts as $post)
+<article style="border:1px solid #e5e8e6;border-radius:14px;padding:20px;margin-bottom:16px"><div style="font-size:14px;color:#617078;margin-bottom:10px"><strong style="color:#263238">{{ $post->user->name }}</strong> <span>@</span>{{ $post->user->username }} <span style="margin:0 5px">·</span>{{ $post->created_at->diffForHumans() }}</div><p style="margin:0 0 16px;font-size:16px;white-space:pre-line">{{ $post->content }}</p><a href="{{ route('post.show', ['id' => $post->id]) }}" style="display:inline-block;background:#3c8c65;border-radius:8px;color:#fff;font-size:14px;font-weight:bold;padding:9px 15px;text-decoration:none">Lihat post &rarr;</a></article>
+@empty
+<div style="background:#f3f8f4;border-radius:12px;padding:24px;text-align:center"><div style="font-size:28px">✧</div><p style="margin:8px 0 0;color:#617078">Belum ada post baru dari akun yang Anda ikuti.</p></div>
+@endforelse
+<p style="border-top:1px solid #e5e8e6;margin:28px 0 0;padding-top:20px;color:#617078;font-size:13px">Anda menerima email ini karena mengikuti akun di Mini Social.</p></div><p style="margin:18px 0;text-align:center;color:#899399;font-size:12px">© {{ date('Y') }} Mini Social</p></div></div></body></html>
