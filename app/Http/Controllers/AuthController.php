@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Gregwar\Captcha\CaptchaBuilder;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,10 @@ class AuthController extends Controller
         }
         $request->session()->regenerate();
 
+        if (! $request->user()->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
+        }
+
         return redirect()->intended(route('home'));
     }
 
@@ -53,16 +58,36 @@ class AuthController extends Controller
         $expectedPhrase = $request->session()->get('signup_captcha_phrase');
         if ($expectedPhrase === '' || $expectedPhrase !== $validated['captcha']) {
             return back()->withErrors([
-                'captcha' => 'Wrong Captcha'
+                'captcha' => 'Wrong Captcha',
             ]);
         }
 
         $request->session()->forget('signup_captcha_phrase');
         $user = User::create($validated);
         Auth::login($user);
+        $user->sendEmailVerificationNotification();
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home'));
+        return redirect()->route('verification.notice');
+    }
+
+    public function verificationNotice(): View
+    {
+        return view('auth.verify-email');
+    }
+
+    public function verifyEmail(EmailVerificationRequest $request): RedirectResponse
+    {
+        $request->fulfill();
+
+        return redirect()->route('home');
+    }
+
+    public function resendVerification(Request $request): RedirectResponse
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'Verification email sent.');
     }
 
     public function logout(Request $request): RedirectResponse
