@@ -20,6 +20,11 @@
             </a>
             <div class="nav-actions">
                 <a class="home-link" href="{{ route('home') }}" @if(request()->routeIs('home')) aria-current="page"@endif>Home</a>
+                <form class="navbar-search" action="{{ route('post') }}" method="GET" role="search">
+                    <label class="visually-hidden" for="navbar-search-input">Search posts</label>
+                    <input id="navbar-search-input" name="search" type="search" value="{{ request('search') }}" placeholder="Search posts...">
+                    <button type="submit" aria-label="Search">⌕</button>
+                </form>
                 <details class="notification-menu">
                     <summary class="notification-toggle" aria-label="Notifications">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9Z"/><path d="M10 21h4"/></svg>

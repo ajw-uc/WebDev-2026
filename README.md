@@ -1,14 +1,13 @@
-# 11. Pagination
-Menambahkan pagination pada daftar post agar data ditampilkan secara bertahap dalam beberapa halaman. Pagination diterapkan pada feed home dan halaman daftar post, menggunakan tampilan Bootstrap 5 serta custom styling agar sesuai dengan desain aplikasi.
+# 12. Search dan Sort
+Menambahkan pencarian dan pengurutan pada halaman daftar post. User dapat mencari post berdasarkan isi, nama, atau username author, lalu mengurutkan hasil berdasarkan post terbaru atau terlama. Parameter filter dipertahankan saat berpindah halaman melalui pagination.
 
 ## File terkait
-- `app/Providers/AppServiceProvider.php` - Mengaktifkan renderer pagination Bootstrap 5 melalui `Paginator::useBootstrapFive()`
-- `app/Http/Controllers/HomeController.php` - Mengambil post terbaru menggunakan `paginate(10)` dan mengatur path pagination ke route post
-- `app/Http/Controllers/PostController.php` - Menambahkan method `index()` untuk menampilkan daftar post terpisah dengan pagination
-- `public/css/style.css` - Menambahkan styling custom untuk link, state active, disabled, hover, dan focus pagination
-- `resources/views/home.blade.php` - Menampilkan link pagination pada feed home
-- `resources/views/post/index.blade.php` - Halaman daftar post terbaru dengan card post dan link pagination
+- `app/Http/Controllers/PostController.php` - memproses query `search` dan `sort`, mencari pada content/name/username, mengurutkan hasil, serta mempertahankan query string pada pagination
+- `public/css/style.css` - menambahkan styling search box, filter form, dan layout responsive untuk kontrol pencarian
+- `resources/views/layout/default.blade.php` - menambahkan search form pada navbar yang mengarah ke daftar post
+- `resources/views/post/index.blade.php` - menambahkan search input, pilihan sort terbaru/terlama, tombol Apply, dan jumlah hasil post
 
 ## Referensi
 - Pagination: https://laravel.com/docs/13.x/pagination
-- Bootstrap Pagination: https://getbootstrap.com/docs/5.3/components/pagination/
+- Query Builder: https://laravel.com/docs/queries
+- Eloquent Relationships: https://laravel.com/docs/13.x/eloquent-relationships
