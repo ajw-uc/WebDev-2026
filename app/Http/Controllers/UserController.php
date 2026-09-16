@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Follow;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
+use App\Notifications\FollowNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +27,7 @@ class UserController extends Controller
         $user = $id === null ? $request->user() : User::findOrFail($id);
 
         $tab = $request->query('tab', 'followers');
-        if (!in_array($tab, ['followers', 'following'])) {
+        if (! in_array($tab, ['followers', 'following'])) {
             $tab = 'followers';
         }
 
@@ -59,10 +59,14 @@ class UserController extends Controller
 
         abort_if($request->user()->is($user), 403, 'You cannot follow yourself.');
 
-        Follow::firstOrCreate([
+        $follow = Follow::firstOrCreate([
             'follower_user_id' => $request->user()->id,
             'following_user_id' => $user->id,
         ]);
+
+        if ($follow->wasRecentlyCreated) {
+            $user->notify(new FollowNotification($request->user()));
+        }
 
         return back();
     }
