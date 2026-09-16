@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Follow;
 
 class DemoSeeder extends Seeder
 {
@@ -26,7 +27,10 @@ class DemoSeeder extends Seeder
             if ($count > 0) {
                 $followers = $users->where('id', '!=', $user->id)->random($count);
                 foreach ($followers as $follower) {
-                    $user->follow($follower);
+                    Follow::create([
+                        'following_user_id' => $user->id,
+                        'follower_user_id' => $follower->id,
+                    ]);
                 }
             }
         }
