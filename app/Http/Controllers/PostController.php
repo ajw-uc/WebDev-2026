@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -27,8 +29,7 @@ class PostController extends Controller
                     $userQuery->where('name', 'like', "%{$search}%")
                         ->orWhere('username', 'like', "%{$search}%");
                 });
-        })
-            ->orderBy('created_at', $sort === 'oldest' ? 'asc' : 'desc')
+        })->orderBy('created_at', $sort === 'oldest' ? 'asc' : 'desc')
             ->paginate(10)
             ->withQueryString();
 
@@ -87,6 +88,28 @@ class PostController extends Controller
         ]);
 
         return redirect()->route('post.show', ['id' => $post->id])->with('comment_status', 'Comment added.');
+    }
+
+    // Memberikan atau menghapus like pada post
+    public function toggleLike(Request $request, string $id): JsonResponse|RedirectResponse
+    {
+        $post = Post::findOrFail($id);
+        $like = $post->likes()->where('user_id', $request->user()->id)->first();
+
+        if ($like) {
+            $like->delete();
+        } else {
+            Like::create(['post_id' => $post->id, 'user_id' => $request->user()->id]);
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'liked' => ! $like,
+                'likes_count' => $post->likes()->count(),
+            ]);
+        }
+
+        return back();
     }
 
     // Menghapus komentar pada post

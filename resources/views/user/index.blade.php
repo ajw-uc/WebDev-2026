@@ -24,8 +24,8 @@
             <p class="profile-bio">{{ $user->bio }}</p>
             <div class="d-sm-flex gap-3">
                 <div class="profile-count"><strong>{{ $posts->total() }}</strong> posts</div>
-                <div class="profile-count"><strong>{{ $user->followers->count() }}</strong> followers</div>
-                <div class="profile-count"><strong>{{ $user->following->count() }}</strong> following</div>
+                <a class="profile-count" href="{{ route('me.network', ['tab' => 'followers']) }}"><strong>{{ $user->followers->count() }}</strong> followers</a>
+                <a class="profile-count" href="{{ route('me.network', ['tab' => 'following']) }}"><strong>{{ $user->following->count() }}</strong> following</a>
             </div>
         </div>
     </section>
