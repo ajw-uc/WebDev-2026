@@ -1,18 +1,20 @@
-# Sesi 6. Relasi Eloquent, Custom Attribute, dan Collection
-Menghubungkan model dengan relasi Eloquent dan memanfaatkan accessor untuk menyediakan format waktu yang mudah dibaca. Factory dan seeder diperluas untuk menghasilkan post beserta komentar, likes, dan relasi follow. Collection digunakan untuk memilih user secara acak, sedangkan `dd` ditambahkan pada alur pengambilan data untuk kebutuhan debugging.
+# 10. Create dan Read
+Menambahkan alur create dan read untuk post. User dapat mengirim post melalui form, data divalidasi lalu disimpan menggunakan Eloquent, kemudian diarahkan ke halaman detail post. View feed dan detail post diperbarui untuk membaca data model, sementara komponen form menangani old input dan pesan error validasi secara konsisten.
 
 ## File terkait
-- `app/Http/Controllers/HomeController.php` - Mengambil 10 post terbaru melalui Eloquent dan menjalankan `dd` untuk debugging
-- `app/Http/Controllers/PostController.php` - Mengambil detail post dengan `findOrFail` dan menguji relasi serta custom attribute
-- `app/Models/Comment.php` - Menambahkan relasi `user` dan accessor waktu dibuat, diubah, serta dihapus
-- `app/Models/Post.php` - Menambahkan relasi `user`, `comments`, dan `likes`, serta accessor waktu
-- `app/Models/User.php` - Menambahkan relasi `posts`, `followers`, dan `following`
-- `database/factories/PostFactory.php` - Menambahkan state `withComments()` dan `withLikes()` untuk membuat data terkait setelah post dibuat
-- `database/seeders/DemoSeeder.php` - Membuat 20 user, 100 post, komentar, likes, dan relasi follow acak
+- `app/Http/Controllers/HomeController.php` - Mengambil 10 post terbaru dari database tanpa lagi menghentikan request dengan `dd`
+- `app/Http/Controllers/PostController.php` - Memvalidasi dan menyimpan post baru, lalu redirect ke detail post
+- `app/Models/User.php` - Menambahkan accessor `usernameDisplay` untuk menampilkan username dengan awalan `@`
+- `resources/views/components/form/error.blade.php` - Menampilkan pesan error validasi berdasarkan nama field
+- `resources/views/components/form/input.blade.php` - Input reusable dengan label, old input, dan error
+- `resources/views/components/form/label.blade.php` - Label reusable untuk field form
+- `resources/views/components/form/textarea.blade.php` - Textarea reusable dengan old input dan error
+- `resources/views/components/post-card.blade.php` - Membaca data post, user, waktu, likes, dan comments dari object model
+- `resources/views/components/post-comment.blade.php` - Membaca data komentar dan user terkait dari object model
+- `resources/views/post/show.blade.php` - Menampilkan detail post, jumlah komentar, form komentar, dan daftar komentar dari model
 
 ## Referensi
-- Eloquent Relationship: https://laravel.com/docs/13.x/eloquent-relationships
-- Eloquent Mutators and Accessors: https://laravel.com/docs/13.x/eloquent-mutators
-- Collections: https://laravel.com/docs/13.x/collections
-- Helper `dd`: https://laravel.com/docs/13.x/helpers#method-dd
-- Factory States: https://laravel.com/docs/13.x/eloquent-factories#factory-states
+- Eloquent: https://laravel.com/docs/13.x/eloquent
+- Validation: https://laravel.com/docs/13.x/validation
+- Old input: https://laravel.com/docs/13.x/requests#old-input
+- Blade Components: https://laravel.com/docs/13.x/blade#components

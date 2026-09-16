@@ -11,7 +11,6 @@ class HomeController extends Controller
     public function index(): View
     {
         $posts = Post::limit(10)->latest()->get();
-        dd($posts);
         return view('home', ['posts' => $posts]);
     }
 }
