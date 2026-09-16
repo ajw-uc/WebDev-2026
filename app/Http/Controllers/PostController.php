@@ -63,11 +63,7 @@ class PostController extends Controller
                 ]);
 
                 if ($request->hasFile('image')) {
-                    $storedImage = $request->file('image')->storeAs(
-                        "post/image/{$post->id}",
-                        Str::uuid().'.'.$request->file('image')->extension(),
-                        'public'
-                    );
+                    $storedImage = $request->file('image')->store("post/image/{$post->id}", 'public');
                     $post->image = $storedImage;
                     $post->save();
                 }
