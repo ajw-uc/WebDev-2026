@@ -3,15 +3,13 @@
 @section('title', $post['author_name'] . "'s post")
 
 @section('content')
-    <h1>Post detail</h1>
+    <h1 class="mb-3">{{ $post['author_name'] }}'s post</h1>
     <x-post-card :post="$post"></x-post-card>
-    <hr/>
     <h4>Comments</h4>
-    <div>
+    <div class="list-group">
         @foreach ($post['comments'] as $comment)
-            <div>
-                <h5>{{ $comment['author_name'] }}</h5>
-                <p>{{ $comment['content'] }}</p>
+            <div class="list-group-item pt-4">
+                <x-post-comment :comment="$comment"></x-post-comment>
             </div>
         @endforeach
     </div>

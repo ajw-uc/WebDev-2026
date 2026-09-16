@@ -1,15 +1,18 @@
-# 5. Layout dan Component
-Memindahkan boilerplate HTML yang semula ada di setiap view ke layout template agar dapat digunakan kembali. Menambahkan Blade component untuk membuat tampilan card post yang konsisten di halaman home, detail post, dan profil user.
+# 6. Bootstrap
+Mengintegrasikan Bootstrap 5.3 ke dalam layout Blade untuk membuat tampilan Mini Social lebih terstruktur dan responsif. Perubahan ini juga menambahkan komponen form dan komentar, composer post di halaman home, serta tombol navigasi untuk mengedit profil dan membuat post.
 
 ## File terkait
-- `resources/views/layout/default.blade.php` - Layout utama berisi boilerplate HTML, navigasi, asset, dan section content
-- `resources/views/components/post-card.blade.php` - Blade component untuk menampilkan card post dan data terkait
-- `resources/views/home.blade.php` - Menggunakan layout dan memanggil component post-card untuk feed
-- `resources/views/post/show.blade.php` - Menggunakan layout dan component post-card pada detail post
-- `resources/views/post/form.blade.php` - Menggunakan layout untuk form post
-- `resources/views/user/index.blade.php` - Menggunakan layout untuk halaman profil user
-- `resources/views/user/show.blade.php` - Menggunakan layout dan component post-card untuk profil publik
+- `public/css/style.css` - Menambahkan ukuran avatar kecil dan besar sebagai pelengkap Bootstrap
+- `resources/views/components/form/group.blade.php` - Komponen pembungkus field form dengan spacing default `mb-3`
+- `resources/views/components/post-card.blade.php` - Menyesuaikan card post dengan utility class Bootstrap
+- `resources/views/components/post-comment.blade.php` - Komponen baru untuk menampilkan komentar dalam format yang konsisten
+- `resources/views/layout/default.blade.php` - Memuat Bootstrap 5.3, menyediakan navbar, container, dan section `head`/`scripts`
+- `resources/views/home.blade.php` - Menambahkan composer post dan menampilkan feed dalam Bootstrap card
+- `resources/views/post/show.blade.php` - Menampilkan detail post dan komentar menggunakan `list-group` serta component komentar
+- `resources/views/post/form.blade.php` - Mengubah form post menjadi Bootstrap card dan form control
+- `resources/views/user/edit.blade.php` - Menambahkan halaman edit profil dengan field Bootstrap
+- `resources/views/user/index.blade.php` - Menambahkan tombol Edit Profile dan Create Post
 
 ## Referensi
-- Layout: https://laravel.com/docs/13.x/blade#layouts-using-template-inheritance
-- Components: https://laravel.com/docs/13.x/blade#components
+- Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
+- Bootstrap components: https://getbootstrap.com/docs/5.3/components/
