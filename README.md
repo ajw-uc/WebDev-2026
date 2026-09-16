@@ -1,18 +1,20 @@
-# 6. Bootstrap
-Mengintegrasikan Bootstrap 5.3 ke dalam layout Blade untuk membuat tampilan Mini Social lebih terstruktur dan responsif. Perubahan ini juga menambahkan komponen form dan komentar, composer post di halaman home, serta tombol navigasi untuk mengedit profil dan membuat post.
+# 7. Redesign
+Melakukan redesign UI/UX Mini Social dengan tetap menggunakan Bootstrap sebagai dasar layout. Tampilan dibuat lebih modern, konsisten, dan responsif melalui custom CSS, struktur halaman yang lebih jelas, serta komponen profil, post, komentar, navigasi, dan notifikasi yang diperbarui.
 
 ## File terkait
-- `public/css/style.css` - Menambahkan ukuran avatar kecil dan besar sebagai pelengkap Bootstrap
-- `resources/views/components/form/group.blade.php` - Komponen pembungkus field form dengan spacing default `mb-3`
-- `resources/views/components/post-card.blade.php` - Menyesuaikan card post dengan utility class Bootstrap
-- `resources/views/components/post-comment.blade.php` - Komponen baru untuk menampilkan komentar dalam format yang konsisten
-- `resources/views/layout/default.blade.php` - Memuat Bootstrap 5.3, menyediakan navbar, container, dan section `head`/`scripts`
-- `resources/views/home.blade.php` - Menambahkan composer post dan menampilkan feed dalam Bootstrap card
-- `resources/views/post/show.blade.php` - Menampilkan detail post dan komentar menggunakan `list-group` serta component komentar
-- `resources/views/post/form.blade.php` - Mengubah form post menjadi Bootstrap card dan form control
-- `resources/views/user/edit.blade.php` - Menambahkan halaman edit profil dengan field Bootstrap
-- `resources/views/user/index.blade.php` - Menambahkan tombol Edit Profile dan Create Post
+- `app/Http/Controllers/UserController.php` - menyediakan data post pada profil user saat ini
+- `database/dummyusers.php` - menambahkan jumlah followers dan following pada setiap user
+- `public/css/style.css` - menambahkan custom styling untuk layout, navigasi, card, feed, profil, form, komentar, dan responsive breakpoint
+- `resources/views/layout/default.blade.php` - memperbarui brand, navbar, ikon notifikasi, avatar profil, dan container halaman
+- `resources/views/home.blade.php` - memperbarui intro, composer post, feed, dan empty state
+- `resources/views/components/post-card.blade.php` - memperbarui struktur card, metadata, aksi post, dan preview image
+- `resources/views/components/post-comment.blade.php` - memperbarui tampilan komentar dan metadata author
+- `resources/views/post/show.blade.php` - memperbarui detail post, header, komentar, dan form komentar
+- `resources/views/post/form.blade.php` - memperbarui form create/edit post dengan layout dan field yang konsisten
+- `resources/views/user/edit.blade.php` - memperbarui form edit profil dan preview avatar
+- `resources/views/user/index.blade.php` - memperbarui profil user, statistik, daftar post, dan empty state
+- `resources/views/user/show.blade.php` - memperbarui profil publik, statistik, daftar post, dan empty state
 
 ## Referensi
 - Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
-- Bootstrap components: https://getbootstrap.com/docs/5.3/components/
+- CSS media queries: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries

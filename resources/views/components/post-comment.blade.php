@@ -1,20 +1,8 @@
-<div>
-    <a href="{{ route('user.show', $comment['author_id']) }}" class="text-decoration-none text-body">
-        <header class="d-flex gap-3 mb-3">
-            <div>
-                <img src="{{ asset('images/profile-avatar.svg') }}" alt="{{ $comment['author_name'] }}" class="profile-avatar-sm">
-            </div>
-            <div>
-                <div class="mb-0 fw-semibold">
-                    {{ $comment['author_name'] }}
-                </div>
-                <div class="text-muted">
-                    {{ $comment['author_username'] }} · {{ $comment['time'] }}
-                </div>
-            </div>
-        </header>
-    </a>
-    <p>{{ $comment['content'] }}</p>
-</div>
-
-
+<article class="feed-comment">
+    <header class="feed-author">
+        <a class="feed-author-link" href="{{ $comment['author_id'] === null ? route('me') : route('user.show', $comment['author_id']) }}">
+        <img class="feed-avatar comment-avatar" src="{{ asset('images/profile-avatar.svg') }}" width="36" height="36" alt="Foto profil {{ $comment['author_name'] }}" loading="lazy">
+        <div><h3>{{ $comment['author_name'] }}</h3><p>{{ $comment['time'] }}</p></div></a>
+    </header>
+    <p class="comment-content">{{ $comment['content'] }}</p>
+</article>
