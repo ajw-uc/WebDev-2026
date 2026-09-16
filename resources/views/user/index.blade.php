@@ -13,6 +13,7 @@
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="{{ route('me.edit') }}">Edit profile</a>
                     <a class="dropdown-item" href="{{ route('password.edit') }}">Change password</a>
+                    <a class="dropdown-item" href="{{ route('api-tokens.index') }}">API tokens</a>
                     <div class="dropdown-divider"></div>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf

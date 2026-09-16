@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiTokenController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FollowedUsersFeedController;
 use App\Http\Controllers\HomeController;
@@ -35,7 +36,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('feed.email.send');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/me/api-tokens', [ApiTokenController::class, 'index'])->name('api-tokens.index');
+    Route::post('/me/api-tokens', [ApiTokenController::class, 'store'])->name('api-tokens.store');
+    Route::delete('/me/api-tokens/{tokenId}', [ApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/{id}', [NotificationController::class, 'open'])->name('notifications.open');
 });

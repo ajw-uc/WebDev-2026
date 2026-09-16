@@ -1,116 +1,75 @@
-# 22. Testing
-Menambahkan pengujian otomatis menggunakan Pest untuk memverifikasi alur authentication, fitur social media, dan notifikasi. Feature test menguji request HTTP beserta perubahan database, sedangkan unit test memeriksa perilaku notification secara terisolasi.
+# Sesi 23. API
+Menambahkan REST API versi `v1` untuk fitur post, komentar, dan like menggunakan Laravel Sanctum sebagai autentikasi token. Response API dinormalisasi dengan Laravel API Resource, dilengkapi pagination dan Postman collection untuk pengujian endpoint.
 
-## Cakupan pengujian
-- Authentication: login user verified/unverified, signup dengan CAPTCHA valid, dan penolakan CAPTCHA invalid.
-- Social feature: create post, komentar, like/unlike, follow/unfollow, dan update profile.
-- Notification: memastikan notification dikirim kepada penerima yang sesuai.
-- Unit test: memastikan notification menggunakan channel `database` dan `mail`.
+## API Resource
 
-## Penjelasan jenis test
+API Resource adalah layer transformasi yang mengubah model Eloquent menjadi struktur JSON yang konsisten sebelum dikirim sebagai response API. Resource menentukan field yang ditampilkan serta relasi dan jumlah relasi yang sudah di-load.
 
-- **Feature Test** menguji fitur dari sudut pandang user melalui request HTTP. Test ini dapat melibatkan route, middleware, controller, database, authentication, validation, dan notification secara bersamaan. Contohnya adalah menguji login, signup, membuat post, komentar, like, follow, dan update profile.
-- **Unit Test** menguji bagian kecil aplikasi secara terisolasi, biasanya satu class atau satu method, tanpa menjalankan alur HTTP lengkap. Pada project ini, unit test digunakan untuk memastikan setiap notification memiliki channel `database` dan `mail`.
-- Feature test menggunakan `RefreshDatabase` agar setiap test berjalan dengan database yang bersih dan perubahan data tidak memengaruhi test lainnya.
+- `UserResource` - data dasar user
+- `PostResource` - data post, user, dan jumlah komentar/like
+- `CommentResource` - data komentar dan user pembuatnya
 
-## Tentang Pest
+## Package untuk autentikasi API
 
-Pest adalah testing framework untuk PHP yang digunakan sebagai test runner pada project Laravel ini. Pest dibangun di atas PHPUnit, tetapi menyediakan syntax yang lebih ringkas dan mudah dibaca.
-
-Test Pest menggunakan fungsi seperti `it()` atau `test()` untuk mendeskripsikan skenario, kemudian menjalankan assertion melalui `$this` atau fungsi `expect()`. Contoh sederhana:
-
-```php
-it('returns a successful response', function () {
-    $this->get('/')->assertStatus(200);
-});
-
-it('confirms a boolean value', function () {
-    expect(true)->toBeTrue();
-});
-```
-
-File `tests/Pest.php` berfungsi sebagai konfigurasi dasar test. Pada project ini, seluruh test di folder `Feature` menggunakan `TestCase` Laravel dan trait `RefreshDatabase`.
-
-## Perintah untuk membuat file test
-```
-php artisan make:test AuthFeatureTest
-php artisan make:test SocialFeatureTest
-php artisan make:test ExampleTest
-php artisan make:test NotificationUnitTest --unit
-php artisan make:test ExampleTest --unit
-```
-
-## File test
-- `tests/Pest.php` - mengaktifkan `RefreshDatabase` untuk feature test
-- `tests/Feature/AuthFeatureTest.php` - menguji login dan signup termasuk validasi CAPTCHA
-- `tests/Feature/SocialFeatureTest.php` - menguji post, komentar, like/unlike, follow/unfollow, dan update profile
-- `tests/Feature/ExampleTest.php` - menguji response dasar aplikasi
-- `tests/Unit/NotificationUnitTest.php` - menguji channel notification database dan mail
-- `tests/Unit/ExampleTest.php` - contoh dasar unit test Pest
-
-## Implementasi yang diuji
-- `app/Http/Controllers/NotificationController.php` - mengelola daftar notifikasi dan penandaan read
-- `app/Http/Controllers/AuthController.php` - mengirim email verifikasi, menampilkan halaman verifikasi, memproses signed link, dan mengirim ulang email
-- `app/Http/Controllers/FollowedUsersFeedController.php` - menyediakan preview dan mengantrekan email feed untuk user terverifikasi
-- `app/Mail/FollowedUsersFeedMail.php` - mailable queued yang mengambil lima post terbaru dari akun yang diikuti
-- `app/Notifications/CommentNotification.php` - notifikasi komentar melalui database dan email queue
-- `app/Notifications/LikeNotification.php` - notifikasi like melalui database dan email queue
-- `app/Notifications/FollowNotification.php` - notifikasi follow melalui database dan email queue
-- `resources/views/emails/followed-users-feed.blade.php` - template HTML email ringkasan feed
-- `resources/views/auth/verify-email.blade.php` - halaman pemberitahuan verifikasi dan tombol resend email
-- `app/Models/User.php` - mengimplementasikan `MustVerifyEmail`
-- `resources/views/notifications/index.blade.php` - menampilkan notifikasi, state unread, waktu relatif, dan pagination
-- `resources/views/layout/default.blade.php` - menampilkan notifikasi terbaru dan link ke halaman lengkap
-- `database/migrations/2026_09_16_032220_create_notifications_table.php` - menyediakan tabel penyimpanan notifikasi database
-- `routes/web.php` - menambahkan route notice, verify, dan resend verification, serta memperketat fitur dengan middleware `verified`
-
-## Menjalankan aplikasi
+API menggunakan Laravel Sanctum untuk sistem autentikasi API dengan personal access token:
 ```bash
-composer install
-php artisan migrate
-php artisan storage:link
-php artisan serve
+php artisan install:api
 ```
 
-Konfigurasikan database dan mailer pada `.env`. Untuk memproses email dan notifikasi yang masuk queue, jalankan worker pada terminal terpisah:
+## Autentikasi API
 
-```bash
-php artisan queue:work
+Buat token melalui halaman **My Profile → API Tokens**, lalu gunakan sebagai Bearer Token:
+
+```http
+Authorization: Bearer {sanctum_token}
+Accept: application/json
 ```
 
-Preview HTML feed tersedia di route `feed.email.preview`. Pengiriman feed dilakukan melalui route `feed.email.send` untuk user yang login dan sudah memverifikasi email.
+Endpoint protected juga membutuhkan user yang sudah memverifikasi email.
 
-## Menjalankan testing
+## Endpoint API v1
 
-Jalankan seluruh test:
+Base URL: `/api/v1`
 
-```bash
-php artisan test --compact
-```
+- `GET /posts` - daftar post dengan pagination
+- `GET /posts/{post}` - detail post beserta komentar
+- `GET /posts/{post}/comments` - daftar komentar
+- `POST /posts` - membuat post
+- `PUT /posts/{post}` - mengubah post
+- `POST /posts/{post}/comments` - membuat komentar
+- `DELETE /posts/{post}/comments/{comment}` - menghapus komentar
+- `POST /posts/{post}/like` - toggle like
+- `DELETE /posts/{post}` - menghapus post
 
-Jalankan test feature:
+## File terkait
 
-```bash
-php artisan test --compact tests/Feature
-```
+- `app/Http/Controllers/Api/V1/PostController.php` - controller endpoint API post, komentar, dan like
+- `app/Http/Controllers/ApiTokenController.php` - membuat dan mencabut personal access token
+- `app/Http/Resources/UserResource.php` - format response user
+- `app/Http/Resources/PostResource.php` - format response post dan metadata relasi
+- `app/Http/Resources/CommentResource.php` - format response komentar
+- `routes/api.php` - endpoint API v1 dan middleware `auth:sanctum`/`verified`
+- `config/sanctum.php` - konfigurasi Sanctum
+- `resources/views/user/api-tokens.blade.php` - halaman pengelolaan token API
+- `API-postman-collection.json` - collection request public dan protected
 
-Jalankan test unit:
+## Postman Collection
 
-```bash
-php artisan test --compact tests/Unit
-```
+Import file `API-postman-collection.json` ke Postman untuk mencoba endpoint API tanpa membuat request dari awal. Collection sudah memiliki dua kelompok request:
 
-Jalankan file atau test tertentu:
+- **Public posts** - list post, detail post, dan komentar tanpa token.
+- **Protected posts** - create/update/delete post, komentar, dan toggle like menggunakan Bearer Token.
 
-```bash
-php artisan test --compact tests/Feature/AuthFeatureTest.php
-php artisan test --compact --filter="creates a comment"
-```
+Atur variable collection berikut sebelum menjalankan request protected:
 
-Test feature menggunakan `RefreshDatabase`, sehingga database test harus dapat dibuat dan di-reset secara otomatis.
+- `base_url` - URL aplikasi, contoh `http://localhost:8000`
+- `sanctum_token` - personal access token dari halaman API Tokens
+- `post_id` dan `comment_id` - ID data yang ingin diuji
+
+Token akan dikirim otomatis sebagai `Authorization: Bearer {{sanctum_token}}`. Pastikan user pemilik token sudah terverifikasi email dan queue tidak diperlukan untuk menjalankan endpoint API.
 
 ## Referensi
-- Pest: https://pestphp.com/docs
-- Laravel HTTP Tests: https://laravel.com/docs/13.x/http-tests
-- Database Testing: https://laravel.com/docs/13.x/database-testing
-- Notifications Testing: https://laravel.com/docs/13.x/notifications#testing
+- API Resources: https://laravel.com/docs/13.x/eloquent-resources
+- Sanctum: https://laravel.com/docs/13.x/sanctum
+- API Routing: https://laravel.com/docs/13.x/routing
+- Postman Collections: https://learning.postman.com/docs/collections/collections-overview/

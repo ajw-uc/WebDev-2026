@@ -1,0 +1,20 @@
+{
+  "info": {"name":"Mini Social API v1","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json","description":"Laravel Sanctum API. Create a token at /me/api-tokens and set sanctum_token."},
+  "auth":{"type":"bearer","bearer":[{"key":"token","value":"{{sanctum_token}}","type":"string"}]},
+  "variable":[{"key":"base_url","value":"http://localhost:8000"},{"key":"sanctum_token","value":""},{"key":"post_id","value":"1"},{"key":"comment_id","value":"1"}],
+  "item":[
+    {"name":"Public posts","item":[
+      {"name":"List posts","request":{"auth":{"type":"noauth"},"method":"GET","url":"{{base_url}}/api/v1/posts"}},
+      {"name":"Show post","request":{"auth":{"type":"noauth"},"method":"GET","url":"{{base_url}}/api/v1/posts/{{post_id}}"}},
+      {"name":"List post comments","request":{"method":"GET","url":"{{base_url}}/api/v1/posts/{{post_id}}/comments"}}
+    ]},
+    {"name":"Protected posts","item":[
+      {"name":"Create post","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"content\": \"A post created through the API\"\n}"},"url":"{{base_url}}/api/v1/posts"}},
+      {"name":"Update post","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"content\": \"Updated post content\"\n}"},"url":"{{base_url}}/api/v1/posts/{{post_id}}"}},
+      {"name":"Comment on post","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"content\": \"Great post!\"\n}"},"url":"{{base_url}}/api/v1/posts/{{post_id}}/comments"}},
+      {"name":"Delete comment","request":{"method":"DELETE","url":"{{base_url}}/api/v1/posts/{{post_id}}/comments/{{comment_id}}"}},
+      {"name":"Toggle like","request":{"method":"POST","url":"{{base_url}}/api/v1/posts/{{post_id}}/like"}},
+      {"name":"Delete post","request":{"method":"DELETE","url":"{{base_url}}/api/v1/posts/{{post_id}}"}}
+    ]}
+  ]
+}
