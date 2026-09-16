@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FollowedUsersFeedController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
@@ -17,6 +18,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/signup', [AuthController::class, 'signup'])->middleware('throttle:signup');
 });
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/feed/email/preview', [FollowedUsersFeedController::class, 'preview'])->name('feed.email.preview');
+    Route::get('/feed/email/send', [FollowedUsersFeedController::class, 'send'])
+        ->name('feed.email.send');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
