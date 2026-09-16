@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Gregwar\Captcha\CaptchaBuilder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,14 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function showSignup(): View
+    public function showSignup(Request $request): View
     {
-        return view('auth.signup');
+        $captcha = CaptchaBuilder::create();
+        $captcha->build(180, 50);
+
+        session(['signup_captcha_phrase' => $captcha->getPhrase()]);
+
+        return view('auth.signup', ['captchaImage' => $captcha->inline()]);
     }
 
     public function login(Request $request): RedirectResponse
@@ -41,7 +47,17 @@ class AuthController extends Controller
             'username' => ['required', 'string', 'max:50', 'alpha_dash', 'unique:users,username'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', 'min:8'],
+            'captcha' => ['required', 'string'],
         ]);
+
+        $expectedPhrase = $request->session()->get('signup_captcha_phrase');
+        if ($expectedPhrase === '' || $expectedPhrase !== $validated['captcha']) {
+            return back()->withErrors([
+                'captcha' => 'Wrong Captcha'
+            ]);
+        }
+
+        $request->session()->forget('signup_captcha_phrase');
         $user = User::create($validated);
         Auth::login($user);
         $request->session()->regenerate();

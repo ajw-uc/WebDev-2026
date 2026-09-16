@@ -10,9 +10,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Throwable;
 
 class PostController extends Controller
 {
@@ -50,16 +53,29 @@ class PostController extends Controller
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
-        $post = Post::create([
-            'user_id' => $request->user()->id,
-            'content' => $validated['content'],
-        ]);
+        $storedImage = null;
 
-        if ($request->hasFile('image')) {
-            $filePath = $request->file('image')->store("post/image/{$post->id}", 'public');
-            $post->update([
-                'image' => $filePath,
-            ]);
+        try {
+            $post = DB::transaction(function () use ($request, $validated, &$storedImage): Post {
+                $post = Post::create([
+                    'user_id' => $request->user()->id,
+                    'content' => $validated['content'],
+                ]);
+
+                if ($request->hasFile('image')) {
+                    $storedImage = $request->file('image')->store("post/image/{$post->id}", 'public');
+                    $post->image = $storedImage;
+                    $post->save();
+                }
+
+                return $post;
+            });
+        } catch (Throwable $exception) {
+            if ($storedImage !== null) {
+                Storage::disk('public')->delete($storedImage);
+            }
+
+            throw $exception;
         }
 
         return redirect()->route('post.show', ['id' => $post->id]);
