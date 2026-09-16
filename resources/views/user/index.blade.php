@@ -33,7 +33,13 @@
     <section class="card mt-4" aria-labelledby="my-posts-heading">
         <div class="card-header profile-posts-header">
             <h2 id="my-posts-heading">My Posts <span>{{ $posts->total() }}</span></h2>
-            <span>Your stories, all together</span>
+            @if($posts->total() === 0)
+                <span>Your stories, all together</span>
+            @else
+                <div class="d-flex align-items-center gap-3">
+                    <a href="{{ route('post.create') }}" class="btn btn-primary btn-sm">Create post ↗</a>
+                </div>
+            @endif
         </div>
         <div class="card-body">
             @if($posts->total() === 0)
