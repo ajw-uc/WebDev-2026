@@ -1,4 +1,4 @@
-# Sesi 1. Instalasi Laravel
+# 1. Instalasi Laravel
 Sesi ini mempelajari cara instalasi Laravel dan melakukan push ke GitHub
 
 ## Cara Instalasi
