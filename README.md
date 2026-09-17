@@ -1,4 +1,4 @@
-# 20. Mailable dan Queue
+# 21. Mailable dan Queue
 Menambahkan fitur untuk mengirim ringkasan lima post terbaru dari akun yang diikuti ke email user, lengkap dengan halaman preview dan template email. Memperluas sistem notifikasi dengan queue agar pengiriman email berjalan asynchronous.
 
 ## Perintah untuk membuat mailable
