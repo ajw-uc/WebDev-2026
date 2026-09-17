@@ -1,4 +1,4 @@
-# 6. Bootstrap
+# 7. Bootstrap
 Mengintegrasikan Bootstrap 5.3 ke dalam layout Blade untuk membuat tampilan Mini Social lebih terstruktur dan responsif. Perubahan ini juga menambahkan komponen form dan komentar, composer post di halaman home, serta tombol navigasi untuk mengedit profil dan membuat post.
 
 ## File terkait
