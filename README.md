@@ -1,4 +1,4 @@
-# Sesi 6. Relasi Eloquent, Custom Attribute, dan Collection
+# 10. Relasi Eloquent, Custom Attribute, dan Collection
 Menghubungkan model dengan relasi Eloquent dan memanfaatkan accessor untuk menyediakan format waktu yang mudah dibaca. Factory dan seeder diperluas untuk menghasilkan post beserta komentar, likes, dan relasi follow. Collection digunakan untuk memilih user secara acak, sedangkan `dd` ditambahkan pada alur pengambilan data untuk kebutuhan debugging.
 
 ## File terkait
