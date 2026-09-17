@@ -1,4 +1,4 @@
-# 14. Authentication & Profile
+# 16. Authentication & Profile
 Menambahkan autentikasi pengguna lengkap berupa login, signup, logout, dan remember me. Akses ke fitur yang membutuhkan akun dibatasi dengan middleware `auth`, sedangkan halaman login dan signup hanya tersedia untuk guest. Profil user kini menggunakan data database dan mendukung edit profil, upload foto, change password, serta daftar post milik user.
 
 ## File terkait
