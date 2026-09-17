@@ -1,4 +1,4 @@
-# 10. Create dan Read
+# 11. Create dan Read
 Menambahkan alur create dan read untuk post. User dapat mengirim post melalui form, data divalidasi lalu disimpan menggunakan Eloquent, kemudian diarahkan ke halaman detail post. View feed dan detail post diperbarui untuk membaca data model, sementara komponen form menangani old input dan pesan error validasi secara konsisten.
 
 ## File terkait
