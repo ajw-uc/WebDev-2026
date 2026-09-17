@@ -1,4 +1,4 @@
-# 21. User Verification
+# 22. User Verification
 Menambahkan verifikasi email untuk memastikan user mengonfirmasi alamat email sebelum menggunakan fitur yang membutuhkan akun terverifikasi. Setelah signup atau login, user diarahkan ke halaman verifikasi dan dapat mengirim ulang email verifikasi dengan pembatasan request.
 
 ## Alur email
