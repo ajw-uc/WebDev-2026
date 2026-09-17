@@ -1,4 +1,4 @@
-# 13. Update dan Delete
+# 14. Update dan Delete
 Menambahkan alur update dan delete untuk post, serta create dan delete untuk komentar. Form post dipisahkan menjadi view create/edit dan partial reusable, sementara halaman detail menyediakan tombol aksi dengan konfirmasi modal sebelum penghapusan.
 
 ## File terkait
