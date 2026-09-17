@@ -1,4 +1,4 @@
-# Sesi 23. API
+# Sesi 24. API
 Menambahkan REST API versi `v1` untuk fitur post, komentar, dan like menggunakan Laravel Sanctum sebagai autentikasi token. Response API dinormalisasi dengan Laravel API Resource, dilengkapi pagination dan Postman collection untuk pengujian endpoint.
 
 ## API Resource
