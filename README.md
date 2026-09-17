@@ -1,4 +1,4 @@
-# 16. Authorization dengan Policy & Gate
+# 17. Authorization dengan Policy & Gate
 Menambahkan authorization berbasis kepemilikan resource. Hanya user yang membuat post yang dapat mengedit atau menghapus post tersebut, dan hanya user yang membuat komentar yang dapat menghapus komentarnya. Pemeriksaan dilakukan di server melalui Policy dan Gate, sedangkan tombol serta modal aksi pada Blade hanya ditampilkan kepada user yang memiliki izin.
 
 ## Policy dan Gate
