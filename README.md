@@ -1,4 +1,4 @@
-# 14. Upload File
+# 15. Upload File
 Menambahkan dukungan upload gambar pada post. File divalidasi berdasarkan tipe dan ukuran, disimpan pada disk `public`, ditampilkan sebagai thumbnail dengan modal preview, serta dapat diganti atau dihapus saat post diedit.
 
 ## File terkait
