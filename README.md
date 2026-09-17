@@ -1,4 +1,4 @@
-# 8. Model
+# 9. Model
 Membuat Eloquent model sesuai dengan tabel database pada sesi sebelumnya. Model dikonfigurasi dengan mass assignment, soft delete, factory, dan casting password. Data dapat diuji melalui Laravel Tinker, sedangkan factory dan seeder digunakan untuk menghasilkan data demo user dan post secara otomatis.
 
 ## Membuat Model
