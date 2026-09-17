@@ -17,7 +17,7 @@ Sesi ini mempelajari cara instalasi Laravel dan melakukan push ke GitHub
 13. Setelah project berhasil dibuat, Herd akan mengaktifkan URL http://webdev.test
 
 ## Cara instalasi manual
-1. Pastikan komputer sudah terinstall PHP, pastikan versi PHP 8.4 atau lebih tinggi dengan menjalankan perintah `php -v` di terminal.
+1. Pastikan komputer sudah terinstall PHP, pastikan versi PHP 8.3 atau lebih tinggi dengan menjalankan perintah `php -v` di terminal.
 2. Install Composer, ikuti panduan https://getcomposer.org/doc/00-intro.md
 3. Buka terminal, lalu masuk ke direktori dimana project akan disimpan
 4. Jalankan perintah Composer untuk mengunduh project Laravel:
