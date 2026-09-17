@@ -1,7 +1,7 @@
 # 1. Instalasi Laravel
 Sesi ini mempelajari cara instalasi Laravel dan melakukan push ke GitHub
 
-## Cara Instalasi
+## Cara instalasi dengan Herd
 1. Install Herd (https://herd.laravel.com/)
 2. Buka Herd
 3. Buka Sites
@@ -14,9 +14,30 @@ Sesi ini mempelajari cara instalasi Laravel dan melakukan push ke GitHub
 10. Aktifkan Laravel Boost jika akan menggunakan AI Agent untuk membantu coding
 11. Aktifkan Initialize a Git repository
 12. Klik "Next", tunggu hingga proses instalasi selesai
+13. Setelah project berhasil dibuat, Herd akan mengaktifkan URL http://webdev.test
 
-## Membuka Project
-Setelah project berhasil dibuat, Herd akan mengaktifkan URL http://webdev.test
+## Cara instalasi manual
+1. Pastikan komputer sudah terinstall PHP, pastikan versi PHP 8.4 atau lebih tinggi dengan menjalankan perintah `php -v` di terminal.
+2. Install Composer, ikuti panduan https://getcomposer.org/doc/00-intro.md
+3. Buka terminal, lalu masuk ke direktori dimana project akan disimpan
+4. Jalankan perintah Composer untuk mengunduh project Laravel:
+```
+composer create-project laravel/laravel webdev
+```
+5. Masuk ke project yang baru dibuat
+```
+cd webdev
+```
+6. Pastikan file konfigurasi .env sudah tersedia, jika belum salin file konfigurasi dan generate key
+```
+cp .env.example .env
+php artisan key:generate
+```
+7. Jalankan server Laravel
+```
+php artisan serve
+```
+8. Buka browser dan akses URL http://127.0.0.1:8000 atau localhost:8000
 
 ## Membuat repository GitHub
 1. Buka GitHub (https://github.com)
