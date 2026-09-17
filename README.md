@@ -1,4 +1,4 @@
-# 7. Redesign
+# 8. Redesign
 Melakukan redesign UI/UX Mini Social dengan tetap menggunakan Bootstrap sebagai dasar layout. Tampilan dibuat lebih modern, konsisten, dan responsif melalui custom CSS, struktur halaman yang lebih jelas, serta komponen profil, post, komentar, navigasi, dan notifikasi yang diperbarui.
 
 ## File terkait
