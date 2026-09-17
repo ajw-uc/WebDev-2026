@@ -1,4 +1,4 @@
-# 12. Search dan Sort
+# 13. Search dan Sort
 Menambahkan pencarian dan pengurutan pada halaman daftar post. User dapat mencari post berdasarkan isi, nama, atau username author, lalu mengurutkan hasil berdasarkan post terbaru atau terlama. Parameter filter dipertahankan saat berpindah halaman melalui pagination.
 
 ## File terkait
