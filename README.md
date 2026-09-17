@@ -1,4 +1,4 @@
-# 22. Testing
+# 23. Testing
 Menambahkan pengujian otomatis menggunakan Pest untuk memverifikasi alur authentication, fitur social media, dan notifikasi. Feature test menguji request HTTP beserta perubahan database, sedangkan unit test memeriksa perilaku notification secara terisolasi.
 
 ## Cakupan pengujian
