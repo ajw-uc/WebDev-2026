@@ -1,4 +1,4 @@
-# 19. Notification
+# 20. Notification
 Menambahkan sistem notifikasi untuk aktivitas komentar, like, dan follow. Notifikasi disimpan pada database serta dikirim melalui mail channel, ditampilkan pada dropdown navbar dan halaman daftar notifikasi, serta dapat ditandai sudah dibaca ketika dibuka.
 
 ## Membuat migration table notification
