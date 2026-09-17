@@ -1,4 +1,4 @@
-# 11. Pagination
+# 12. Pagination
 Menambahkan pagination pada daftar post agar data ditampilkan secara bertahap dalam beberapa halaman. Pagination diterapkan pada feed home dan halaman daftar post, menggunakan tampilan Bootstrap 5 serta custom styling agar sesuai dengan desain aplikasi.
 
 ## File terkait
