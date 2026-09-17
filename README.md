@@ -88,8 +88,21 @@ git commit -m "Initial commit"
 8. Push semua file ke repository GitHub dengan perintah 
 ```
 git push -u origin main
-```
-9. Lihat repository GitHub, source code sekarang sudah tersimpan di GitHub
+``` 
+10. Lihat repository GitHub, source code sekarang sudah tersimpan di GitHub
+
+## Autentikasi GitHub
+Jika muncul prompt untuk autentikasi saat melakukan push, maka lakukan langkah berikut:
+1. Masuk ke web github.com
+2. Klik profil dikanan atas dan masuk ke halaman Settings
+3. Pada tab sebelah kiri, masuk ke menu Developer Settings
+4. Klik Personal access tokens, lalu pilih Tokens (classic)
+5. Klik Generate new token di kanan atas, lalu pilih Generate new token (classic)
+6. Masukkan note (contoh: webdev), pilih expiration (saran saya gunakan no expiration), dan centang semua item repo
+7. Klik Generate token
+8. Copy dan simpan token yang diberikan, karena token ini hanya muncul sekali
+9. Kembali ke prompt autentikasi, masukkan email sebagai username dan personal access token sebagai password
+10. Klik authenticate/submit/login 
 
 ## Referensi
 - Herd: https://herd.laravel.com/
