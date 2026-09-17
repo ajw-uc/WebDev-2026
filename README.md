@@ -1,4 +1,4 @@
-# 17. Like dan Follow
+# 18. Like dan Follow
 Menambahkan interaksi like pada post dan fitur follow/unfollow antar user. Like dapat di-toggle secara asynchronous menggunakan JavaScript dan endpoint JSON, sedangkan network followers/following ditampilkan melalui halaman terpisah dengan pagination.
 
 ## File terkait
