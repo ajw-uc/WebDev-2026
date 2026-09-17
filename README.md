@@ -1,4 +1,4 @@
-# Sesi 4. Migration
+# 6. Migration
 Menambahkan struktur database untuk fitur social media menggunakan Laravel Migration. Schema mencakup posts, comments, likes, dan relasi follows, serta menambahkan informasi profil `username`, `bio`, dan `image` pada tabel users. Migration juga menerapkan foreign key, unique constraint, cascade delete, timestamps, dan soft delete sesuai kebutuhan tiap tabel.
 
 ## Prasyarat
