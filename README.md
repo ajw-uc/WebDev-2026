@@ -1,4 +1,4 @@
-# 18. Security
+# 19. Security
 Menambahkan pengamanan pada authentication, pembuatan post, dan penambahan komentar. Signup dilindungi CAPTCHA, endpoint sensitif diberi rate limiter berdasarkan IP atau user, dan pembuatan post beserta upload gambar dijalankan dalam database transaction agar data serta file tetap konsisten saat terjadi kegagalan.
 
 ## Perubahan keamanan
