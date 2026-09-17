@@ -38,6 +38,12 @@ php artisan key:generate
 php artisan serve
 ```
 8. Buka browser dan akses URL http://127.0.0.1:8000 atau localhost:8000
+9. Jika akan menggunakan AI Agent untuk development (contoh: codex, claude code), install Laravel Boost yang akan memberikan panduan agent dalam membuat kode Laravel.
+```
+composer require laravel/boost --dev
+
+
+```
 
 ## Membuat repository GitHub
 1. Buka GitHub (https://github.com)
