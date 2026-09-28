@@ -42,13 +42,18 @@ body { color: #20232a; }
 
 .post-card { transition: transform .2s ease, box-shadow .2s ease; }
 .post-card:hover, .post-card:focus-within { transform: translateY(-2px); box-shadow: var(--bs-box-shadow-sm) !important; }
-.post-card-profile .avatar { transition: transform .2s ease, box-shadow .2s ease; }
-.post-card-profile h3 { transition: color .2s ease; }
+.post-card-profile .avatar,
+.post-comment-profile .avatar { transition: transform .2s ease, box-shadow .2s ease; }
+.post-card-profile h3,
+.post-comment-profile h3 { transition: color .2s ease; }
 .post-card-profile:hover .avatar,
-.post-card-profile:focus-visible .avatar { transform: scale(1.08); box-shadow: 0 0 0 .2rem rgba(var(--bs-primary-rgb), .18); }
+.post-card-profile:focus-visible .avatar,
+.post-comment-profile:hover .avatar,
+.post-comment-profile:focus-visible .avatar { transform: scale(1.08); box-shadow: 0 0 0 .2rem rgba(var(--bs-primary-rgb), .18); }
 .post-card-profile:hover h3,
-.post-card-profile:focus-visible h3 { color: var(--bs-primary); }
-.post-content { white-space: pre-line; overflow-wrap: anywhere; }
+.post-card-profile:focus-visible h3,
+.post-comment-profile:hover h3,
+.post-comment-profile:focus-visible h3 { color: var(--bs-primary); }
 .stretched-link-layer { position: relative; z-index: 2; }
 .notification-menu { width: min(22rem, calc(100vw - 2rem)); }
 .comment + .comment { border-top: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color); }
@@ -56,7 +61,10 @@ body { color: #20232a; }
 @media (prefers-reduced-motion: reduce) {
     .post-card { transition: none; }
     .post-card:hover, .post-card:focus-within { transform: none; }
-    .post-card-profile .avatar, .post-card-profile h3 { transition: none; }
+    .post-card-profile .avatar, .post-card-profile h3,
+    .post-comment-profile .avatar, .post-comment-profile h3 { transition: none; }
     .post-card-profile:hover .avatar,
-    .post-card-profile:focus-visible .avatar { transform: none; }
+    .post-card-profile:focus-visible .avatar,
+    .post-comment-profile:hover .avatar,
+    .post-comment-profile:focus-visible .avatar { transform: none; }
 }

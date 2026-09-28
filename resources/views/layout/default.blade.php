@@ -19,10 +19,18 @@
             <div class="d-flex align-items-center gap-2 gap-sm-3">
                 <a class="btn {{ request()->routeIs('home') ? 'btn-primary' : 'btn-light' }} btn-sm rounded-pill px-3" href="{{ route('home') }}">Home</a>
                 <div class="dropdown">
-                    <button class="btn btn-light rounded-circle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications" style="width: 2.5rem; height: 2.5rem;"><i class="bi bi-bell" aria-hidden="true"></i></button>
+                    <button class="btn btn-light rounded-circle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications" style="width: 2.5rem; height: 2.5rem;">
+                        <i class="bi bi-bell" aria-hidden="true"></i>
+                    </button>
                     <div class="dropdown-menu dropdown-menu-end notification-menu p-0 overflow-hidden shadow border-0">
                         <h2 class="h6 px-3 py-3 mb-0 border-bottom">Notifications</h2>
-                        <div class="p-4 text-center"><div class="fs-2 text-primary mb-2"><i class="bi bi-check-circle" aria-hidden="true"></i></div><p class="fw-semibold mb-1">You're all caught up</p><p class="small text-body-secondary mb-0">New activity will appear here.</p></div>
+                        <div class="p-4 text-center">
+                            <div class="fs-2 text-primary mb-2">
+                                <i class="bi bi-check-circle" aria-hidden="true"></i>
+                            </div>
+                            <p class="fw-semibold mb-1">You're all caught up</p>
+                            <p class="small text-body-secondary mb-0">New activity will appear here.</p>
+                        </div>
                     </div>
                 </div>
                 <a class="rounded-circle" href="{{ route('me') }}" aria-label="My profile">
