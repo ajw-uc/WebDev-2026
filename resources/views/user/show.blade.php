@@ -8,7 +8,27 @@
             <span class="h3 fw-bold mb-0 opacity-75">Meet the community.</span>
         </div>
         <div class="card-body px-4 px-md-5 pb-4">
-            <img class="avatar avatar-lg profile-avatar rounded-circle bg-white" src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile-avatar.svg') }}" alt="{{ $user->name }}'s profile picture">
+            <div class="d-flex align-items-end justify-content-between gap-3">
+                <img class="avatar avatar-lg profile-avatar rounded-circle bg-white" src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile-avatar.svg') }}" alt="{{ $user->name }}'s profile picture">
+                @auth
+                    @if (! auth()->user()->is($user))
+                        @if ($isFollowing)
+                            <form class="mb-2" action="{{ route('user.unfollow', $user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-light border rounded-pill px-4" type="submit"><i class="bi bi-person-check-fill me-1" aria-hidden="true"></i>Following</button>
+                            </form>
+                        @else
+                            <form class="mb-2" action="{{ route('user.follow', $user->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-primary rounded-pill px-4" type="submit"><i class="bi bi-person-plus me-1" aria-hidden="true"></i>Follow</button>
+                            </form>
+                        @endif
+                    @endif
+                @else
+                    <a class="btn btn-primary rounded-pill px-4 mb-2" href="{{ route('login') }}"><i class="bi bi-person-plus me-1" aria-hidden="true"></i>Log in to follow</a>
+                @endauth
+            </div>
             <span class="badge text-bg-light rounded-pill d-table mt-3">Community profile</span>
             <h1 class="h2 fw-bold mt-2 mb-1" id="profile-heading">{{ $user->name }}</h1>
             <p class="text-body-secondary mb-3">{{ $user->username_display }}</p>
@@ -18,14 +38,14 @@
                     <strong class="d-block fs-5">{{ $posts->total() }}</strong>
                     <span class="small text-body-secondary">Posts</span>
                 </div>
-                <div>
+                <a class="profile-stat text-reset text-decoration-none rounded-3" href="{{ route('user.network', ['id' => $user->id, 'tab' => 'followers']) }}">
                     <strong class="d-block fs-5">{{ $user->followers->count() }}</strong>
                     <span class="small text-body-secondary">Followers</span>
-                </div>
-                <div>
+                </a>
+                <a class="profile-stat text-reset text-decoration-none rounded-3" href="{{ route('user.network', ['id' => $user->id, 'tab' => 'following']) }}">
                     <strong class="d-block fs-5">{{ $user->following->count() }}</strong>
                     <span class="small text-body-secondary">Following</span>
-                </div>
+                </a>
             </div>
         </div>
     </section>

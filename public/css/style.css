@@ -111,6 +111,16 @@ body { color: #20232a; }
     margin-top: -3.5rem;
     border: .35rem solid var(--bs-body-bg);
 }
+.profile-stat {
+    margin: -.5rem;
+    padding: .5rem;
+    transition: color .2s ease, background-color .2s ease;
+}
+.profile-stat:hover,
+.profile-stat:focus-visible {
+    color: var(--bs-primary) !important;
+    background: rgba(var(--bs-primary-rgb), .08);
+}
 
 .post-form-card { max-width: 52rem; }
 .post-form .form-label {
@@ -197,9 +207,64 @@ body { color: #20232a; }
 .post-card-profile:focus-visible h3,
 .post-comment-profile:hover h3,
 .post-comment-profile:focus-visible h3 { color: var(--bs-primary); }
+.like-button {
+    color: var(--bs-secondary-color);
+    background: var(--bs-tertiary-bg);
+    border: 1px solid transparent;
+    transition: color .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.like-button:hover,
+.like-button:focus-visible {
+    color: #d6336c;
+    background: rgba(214, 51, 108, .08);
+    border-color: rgba(214, 51, 108, .16);
+    transform: translateY(-1px);
+}
+.like-button.is-liked {
+    color: #d6336c;
+    background: rgba(214, 51, 108, .1);
+    border-color: rgba(214, 51, 108, .18);
+}
+.like-button:disabled { opacity: .65; }
+.like-icon { font-size: 1rem; line-height: 1; }
 .stretched-link-layer { position: relative; z-index: 2; }
 .notification-menu { width: min(22rem, calc(100vw - 2rem)); }
 .comment + .comment { border-top: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color); }
+
+.network-card { max-width: 46rem; }
+.network-tabs { background: var(--bs-tertiary-bg); }
+.network-tabs a {
+    padding: .65rem 1rem;
+    color: var(--bs-secondary-color);
+    font-weight: 600;
+    transition: color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+.network-tabs a:hover,
+.network-tabs a:focus-visible { color: var(--bs-primary); }
+.network-tabs a.active {
+    color: var(--bs-primary);
+    background: var(--bs-body-bg);
+    box-shadow: var(--bs-box-shadow-sm);
+}
+.network-tabs .badge {
+    color: inherit;
+    background: rgba(var(--bs-primary-rgb), .1);
+}
+.network-person + .network-person { border-top: var(--bs-border-width) solid var(--bs-border-color); }
+.network-person-info { min-width: 0; }
+.network-person-info strong,
+.network-person-info .avatar { transition: color .2s ease, transform .2s ease, box-shadow .2s ease; }
+.network-person-info:hover strong,
+.network-person-info:focus-visible strong { color: var(--bs-primary); }
+.network-person-info:hover .avatar,
+.network-person-info:focus-visible .avatar { transform: scale(1.06); box-shadow: 0 0 0 .2rem rgba(var(--bs-primary-rgb), .12); }
+.network-empty-icon {
+    width: 4rem;
+    height: 4rem;
+    color: var(--bs-primary);
+    background: rgba(var(--bs-primary-rgb), .1);
+    font-size: 1.5rem;
+}
 
 .post-actions .btn {
     font-weight: 600;
@@ -259,12 +324,21 @@ body { color: #20232a; }
     .post-image-preview-trigger:focus-visible .post-image-thumbnail { transform: none; }
     .post-card-profile .avatar, .post-card-profile h3,
     .post-comment-profile .avatar, .post-comment-profile h3,
+    .profile-stat,
+    .like-button,
+    .network-tabs a,
+    .network-person-info strong,
+    .network-person-info .avatar,
     .post-actions .btn,
     .comment-delete-button { transition: none; }
     .post-card-profile:hover .avatar,
     .post-card-profile:focus-visible .avatar,
     .post-comment-profile:hover .avatar,
-    .post-comment-profile:focus-visible .avatar { transform: none; }
+    .post-comment-profile:focus-visible .avatar,
+    .network-person-info:hover .avatar,
+    .network-person-info:focus-visible .avatar,
+    .like-button:hover,
+    .like-button:focus-visible { transform: none; }
     .post-actions .btn:hover,
     .comment-delete-button:hover,
     .comment-delete-button:focus-visible { transform: none; }

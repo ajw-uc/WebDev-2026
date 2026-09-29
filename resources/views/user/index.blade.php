@@ -42,14 +42,14 @@
                     <strong class="d-block fs-5">{{ $posts->total() }}</strong>
                     <span class="small text-body-secondary">Posts</span>
                 </div>
-                <div>
+                <a class="profile-stat text-reset text-decoration-none rounded-3" href="{{ route('me.network', ['tab' => 'followers']) }}">
                     <strong class="d-block fs-5">{{ $user->followers->count() }}</strong>
                     <span class="small text-body-secondary">Followers</span>
-                </div>
-                <div>
+                </a>
+                <a class="profile-stat text-reset text-decoration-none rounded-3" href="{{ route('me.network', ['tab' => 'following']) }}">
                     <strong class="d-block fs-5">{{ $user->following->count() }}</strong>
                     <span class="small text-body-secondary">Following</span>
-                </div>
+                </a>
             </div>
         </div>
     </section>

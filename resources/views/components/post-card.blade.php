@@ -22,10 +22,21 @@
             </button>
         @endif
         <footer class="d-flex align-items-center gap-2 position-relative">
-            <a class="btn btn-light btn-sm rounded-pill px-3 stretched-link-layer">
-                <i class="bi bi-heart me-1" aria-hidden="true"></i>
-                {{ $post->likes->count() }} likes
-            </a>
+            @auth
+                @php($isLiked = $post->likes->contains('user_id', auth()->id()))
+                <form class="d-inline-flex stretched-link-layer" action="{{ route('post.like', $post->id) }}" method="POST" data-like-form>
+                    @csrf
+                    <button class="like-button btn btn-sm rounded-pill px-3 {{ $isLiked ? 'is-liked' : '' }}" type="submit" aria-label="{{ $isLiked ? 'Unlike' : 'Like' }} post" aria-pressed="{{ $isLiked ? 'true' : 'false' }}">
+                        <span class="like-icon me-1" data-like-icon aria-hidden="true">{{ $isLiked ? '♥' : '♡' }}</span>
+                        <span data-like-count>{{ $post->likes->count() }}</span> likes
+                    </button>
+                </form>
+            @else
+                <a class="like-button btn btn-sm rounded-pill px-3 stretched-link-layer" href="{{ route('login') }}" aria-label="Log in to like this post">
+                    <span class="like-icon me-1" aria-hidden="true">♡</span>
+                    {{ $post->likes->count() }} likes
+                </a>
+            @endauth
             <a class="btn btn-light btn-sm rounded-pill px-3 stretched-link-layer" href="{{ route('post.show', $post->id) }}#comments">
                 <i class="bi bi-chat-left-text me-1" aria-hidden="true"></i>
                 {{ $post->comments->count() }} comments
@@ -49,3 +60,9 @@
         </div>
     </div>
 @endif
+
+@once
+    @push('scripts')
+        <script src="{{ asset('js/like.js') }}" defer></script>
+    @endpush
+@endonce
