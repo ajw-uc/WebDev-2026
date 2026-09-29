@@ -228,7 +228,36 @@ body { color: #20232a; }
 .like-button:disabled { opacity: .65; }
 .like-icon { font-size: 1rem; line-height: 1; }
 .stretched-link-layer { position: relative; z-index: 2; }
-.notification-menu { width: min(22rem, calc(100vw - 2rem)); }
+.notification-trigger { width: 2.5rem; height: 2.5rem; }
+.notification-count { min-width: 1.4rem; font-size: .65rem; }
+.notification-menu { width: min(24rem, calc(100vw - 2rem)); max-height: min(34rem, calc(100vh - 6rem)); overflow-y: auto !important; }
+.notification-menu-item,
+.notification-list-item { transition: background-color .2s ease; }
+.notification-menu-item + .notification-menu-item,
+.notification-list-item + .notification-list-item { border-top: var(--bs-border-width) solid var(--bs-border-color); }
+.notification-menu-item:hover,
+.notification-menu-item:focus-visible,
+.notification-list-item:hover,
+.notification-list-item:focus-visible { background: var(--bs-tertiary-bg); }
+.notification-menu-item.is-unread,
+.notification-list-item.is-unread { background: rgba(var(--bs-primary-rgb), .07); }
+.notification-menu-item.is-unread:hover,
+.notification-list-item.is-unread:hover { background: rgba(var(--bs-primary-rgb), .12); }
+.notification-item-icon,
+.notification-list-icon,
+.notification-empty-icon {
+    color: var(--bs-primary);
+    background: rgba(var(--bs-primary-rgb), .1);
+}
+.notification-item-icon { width: 2.25rem; height: 2.25rem; }
+.notification-list-icon { width: 3rem; height: 3rem; font-size: 1.15rem; }
+.notification-empty-icon { width: 4rem; height: 4rem; font-size: 1.5rem; }
+.notification-message { line-height: 1.35; }
+.notification-unread-dot { width: .55rem; height: .55rem; margin-top: .35rem; background: var(--bs-primary); }
+.notification-view-all { color: var(--bs-primary); background: var(--bs-body-bg); }
+.notification-view-all:hover,
+.notification-view-all:focus-visible { color: var(--bs-link-hover-color); background: var(--bs-tertiary-bg); }
+.notification-list { max-width: 52rem; }
 .comment + .comment { border-top: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color); }
 
 .network-card { max-width: 46rem; }
@@ -329,6 +358,8 @@ body { color: #20232a; }
     .network-tabs a,
     .network-person-info strong,
     .network-person-info .avatar,
+    .notification-menu-item,
+    .notification-list-item,
     .post-actions .btn,
     .comment-delete-button { transition: none; }
     .post-card-profile:hover .avatar,

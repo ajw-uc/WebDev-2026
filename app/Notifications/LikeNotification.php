@@ -36,11 +36,11 @@ class LikeNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Like baru di post Anda')
-            ->greeting('Halo '.$notifiable->name.'!')
-            ->line($this->user->name.' menyukai post Anda.')
+            ->subject('New like on your post')
+            ->greeting('Hello, '.$notifiable->name.'!')
+            ->line($this->user->name.' liked your post.')
             ->line('“'.$this->post->content.'”')
-            ->action('Lihat post', route('post.show', ['id' => $this->post->id]));
+            ->action('View post', route('post.show', ['id' => $this->post->id]));
     }
 
     /**
@@ -51,7 +51,7 @@ class LikeNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => $this->user->name.' menyukai post Anda.',
+            'message' => $this->user->name.' liked your post.',
             'post_id' => $this->post->id,
         ];
     }

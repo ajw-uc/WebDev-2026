@@ -26,19 +26,48 @@
                     </button>
                 </form>
                 @auth
+                    @php
+                        $latestNotifications = auth()->user()->notifications()->latest()->limit(10)->get();
+                        $unreadNotificationsCount = auth()->user()->unreadNotifications()->count();
+                    @endphp
                     <div class="dropdown">
-                        <button class="btn btn-light rounded-circle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications" style="width: 2.5rem; height: 2.5rem;">
+                        <button class="notification-trigger btn btn-light rounded-circle p-0 position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications{{ $unreadNotificationsCount ? ', ' . $unreadNotificationsCount . ' unread' : '' }}">
                             <i class="bi bi-bell" aria-hidden="true"></i>
+                            @if ($unreadNotificationsCount > 0)
+                                <span class="notification-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{ $unreadNotificationsCount > 99 ? '99+' : $unreadNotificationsCount }}
+                                    <span class="visually-hidden">unread notifications</span>
+                                </span>
+                            @endif
                         </button>
                         <div class="dropdown-menu dropdown-menu-end notification-menu p-0 overflow-hidden shadow border-0">
-                            <h2 class="h6 px-3 py-3 mb-0 border-bottom">Notifications</h2>
-                            <div class="p-4 text-center">
-                                <div class="fs-2 text-primary mb-2">
-                                    <i class="bi bi-check-circle" aria-hidden="true"></i>
-                                </div>
-                                <p class="fw-semibold mb-1">You're all caught up</p>
-                                <p class="small text-body-secondary mb-0">New activity will appear here.</p>
+                            <div class="d-flex align-items-center justify-content-between px-3 py-3 border-bottom">
+                                <h2 class="h6 fw-bold mb-0">Notifications</h2>
+                                @if ($unreadNotificationsCount > 0)
+                                    <span class="badge text-bg-primary rounded-pill">{{ $unreadNotificationsCount }} new</span>
+                                @endif
                             </div>
+                            @forelse ($latestNotifications as $notification)
+                                <a class="notification-menu-item d-flex gap-3 px-3 py-3 text-reset text-decoration-none {{ $notification->read_at ? '' : 'is-unread' }}" href="{{ route('notifications.open', ['id' => $notification->id]) }}">
+                                    <span class="notification-item-icon d-inline-flex align-items-center justify-content-center rounded-circle flex-shrink-0" aria-hidden="true">
+                                        <i class="bi {{ isset($notification->data['post_id']) ? 'bi-chat-heart' : 'bi-person-plus' }}"></i>
+                                    </span>
+                                    <span class="flex-grow-1">
+                                        <span class="notification-message d-block small">{{ $notification->data['message'] }}</span>
+                                        <small class="text-body-secondary">{{ $notification->created_at->diffForHumans() }}</small>
+                                    </span>
+                                    @if (! $notification->read_at)
+                                        <span class="notification-unread-dot flex-shrink-0 rounded-circle" aria-label="Unread"></span>
+                                    @endif
+                                </a>
+                            @empty
+                                <div class="p-4 text-center">
+                                    <div class="fs-2 text-primary mb-2"><i class="bi bi-check-circle" aria-hidden="true"></i></div>
+                                    <p class="fw-semibold mb-1">You're all caught up</p>
+                                    <p class="small text-body-secondary mb-0">New activity will appear here.</p>
+                                </div>
+                            @endforelse
+                            <a class="notification-view-all d-block px-3 py-3 text-center text-decoration-none fw-semibold border-top" href="{{ route('notifications.index') }}">View all notifications <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     <a class="rounded-circle" href="{{ route('me') }}" aria-label="My profile">
