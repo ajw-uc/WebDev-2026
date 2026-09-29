@@ -16,7 +16,7 @@
             <a class="btn btn-light btn-sm rounded-pill px-3 stretched-link-layer">
                 <i class="bi bi-heart me-1" aria-hidden="true"></i>
                 {{ $post->likes->count() }} likes
-            </span>
+            </a>
             <a class="btn btn-light btn-sm rounded-pill px-3 stretched-link-layer" href="{{ route('post.show', $post->id) }}#comments">
                 <i class="bi bi-chat-left-text me-1" aria-hidden="true"></i>
                 {{ $post->comments->count() }} comments
