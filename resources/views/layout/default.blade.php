@@ -25,24 +25,29 @@
                         <i class="bi bi-search" aria-hidden="true"></i>
                     </button>
                 </form>
-                <div class="dropdown">
-                    <button class="btn btn-light rounded-circle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications" style="width: 2.5rem; height: 2.5rem;">
-                        <i class="bi bi-bell" aria-hidden="true"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end notification-menu p-0 overflow-hidden shadow border-0">
-                        <h2 class="h6 px-3 py-3 mb-0 border-bottom">Notifications</h2>
-                        <div class="p-4 text-center">
-                            <div class="fs-2 text-primary mb-2">
-                                <i class="bi bi-check-circle" aria-hidden="true"></i>
+                @auth
+                    <div class="dropdown">
+                        <button class="btn btn-light rounded-circle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications" style="width: 2.5rem; height: 2.5rem;">
+                            <i class="bi bi-bell" aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end notification-menu p-0 overflow-hidden shadow border-0">
+                            <h2 class="h6 px-3 py-3 mb-0 border-bottom">Notifications</h2>
+                            <div class="p-4 text-center">
+                                <div class="fs-2 text-primary mb-2">
+                                    <i class="bi bi-check-circle" aria-hidden="true"></i>
+                                </div>
+                                <p class="fw-semibold mb-1">You're all caught up</p>
+                                <p class="small text-body-secondary mb-0">New activity will appear here.</p>
                             </div>
-                            <p class="fw-semibold mb-1">You're all caught up</p>
-                            <p class="small text-body-secondary mb-0">New activity will appear here.</p>
                         </div>
                     </div>
-                </div>
-                <a class="rounded-circle" href="{{ route('me') }}" aria-label="My profile">
-                    <img class="avatar avatar-sm rounded-circle border" src="{{ asset('images/profile-avatar.svg') }}" alt="My profile picture">
-                </a>
+                    <a class="rounded-circle" href="{{ route('me') }}" aria-label="My profile">
+                        <img class="avatar avatar-sm rounded-circle border" src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('images/profile-avatar.svg') }}" alt="{{ auth()->user()->name }}'s profile picture">
+                    </a>
+                @else
+                    <a class="btn btn-light btn-sm rounded-pill px-3" href="{{ route('login') }}">Log in</a>
+                    <a class="btn btn-primary btn-sm rounded-pill px-3 d-none d-sm-inline-flex" href="{{ route('signup') }}">Sign up</a>
+                @endauth
             </div>
         </div>
     </nav>

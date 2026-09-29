@@ -11,16 +11,20 @@
                     <span class="badge text-bg-primary rounded-pill mb-2">Conversation</span>
                     <h1 class="h2 fw-bold mb-0">{{ $post->user->name }}'s post</h1>
                 </div>
-                <div class="post-actions d-flex align-items-center gap-2" aria-label="Post actions">
-                    <a class="btn btn-light border rounded-pill px-3" href="{{ route('post.edit', ['id' => $post->id]) }}">
-                        <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>
-                        Edit post
-                    </a>
-                    <button class="btn btn-outline-danger rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#deletePostModal">
-                        <i class="bi bi-trash3 me-1" aria-hidden="true"></i>
-                        Delete
-                    </button>
-                </div>
+                @auth
+                    @if (auth()->id() === $post->user_id)
+                        <div class="post-actions d-flex align-items-center gap-2" aria-label="Post actions">
+                            <a class="btn btn-light border rounded-pill px-3" href="{{ route('post.edit', ['id' => $post->id]) }}">
+                                <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>
+                                Edit post
+                            </a>
+                            <button class="btn btn-outline-danger rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#deletePostModal">
+                                <i class="bi bi-trash3 me-1" aria-hidden="true"></i>
+                                Delete
+                            </button>
+                        </div>
+                    @endif
+                @endauth
             </div>
             <x-post-card :post="$post"></x-post-card>
             <section class="card border-0 shadow-sm rounded-4 mt-4" id="comments" aria-labelledby="comments-heading">
@@ -29,18 +33,34 @@
                     <span class="badge text-bg-light rounded-pill">{{ $post->comments->count() }}</span>
                 </div>
                 <div class="card-body p-4">
-                    <form class="pb-4 mb-2 border-bottom" action="{{ route('post.comments.store', $post->id) }}" method="POST">
-                        @csrf
-                        <label class="form-label fw-semibold" for="comment-content">Write a comment</label>
-                        <textarea class="form-control bg-body-tertiary border-0" id="comment-content" name="content" rows="3" maxlength="1000" required placeholder="Share your thoughts..." aria-describedby="comment-help @error('content') comment-error @enderror" @error('content') aria-invalid="true" @enderror>{{ old('content') }}</textarea>
-                        @error('content')
-                            <p id="comment-error" class="text-danger small mt-2" role="alert">{{ $message }}</p>
-                        @enderror
-                        <div class="d-flex align-items-center justify-content-between gap-3 mt-3">
-                            <span class="small text-body-secondary" id="comment-help">Maximum 1,000 characters</span>
-                            <button class="btn btn-primary rounded-pill px-4" type="submit">Send ↗</button>
+                    @auth
+                        <form class="pb-4 mb-2 border-bottom" action="{{ route('post.comments.store', $post->id) }}" method="POST">
+                            @csrf
+                            <label class="form-label fw-semibold" for="comment-content">Write a comment</label>
+                            <textarea class="form-control bg-body-tertiary border-0" id="comment-content" name="content" rows="3" maxlength="1000" required placeholder="Share your thoughts..." aria-describedby="comment-help @error('content') comment-error @enderror" @error('content') aria-invalid="true" @enderror>{{ old('content') }}</textarea>
+                            @error('content')
+                                <p id="comment-error" class="text-danger small mt-2" role="alert">{{ $message }}</p>
+                            @enderror
+                            <div class="d-flex align-items-center justify-content-between gap-3 mt-3">
+                                <span class="small text-body-secondary" id="comment-help">Maximum 1,000 characters</span>
+                                <button class="btn btn-primary rounded-pill px-4" type="submit">
+                                    <i class="bi bi-send me-1" aria-hidden="true"></i>
+                                    Send
+                                </button>
+                            </div>
+                        </form>
+                    @else
+                        <div class="guest-comment-prompt d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 p-3 mb-3 rounded-3">
+                            <div>
+                                <p class="fw-semibold mb-1">Join the conversation</p>
+                                <p class="small text-body-secondary mb-0">Log in or sign up to leave a comment.</p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-light btn-sm border rounded-pill px-3" href="{{ route('login') }}">Log in</a>
+                                <a class="btn btn-primary btn-sm rounded-pill px-3" href="{{ route('signup') }}">Sign up</a>
+                            </div>
                         </div>
-                    </form>
+                    @endauth
                     @if (session('comment_status'))
                         <div class="alert alert-success" role="status">{{ session('comment_status') }}</div>
                     @endif
@@ -58,6 +78,8 @@
         </div>
     </div>
 
+    @auth
+    @if (auth()->id() === $post->user_id)
     <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow">
@@ -85,4 +107,6 @@
             </div>
         </div>
     </div>
+    @endif
+    @endauth
 @endsection

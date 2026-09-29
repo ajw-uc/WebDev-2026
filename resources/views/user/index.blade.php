@@ -3,30 +3,51 @@
 @section('title', 'My Profile')
 
 @section('content')
+    @if (session('status'))
+        <div class="alert alert-success border-0 shadow-sm" role="status">
+            <i class="bi bi-check-circle me-2" aria-hidden="true"></i>{{ session('status') }}
+        </div>
+    @endif
     <section class="card border-0 shadow-sm rounded-4 overflow-hidden" aria-labelledby="profile-heading">
         <div class="profile-cover d-flex align-items-end justify-content-end p-4 text-white">
             <span class="h3 fw-bold mb-0 opacity-75">A space for your story.</span>
         </div>
         <div class="card-body px-4 px-md-5 pb-4">
-            <div class="d-flex align-items-end justify-content-between">
-                <img class="avatar avatar-lg profile-avatar rounded-circle bg-white" src="{{ asset('images/profile-avatar.svg') }}" alt="My profile picture">
-                <a class="btn btn-outline-primary rounded-pill px-4 mb-2" href="{{ route('me.edit') }}">Edit profile</a>
+            <div class="d-flex align-items-end justify-content-between gap-3">
+                <img class="avatar avatar-lg profile-avatar rounded-circle bg-white" src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile-avatar.svg') }}" alt="{{ $user->name }}'s profile picture">
+                <div class="dropdown mb-2">
+                    <button class="btn btn-outline-primary rounded-pill px-4 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-gear me-1" aria-hidden="true"></i>
+                        Profile settings
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow">
+                        <li><a class="dropdown-item" href="{{ route('me.edit') }}"><i class="bi bi-person-gear me-2" aria-hidden="true"></i>Edit profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('password.edit') }}"><i class="bi bi-shield-lock me-2" aria-hidden="true"></i>Change password</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="dropdown-item text-danger" type="submit"><i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Log out</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <span class="badge text-bg-light rounded-pill mt-3">My profile</span>
-            <h1 class="h2 fw-bold mt-2 mb-1" id="profile-heading">{{ $user['name'] }}</h1>
-            <p class="text-body-secondary mb-3">{{ $user['username'] }}</p>
-            <p class="mb-4">{{ $user['caption'] }}</p>
+            <h1 class="h2 fw-bold mt-2 mb-1" id="profile-heading">{{ $user->name }}</h1>
+            <p class="text-body-secondary mb-3">{{ $user->username_display }}</p>
+            <p class="mb-4">{{ $user->bio ?: 'No bio added yet.' }}</p>
             <div class="d-flex flex-wrap gap-4">
                 <div>
-                    <strong class="d-block fs-5">{{ count($posts) }}</strong>
+                    <strong class="d-block fs-5">{{ $posts->total() }}</strong>
                     <span class="small text-body-secondary">Posts</span>
                 </div>
                 <div>
-                    <strong class="d-block fs-5">{{ $user['followers'] }}</strong>
+                    <strong class="d-block fs-5">{{ $user->followers->count() }}</strong>
                     <span class="small text-body-secondary">Followers</span>
                 </div>
                 <div>
-                    <strong class="d-block fs-5">{{ $user['following'] }}</strong>
+                    <strong class="d-block fs-5">{{ $user->following->count() }}</strong>
                     <span class="small text-body-secondary">Following</span>
                 </div>
             </div>
@@ -36,9 +57,9 @@
     <section class="mt-5" aria-labelledby="my-posts-heading">
         <div class="d-flex align-items-center justify-content-between mb-3">
             <h2 class="h4 fw-bold mb-0" id="my-posts-heading">My posts</h2>
-            <span class="badge text-bg-light rounded-pill">{{ count($posts) }}</span>
+            <span class="badge text-bg-light rounded-pill">{{ $posts->total() }}</span>
         </div>
-        @empty($posts)
+        @if ($posts->isEmpty())
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body text-center p-5">
                     <div class="display-5 text-primary mb-3">✎</div>
@@ -54,5 +75,8 @@
                 @endforeach
             </div>
         @endif
+        <div class="mt-4">
+            {{ $posts->links() }}
+        </div>
     </section>
 @endsection
