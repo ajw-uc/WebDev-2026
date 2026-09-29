@@ -3,10 +3,14 @@
 @section('title', 'Edit Post')
 
 @section('content')
-    <a class="detail-back" href="{{ route('post.show', ['id' => $post->id]) }}">← Back to post</a>
-    <header class="page-intro">
-        <div><div class="eyebrow">Shape your story</div><h1>Edit your post.</h1><p>Update your thought and keep the conversation going.</p></div>
-    </header>
+    <a class="btn btn-light btn-sm rounded-pill mb-4" href="{{ route('post.show', ['id' => $post->id]) }}">
+        <i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Back to post
+    </a>
+    <div class="mb-4">
+        <span class="badge text-bg-primary rounded-pill mb-2">Shape your story</span>
+        <h1 class="display-6 fw-bold">Edit your post</h1>
+        <p class="text-body-secondary mb-0">Update your thought and keep the conversation going.</p>
+    </div>
     <div class="card">
         <div class="card-body">
             <form action="{{ route('post.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
