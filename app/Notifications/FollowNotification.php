@@ -36,10 +36,10 @@ class FollowNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Pengikut baru')
-            ->greeting('Halo '.$notifiable->name.'!')
-            ->line($this->follower->name.' mulai mengikuti Anda.')
-            ->action('Lihat profil', route('me'));
+            ->subject('New follower')
+            ->greeting('Hello, '.$notifiable->name.'!')
+            ->line($this->follower->name.'started following you.')
+            ->action('View profile', route('me'));
     }
 
     /**
@@ -50,7 +50,7 @@ class FollowNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => $this->follower->name.' mulai mengikuti Anda.',
+            'message' => $this->follower->name.' started following you.',
         ];
     }
 }
