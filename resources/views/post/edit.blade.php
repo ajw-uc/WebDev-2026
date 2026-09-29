@@ -16,9 +16,14 @@
             <form action="{{ route('post.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @include('post._form', ['post' => $post])
-                <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <a href="{{ route('post.show', ['id' => $post->id]) }}" class="btn btn-secondary">Cancel</a>
+                <div class="d-flex flex-column-reverse flex-sm-row align-items-stretch align-items-sm-center justify-content-end gap-2">
+                    <a href="{{ route('me') }}" class="btn btn-light border rounded-pill px-4">
+                        Cancel
+                    </a>
+                    <button type="submit" class="btn btn-primary rounded-pill px-4">
+                        <i class="bi bi-pencil me-1" aria-hidden="true"></i>
+                        Save changes
+                    </button>
                 </div>
             </form>
         </div>
