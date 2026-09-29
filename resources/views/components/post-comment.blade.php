@@ -10,15 +10,12 @@
     </header>
     <p class="post-content small ms-5 mt-3 mb-0">{{ $comment->content }}</p>
     @auth
-        @if (auth()->id() === $comment->user_id)
-            <button class="comment-delete-button btn btn-sm d-inline-flex align-items-center justify-content-center rounded-circle" type="button" data-bs-toggle="modal" data-bs-target="#deleteCommentModal{{ $comment->id }}" aria-label="Delete comment" title="Delete comment">
-                <i class="bi bi-trash3" aria-hidden="true"></i>
-            </button>
-        @endif
+        <button class="comment-delete-button btn btn-sm d-inline-flex align-items-center justify-content-center rounded-circle" type="button" data-bs-toggle="modal" data-bs-target="#deleteCommentModal{{ $comment->id }}" aria-label="Delete comment" title="Delete comment">
+            <i class="bi bi-trash3" aria-hidden="true"></i>
+        </button>
     @endauth
 
     @auth
-    @if (auth()->id() === $comment->user_id)
     <div class="modal fade" id="deleteCommentModal{{ $comment->id }}" tabindex="-1" aria-labelledby="deleteCommentModalLabel{{ $comment->id }}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow">
@@ -46,6 +43,5 @@
             </div>
         </div>
     </div>
-    @endif
     @endauth
 </article>
