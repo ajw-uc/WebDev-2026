@@ -37,11 +37,11 @@ class CommentNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Komentar baru di post Anda')
-            ->greeting('Halo '.$notifiable->name.'!')
-            ->line($this->user->name.' mengomentari post Anda.')
+            ->subject('New comment on your post')
+            ->greeting('Hello '.$notifiable->name.'!')
+            ->line($this->user->name.' commented on your post.')
             ->line('“'.$this->post->content.'”')
-            ->action('Lihat post', route('post.show', ['id' => $this->post->id]));
+            ->action('View post', route('post.show', ['id' => $this->post->id]));
     }
 
     /**
@@ -52,7 +52,7 @@ class CommentNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => $this->user->name.' mengomentari post Anda.',
+            'message' => $this->user->name.' commented on your post.',
             'post_id' => $this->post->id,
         ];
     }
