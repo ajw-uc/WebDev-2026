@@ -3,56 +3,46 @@
 @section('title', 'Home')
 
 @section('content')
-    <header class="page-intro"><div><div class="eyebrow">Your everyday community</div><h1>A little thought. A new connection.</h1><p>Share your moments, spark a conversation, and make yourself at home.</p></div><span class="intro-label">A space to connect</span></header>
-    @auth
-    <div class="card mb-4">
-        <div class="card-header bg-white">
-            <h5 class="mb-0">Share something</h5>
-        </div>
-        <div class="card-body">
-            <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <x-form.group>
-                    <x-form.textarea id="content" name="content" rows="5" placeholder="What's on your mind?" />
-                </x-form.group>
-                <x-form.group>
-                    <x-form.input type="file" class="form-control" aria-label="Post image" name="image" accept="image/jpeg,image/png,image/webp" />
-                    <small class="form-text text-muted">JPG, PNG, atau WebP. max 2 MB.</small>
-                </x-form.group>
-
-                <div class="composer-footer"><span>Big ideas start with a little thought.</span><button type="submit" class="btn btn-primary">Share post <span aria-hidden="true" style="color:inherit">↗</span></button></div>
-            </form>
-        </div>
+    <div class="mb-4">
+        <span class="badge text-bg-primary rounded-pill mb-2">Your everyday community</span>
+        <h1 class="display-6 fw-bold">A little thought. A new connection.</h1>
+        <p class="text-body-secondary mb-0">Share your moments, spark a conversation, and make yourself at home.</p>
     </div>
-    @else
-    <div class="card mb-4 text-center guest-placeholder">
-        <div class="card-header bg-white">
-            <span class="eyebrow">Welcome to Mini Social</span>
-        </div>
-        <div class="card-body pt-5">
-            <h4>Join the conversation</h4>
-            <p class="text-muted guest-placeholder-copy">Login to share your thoughts, connect with people, and join the community.</p>
-            <div class="guest-placeholder-actions">
-                <a href="{{ route('login') }}" class="btn btn-primary">Log in <span aria-hidden="true">↗</span></a>
-                <a href="{{ route('signup') }}" class="btn btn-secondary">Create account</a>
-            </div>
-        </div>
-    </div>
-    @endauth
 
-    <div class="card mb-4">
-        <div class="card-header bg-white">
-            <h5 class="mb-0">Recent Posts</h5>
-        </div>
-        <div class="card-body">
-            <div class="feed">
-                <?php foreach($posts as $post): ?>
-                    <x-post-card :post="$post"></x-post-card>
-                <?php endforeach; ?>
-            </div>
-            <div class="mt-3">
-                {{ $posts->links()}}
+    <section class="card border-0 shadow-sm rounded-4 mb-4" id="buat-post"><div class="card-body p-4">
+        <div class="d-flex align-items-center gap-3 mb-3">
+            <img class="avatar rounded-circle border" src="{{ asset('images/profile-avatar.svg') }}" alt="My profile picture">
+            <div>
+                <h2 class="h5 mb-0">Create a post</h2>
+                <p class="small text-body-secondary mb-0">What's on your mind?</p>
             </div>
         </div>
+        <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">@csrf
+            @include('post._form', ['label' => false])
+            <div class="d-flex justify-content-between align-items-center gap-3">
+                <div>
+                    <span>Big ideas start with a little thought.</span>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary rounded-pill px-4">Share post ↗</button>
+                </div>
+            </div>
+        </form>
+    </div></section>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+            <h2 class="h4 fw-bold mb-1">Latest posts</h2>
+            <p class="small text-body-secondary mb-0">Fresh stories from the community</p>
+        </div>
+        <span class="badge text-bg-light rounded-pill">{{ count($posts) }} posts</span>
+    </div>
+    <div class="d-grid gap-3">
+        @foreach($posts as $post)
+            <x-post-card :post="$post"></x-post-card>
+        @endforeach
+    </div>
+
+    <div class="mt-3">
+        {{ $posts->links()}}
     </div>
 @endsection
