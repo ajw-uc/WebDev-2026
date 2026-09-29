@@ -12,18 +12,16 @@
                     <h1 class="h2 fw-bold mb-0">{{ $post->user->name }}'s post</h1>
                 </div>
                 @auth
-                    @if (auth()->id() === $post->user_id)
-                        <div class="post-actions d-flex align-items-center gap-2" aria-label="Post actions">
-                            <a class="btn btn-light border rounded-pill px-3" href="{{ route('post.edit', ['id' => $post->id]) }}">
-                                <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>
-                                Edit post
-                            </a>
-                            <button class="btn btn-outline-danger rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#deletePostModal">
-                                <i class="bi bi-trash3 me-1" aria-hidden="true"></i>
-                                Delete
-                            </button>
-                        </div>
-                    @endif
+                    <div class="post-actions d-flex align-items-center gap-2" aria-label="Post actions">
+                        <a class="btn btn-light border rounded-pill px-3" href="{{ route('post.edit', ['id' => $post->id]) }}">
+                            <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>
+                            Edit post
+                        </a>
+                        <button class="btn btn-outline-danger rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#deletePostModal">
+                            <i class="bi bi-trash3 me-1" aria-hidden="true"></i>
+                            Delete
+                        </button>
+                    </div>
                 @endauth
             </div>
             <x-post-card :post="$post"></x-post-card>
@@ -79,7 +77,6 @@
     </div>
 
     @auth
-    @if (auth()->id() === $post->user_id)
     <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 rounded-4 shadow">
@@ -107,6 +104,5 @@
             </div>
         </div>
     </div>
-    @endif
     @endauth
 @endsection
