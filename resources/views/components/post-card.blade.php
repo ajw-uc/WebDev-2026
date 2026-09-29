@@ -13,7 +13,7 @@
             <a class="text-reset text-decoration-none stretched-link" href="{{ route('post.show', $post->id) }}">{{ $post->content }}</a>
         </p>
         <footer class="d-flex align-items-center gap-2 position-relative">
-            <span class="badge text-bg-light rounded-pill fw-normal px-3 py-2">
+            <a class="btn btn-light btn-sm rounded-pill px-3 stretched-link-layer">
                 <i class="bi bi-heart me-1" aria-hidden="true"></i>
                 {{ $post->likes->count() }} likes
             </span>
