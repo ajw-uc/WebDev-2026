@@ -11,18 +11,22 @@
                     <span class="badge text-bg-primary rounded-pill mb-2">Conversation</span>
                     <h1 class="h2 fw-bold mb-0">{{ $post->user->name }}'s post</h1>
                 </div>
-                @auth
+                @canany(['update', 'delete'], $post)
                     <div class="post-actions d-flex align-items-center gap-2" aria-label="Post actions">
-                        <a class="btn btn-light border rounded-pill px-3" href="{{ route('post.edit', ['id' => $post->id]) }}">
-                            <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>
-                            Edit post
-                        </a>
-                        <button class="btn btn-outline-danger rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#deletePostModal">
-                            <i class="bi bi-trash3 me-1" aria-hidden="true"></i>
-                            Delete
-                        </button>
+                        @can('update', $post)
+                            <a class="btn btn-light border rounded-pill px-3" href="{{ route('post.edit', ['id' => $post->id]) }}">
+                                <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>
+                                Edit post
+                            </a>
+                        @endcan
+                        @can('delete', $post)
+                            <button class="btn btn-outline-danger rounded-pill px-3" type="button" data-bs-toggle="modal" data-bs-target="#deletePostModal">
+                                <i class="bi bi-trash3 me-1" aria-hidden="true"></i>
+                                Delete
+                            </button>
+                        @endcan
                     </div>
-                @endauth
+                @endcanany
             </div>
             <x-post-card :post="$post"></x-post-card>
             <section class="card border-0 shadow-sm rounded-4 mt-4" id="comments" aria-labelledby="comments-heading">
@@ -76,33 +80,33 @@
         </div>
     </div>
 
-    @auth
-    <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 rounded-4 shadow">
-                <div class="modal-header border-0 px-4 pt-4 pb-2">
-                    <div class="d-flex align-items-center gap-3">
-                        <span class="delete-modal-icon d-inline-flex align-items-center justify-content-center rounded-circle" aria-hidden="true">
-                            <i class="bi bi-trash3"></i>
-                        </span>
-                        <h2 class="modal-title h5 fw-bold mb-0" id="deletePostModalLabel">Delete this post?</h2>
+    @can('delete', $post)
+        <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 rounded-4 shadow">
+                    <div class="modal-header border-0 px-4 pt-4 pb-2">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="delete-modal-icon d-inline-flex align-items-center justify-content-center rounded-circle" aria-hidden="true">
+                                <i class="bi bi-trash3"></i>
+                            </span>
+                            <h2 class="modal-title h5 fw-bold mb-0" id="deletePostModalLabel">Delete this post?</h2>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-4 py-3 text-body-secondary">This action cannot be undone. The post and its conversation will be permanently removed.</div>
-                <div class="modal-footer border-0 px-4 pt-0 pb-4">
-                    <button class="btn btn-light border rounded-pill px-4" type="button" data-bs-dismiss="modal">Cancel</button>
-                    <form class="m-0" action="{{ route('post.destroy', ['id' => $post->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger rounded-pill px-4" type="submit">
-                            <i class="bi bi-trash3 me-1" aria-hidden="true"></i>
-                            Delete post
-                        </button>
-                    </form>
+                    <div class="modal-body px-4 py-3 text-body-secondary">This action cannot be undone. The post and its conversation will be permanently removed.</div>
+                    <div class="modal-footer border-0 px-4 pt-0 pb-4">
+                        <button class="btn btn-light border rounded-pill px-4" type="button" data-bs-dismiss="modal">Cancel</button>
+                        <form class="m-0" action="{{ route('post.destroy', ['id' => $post->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger rounded-pill px-4" type="submit">
+                                <i class="bi bi-trash3 me-1" aria-hidden="true"></i>
+                                Delete post
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    @endauth
+    @endcan
 @endsection
