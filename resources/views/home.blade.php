@@ -8,7 +8,6 @@
         <h1 class="display-6 fw-bold">A little thought. A new connection.</h1>
         <p class="text-body-secondary mb-0">Share your moments, spark a conversation, and make yourself at home.</p>
     </div>
-
     <section class="card border-0 shadow-sm rounded-4 mb-4" id="buat-post"><div class="card-body p-4">
         <div class="d-flex align-items-center gap-3 mb-3">
             <img class="avatar rounded-circle border" src="{{ asset('images/profile-avatar.svg') }}" alt="My profile picture">
