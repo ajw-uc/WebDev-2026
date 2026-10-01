@@ -16,11 +16,11 @@
                     <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">@csrf
                         <x-form.group>
                             <label for="content" class="form-label fw-semibold">Post content</label>
-                            <textarea class="form-control bg-body-tertiary border-0" id="content" name="content" rows="7" placeholder="What's on your mind?"></textarea>
+                            <x-form.textarea id="content" name="content" rows="7" placeholder="What's on your mind?" />
                         </x-form.group>
                         <x-form.group>
                             <label for="image" class="form-label fw-semibold">Image <span class="text-body-secondary fw-normal">(optional)</span></label>
-                            <input type="file" id="image" class="form-control" name="image" accept="image/*">
+                            <x-form.input type="file" class="form-control form-control-sm" aria-label="Post image" name="image" accept="image/*" />
                         </x-form.group>
                         <div class="d-flex gap-2 justify-content-end"><a href="{{ route('me') }}" class="btn btn-light rounded-pill px-4">Cancel</a>
                         <button type="submit" class="btn btn-primary rounded-pill px-4">Publish ↗</button></div>

@@ -19,10 +19,10 @@
         </div>
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">@csrf
             <x-form.group>
-                <textarea class="form-control bg-body-tertiary border-0" aria-label="Post content" name="content" rows="4" placeholder="Write your story..."></textarea>
+                <x-form.textarea aria-label="Post content" name="content" rows="4" placeholder="Write your story..." />
             </x-form.group>
             <x-form.group>
-                <input type="file" class="form-control form-control-sm" aria-label="Post image" name="image" accept="image/*">
+                <x-form.input type="file" class="form-control form-control-sm" aria-label="Post image" name="image" accept="image/*" />
             </x-form.group>
             <div class="d-flex justify-content-between align-items-center gap-3">
                 <div>
