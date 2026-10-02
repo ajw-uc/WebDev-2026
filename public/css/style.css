@@ -22,6 +22,20 @@ body { color: #20232a; }
     background: linear-gradient(135deg, #6f67e8, #4f46c8);
 }
 
+.navbar-search {
+    width: clamp(9rem, 22vw, 16rem);
+    border: var(--bs-border-width) solid transparent;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.navbar-search:focus-within {
+    border-color: rgba(var(--bs-primary-rgb), .45);
+    box-shadow: 0 0 0 .2rem rgba(var(--bs-primary-rgb), .12);
+}
+
+.navbar-search .form-control { min-width: 0; }
+.navbar-search .btn { color: var(--bs-primary); }
+
 .avatar { width: 3rem; height: 3rem; object-fit: cover; }
 .avatar-sm { width: 2.25rem; height: 2.25rem; }
 .avatar-lg { width: 7rem; height: 7rem; }
@@ -29,6 +43,30 @@ body { color: #20232a; }
 .hero-panel {
     background: radial-gradient(circle at 90% 10%, rgba(255, 255, 255, .22), transparent 28%), linear-gradient(135deg, #5b5bd6, #7b61d9);
 }
+
+.post-index-hero {
+    background: radial-gradient(circle at 85% 15%, rgba(255, 255, 255, .22), transparent 27%), linear-gradient(135deg, #5b5bd6, #8965d6);
+}
+
+.post-filter-card .input-group,
+.post-filter-card .form-select { min-height: 2.5rem; }
+
+.post-empty-icon {
+    width: 4rem;
+    height: 4rem;
+    color: var(--bs-primary);
+    background: rgba(var(--bs-primary-rgb), .1);
+    font-size: 1.5rem;
+}
+
+.pagination {
+    --bs-pagination-color: var(--bs-primary);
+    --bs-pagination-active-bg: var(--bs-primary);
+    --bs-pagination-active-border-color: var(--bs-primary);
+    gap: .25rem;
+}
+
+.page-link { border-radius: 50rem !important; }
 
 .profile-cover {
     min-height: 11rem;
@@ -58,7 +96,13 @@ body { color: #20232a; }
 .notification-menu { width: min(22rem, calc(100vw - 2rem)); }
 .comment + .comment { border-top: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color); }
 
+@media (max-width: 575.98px) {
+    .navbar-search { width: 7rem; }
+    .navbar-search .form-control { padding-right: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+    .navbar-search { transition: none; }
     .post-card { transition: none; }
     .post-card:hover, .post-card:focus-within { transform: none; }
     .post-card-profile .avatar, .post-card-profile h3,
