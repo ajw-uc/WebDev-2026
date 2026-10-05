@@ -18,7 +18,7 @@
         </div>
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">@csrf
             <x-form.group>
-                <x-form.textarea aria-label="Post content" name="content" rows="4" placeholder="Write your story..." />
+                <x-form.textarea aria-label="Post content" name="content" rows="4" placeholder="Write your story..." :value="old('content')" />
             </x-form.group>
             <x-form.group>
                 <x-form.input type="file" class="form-control form-control-sm" aria-label="Post image" name="image" accept="image/*" />
