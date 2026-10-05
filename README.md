@@ -13,7 +13,7 @@ composer require gregwar/captcha
 
 ## File terkait
 - `composer.json` - menambahkan dependency `gregwar/captcha`
-- `app/Http/Controllers/AuthController.php` - membuat CAPTCHA signup, menyimpan phrase ke session, dan memvalidasi jawaban CAPTCHA
+- `app/Http/Controllers/AuthController.php` - membuat CAPTCHA signup, menyimpan phrase ke session, memvalidasi jawaban CAPTCHA, mengembalikan old input dan error jika CAPTCHA salah
 - `app/Http/Controllers/PostController.php` - membungkus pembuatan post dan upload gambar menggunakan `store()` dalam transaction serta membersihkan file saat exception
 - `app/Providers/AppServiceProvider.php` - mendefinisikan rate limiter login, signup, post, dan comment
 - `resources/views/auth/signup.blade.php` - menampilkan gambar CAPTCHA dan input jawaban CAPTCHA
@@ -31,3 +31,4 @@ composer require gregwar/captcha
 - Database Transactions: https://laravel.com/docs/13.x/database#database-transactions
 - File Storage: https://laravel.com/docs/13.x/filesystem
 - Session: https://laravel.com/docs/13.x/session
+- Manual Validator: https://laravel.com/framework/docs/13.x/validation#manually-creating-validators

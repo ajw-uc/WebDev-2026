@@ -71,7 +71,7 @@
         @else
             <div class="d-grid gap-3">
                 @foreach($posts as $post)
-                    <x-post-card :post="$post" />
+                    <x-post.card :post="$post" />
                 @endforeach
             </div>
         @endif
