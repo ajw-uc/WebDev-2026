@@ -23,7 +23,7 @@
 
                     <div class="user-list mb-3">
                         @forelse($people as $person)
-                            @include('user._network-person', ['person' => $person, 'followingIds' => $followingIds])
+                            @include('user.network-person', ['person' => $person, 'followingIds' => $followingIds])
                         @empty
                             <div class="text-center py-5"><span class="network-empty-icon d-inline-flex align-items-center justify-content-center rounded-circle mb-3" aria-hidden="true"><i class="bi bi-people"></i></span><h3 class="h5">No {{ $tab }} yet</h3><p class="text-body-secondary mb-0">People you connect with will appear here.</p></div>
                         @endforelse
