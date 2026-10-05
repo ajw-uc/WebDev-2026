@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-lg-7">
+        <div class="col-lg-6">
             <a class="btn btn-light btn-sm rounded-pill mb-4" href="{{ route('me') }}">← Back to profile</a>
             <div class="mb-4">
                 <span class="badge text-bg-primary rounded-pill mb-2">Profile settings</span>
@@ -16,36 +16,27 @@
                     <form class="profile-form" action="{{ route('me.update') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <x-form.group class="text-center pb-3">
-                            <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile-avatar.svg') }}" alt="{{ $user->name }}'s profile picture" class="avatar avatar-lg rounded-circle border mb-3">
-                            <label class="form-label fw-semibold d-block" for="image">Profile picture</label>
-                            <input type="file" name="image" id="image" class="form-control" accept="image/jpeg,image/png,image/webp">
+                        <x-form.group class="text-center">
+                            <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile-avatar.svg') }}" alt="Profile picture" class="avatar avatar-lg rounded-circle border mb-3">
+                        </x-form.group>
+                        <x-form.group>
+                            <x-form.label for="image" class="d-block">Profile picture</x-form.label>
+                            <x-form.input type="file" name="image" id="image" accept="image/*" />
                             <div class="form-text">JPG, PNG, or WebP. Maximum file size is 2 MB.</div>
-                            @error('image')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
-                        </x-form.group>
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold" for="name">Name</label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}" placeholder="Full name" required>
-                                @error('name')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold" for="username">Username</label>
-                                <input type="text" name="username" id="username" class="form-control" value="{{ old('username', $user->username) }}" placeholder="username" required>
-                                @error('username')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
-                            </div>
-                        </div>
-                        <x-form.group>
-                            <label class="form-label fw-semibold" for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}" placeholder="you@example.com" required>
-                            @error('email')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                         </x-form.group>
                         <x-form.group>
-                            <label class="form-label fw-semibold" for="bio">Short bio</label>
-                            <textarea name="bio" id="bio" class="form-control" rows="4" maxlength="255" placeholder="Tell us a little about yourself...">{{ old('bio', $user->bio) }}</textarea>
-                            @error('bio')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
+                            <x-form.input type="text" name="name" id="name" label="Name" :value="$user->name" placeholder="Full name" />
                         </x-form.group>
-                        <div class="d-flex flex-column-reverse flex-sm-row justify-content-end gap-2 pt-4 border-top">
+                        <x-form.group>
+                            <x-form.input type="text" name="email" id="email" label="Email" :value="$user->email" placeholder="user@mail.com" />
+                        </x-form.group>
+                        <x-form.group>
+                            <x-form.input type="text" name="username" id="username" label="Username" :value="$user->username" placeholder="@username" />
+                        </x-form.group>
+                        <x-form.group>
+                            <x-form.textarea name="bio" id="bio" rows="4" placeholder="Tell us a little about yourself..." :value="$user->bio" label="Short bio" />
+                        </x-form.group>
+                        <div class="d-flex flex-column-reverse flex-sm-row justify-content-end gap-2 pt-4">
                             <a href="{{ route('me') }}" class="btn btn-light border rounded-pill px-4">Cancel</a>
                             <button type="submit" class="btn btn-primary rounded-pill px-4"><i class="bi bi-check2-circle me-1" aria-hidden="true"></i>Save changes</button>
                         </div>
