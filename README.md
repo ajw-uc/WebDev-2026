@@ -11,8 +11,8 @@ Menambahkan authorization berbasis kepemilikan resource. Hanya user yang membuat
 - `app/Policies/PostPolicy.php` - Memastikan hanya pemilik post yang dapat melakukan update dan delete
 - `app/Policies/CommentPolicy.php` - Memastikan hanya pemilik komentar yang dapat melakukan delete
 - `app/Providers/AppServiceProvider.php` - Mendaftarkan Policy secara eksplisit ke model melalui Gate
-- `resources/views/components/post-card.blade.php` - Menampilkan tombol edit dan delete hanya kepada pemilik
-- `resources/views/components/post-comment.blade.php` - Menyesuaikan tampilan komentar dan menampilkan tombol/modal delete hanya kepada pemilik komentar
+- `resources/views/components/post/card.blade.php` - Menampilkan tombol edit dan delete hanya kepada pemilik
+- `resources/views/components/post/comment.blade.php` - Menyesuaikan tampilan komentar dan menampilkan tombol/modal delete hanya kepada pemilik komentar
 
 ## Referensi
 - Authorization: https://laravel.com/docs/13.x/authorization

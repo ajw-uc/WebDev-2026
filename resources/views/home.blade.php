@@ -8,45 +8,44 @@
         <h1 class="display-6 fw-bold">A little thought. A new connection.</h1>
         <p class="text-body-secondary mb-0">Share your moments, spark a conversation, and make yourself at home.</p>
     </div>
-
-    <section class="card border-0 shadow-sm rounded-4 mb-4" id="buat-post">
-        <div class="card-body p-4">
-            @auth
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <img class="avatar rounded-circle border" src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('images/profile-avatar.svg') }}" alt="{{ auth()->user()->name }}'s profile picture">
-                    <div>
-                        <h2 class="h5 mb-0">Create a post</h2>
-                        <p class="small text-body-secondary mb-0">What's on your mind, {{ auth()->user()->name }}?</p>
-                    </div>
+    <section class="card border-0 shadow-sm rounded-4 mb-4" id="buat-post"><div class="card-body p-4">
+        @auth
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <img class="avatar rounded-circle border" src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('images/profile-avatar.svg') }}" alt="My profile picture">
+                <div>
+                    <h2 class="h5 mb-0">Create a post</h2>
+                    <p class="small text-body-secondary mb-0">What's on your mind?</p>
                 </div>
-                <form class="post-form" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
-                    @include('post._form')
-                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 pt-3 border-top">
-                        <span class="small text-body-secondary">Big ideas start with a little thought.</span>
-                        <button type="submit" class="btn btn-primary rounded-pill px-4">
-                            <i class="bi bi-send me-1" aria-hidden="true"></i>
-                            Share post
-                        </button>
-                    </div>
-                </form>
-            @else
-                <div class="guest-prompt d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-4 p-2">
-                    <div class="d-flex align-items-center gap-3">
-                        <span class="guest-prompt-icon d-inline-flex align-items-center justify-content-center rounded-circle" aria-hidden="true">
-                            <i class="bi bi-pencil-square"></i>
-                        </span>
+            </div>
+            <x-post.form hide-label="true">
+                <x-slot:actions>
+                    <div class="d-flex justify-content-between align-items-center gap-3">
                         <div>
-                            <h2 class="h5 fw-bold mb-1">Share your own story</h2>
-                            <p class="text-body-secondary mb-0">Log in or create an account to publish a post.</p>
+                            <span>Big ideas start with a little thought.</span>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">Share post ↗</button>
                         </div>
                     </div>
-                    <div class="d-flex gap-2 flex-shrink-0">
-                        <a class="btn btn-light border rounded-pill px-4" href="{{ route('login') }}">Log in</a>
-                        <a class="btn btn-primary rounded-pill px-4" href="{{ route('signup') }}">Sign up</a>
+                </x-slot:actions>
+            </x-post.form>
+        @else
+            <div class="guest-prompt d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-4 p-2">
+                <div class="d-flex align-items-center gap-3">
+                    <span class="guest-prompt-icon d-inline-flex align-items-center justify-content-center rounded-circle" aria-hidden="true">
+                        <i class="bi bi-pencil-square"></i>
+                    </span>
+                    <div>
+                        <h2 class="h5 fw-bold mb-1">Share your own story</h2>
+                        <p class="text-body-secondary mb-0">Log in or create an account to publish a post.</p>
                     </div>
                 </div>
-            @endauth
-        </div>
+                <div class="d-flex gap-2 flex-shrink-0">
+                    <a class="btn btn-light border rounded-pill px-4" href="{{ route('login') }}">Log in</a>
+                    <a class="btn btn-primary rounded-pill px-4" href="{{ route('signup') }}">Sign up</a>
+                </div>
+            </div>
+        @endauth
     </section>
     <div class="d-flex align-items-center justify-content-between mb-3">
         <div>
@@ -57,7 +56,7 @@
     </div>
     <div class="d-grid gap-3">
         @foreach($posts as $post)
-            <x-post-card :post="$post"></x-post-card>
+            <x-post.card :post="$post"></x-post.card>
         @endforeach
     </div>
 
