@@ -6,9 +6,9 @@ Menambahkan interaksi like pada post dan fitur follow/unfollow antar user. Like 
 - `app/Http/Controllers/UserController.php` - menambahkan daftar network, follow, unfollow, dan status following pada profil publik
 - `public/js/like.js` - mengelola toggle like asynchronous, optimistic UI, update counter, dan rollback saat request gagal
 - `public/css/style.css` - menambahkan styling tombol like, follow, network list, dan state interaktif
-- `resources/views/components/post-card.blade.php` - menampilkan tombol like untuk user login dan memuat script like sekali
+- `resources/views/components/post/card.blade.php` - memuat script untuk interaksi like sekali
 - `resources/views/components/post-comment.blade.php` - menampilkan kontrol delete sesuai authorization
-- `resources/views/user/_network-person.blade.php` - partial untuk item user pada daftar network
+- `resources/views/user/network-person.blade.php` - partial untuk item user pada daftar network
 - `resources/views/user/index_network.blade.php` - halaman followers/following user sendiri dengan tab dan pagination
 - `resources/views/user/show_network.blade.php` - halaman network milik user publik
 - `resources/views/user/index.blade.php` - menjadikan statistik followers/following sebagai link ke network
