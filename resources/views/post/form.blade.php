@@ -15,8 +15,7 @@
                 <div class="card-body p-4 p-md-5">
                     <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">@csrf
                         <x-form.group>
-                            <x-form.label for="content">Post content</x-form.label>
-                            <x-form.textarea id="content" name="content" rows="7" placeholder="What's on your mind?" />
+                            <x-form.textarea id="content" name="content" rows="7" placeholder="What's on your mind?" label="Post content" :value="old('content')" />
                         </x-form.group>
                         <x-form.group>
                             <x-form.label for="image">Image <span class="text-body-secondary fw-normal">(optional)</span></x-form.label>

@@ -16,24 +16,25 @@
                     <form action="{{ route('me.update') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <x-form.group class="text-center pb-3">
+                        <x-form.group class="text-center">
                             <img src="{{ asset('images/profile-avatar.svg') }}" alt="Profile picture" class="avatar avatar-lg rounded-circle border mb-3">
-                            <label class="form-label fw-semibold d-block" for="image">Profile picture</label>
-                            <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                            <x-form.label for="image" class="d-block">Profile picture</x-form.label>
+                            <x-form.input type="file" name="image" id="image" class="form-control" accept="image/*" />
                         </x-form.group>
-                        <div class="row g-3 mb-3">
+                        <div class="row">
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold" for="name">Name</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Full name">
+                                <x-form.group>
+                                    <x-form.input type="text" name="name" id="name" label="Name" class="form-control" placeholder="Full name" />
+                                </x-form.group>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold" for="username">Username</label>
-                                <input type="text" name="username" id="username" class="form-control" placeholder="@username">
+                                <x-form.group>
+                                    <x-form.input type="text" name="username" id="username" label="Username" class="form-control" placeholder="@username" />
+                                </x-form.group>
                             </div>
                         </div>
                         <x-form.group>
-                            <label class="form-label fw-semibold" for="caption">Short bio</label>
-                            <textarea name="caption" id="caption" class="form-control" rows="4" placeholder="Tell us a little about yourself..."></textarea>
+                            <x-form.textarea name="caption" id="caption" class="form-control" rows="4" placeholder="Tell us a little about yourself..." label="Short bio" />
                         </x-form.group>
                         <div class="d-flex justify-content-end gap-2">
                             <a href="{{ route('me') }}" class="btn btn-light rounded-pill px-4">Cancel</a>
