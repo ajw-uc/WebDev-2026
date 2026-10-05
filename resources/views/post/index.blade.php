@@ -43,7 +43,7 @@
 
     @forelse ($posts as $post)
         <div class="mb-3">
-            <x-post-card :post="$post"></x-post-card>
+            <x-post.card :post="$post"></x-post.card>
         </div>
     @empty
         <div class="card border-0 shadow-sm rounded-4">
