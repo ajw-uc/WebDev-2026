@@ -4,11 +4,8 @@ Menambahkan dukungan upload gambar pada post. File divalidasi berdasarkan tipe d
 ## File terkait
 - `app/Http/Controllers/PostController.php` - Memvalidasi, menyimpan, mengganti, dan menghapus file gambar post menggunakan `Storage`
 - `public/css/style.css` - Menambahkan styling thumbnail, preview image, dan kontrol upload
-- `resources/views/components/post-card.blade.php` - Menampilkan thumbnail gambar post dan modal preview berukuran besar
-- `resources/views/post/_form.blade.php` - Menambahkan atribut label untuk menampilkan label inputan. Menyediakan input gambar, batasan format/ukuran, preview gambar lama, dan opsi hapus gambar
-- `resources/views/post/create.blade.php` - Menambahkan `multipart/form-data` pada form create post
-- `resources/views/post/edit.blade.php` - Menambahkan `multipart/form-data` pada form edit post
-- `resources/views/home.blade.php` - Menambahkan upload gambar pada composer post di home dan token CSRF
+- `resources/views/components/post/card.blade.php` - Menampilkan thumbnail gambar post dan modal preview berukuran besar
+- `resources/views/components/post/form.blade.php` - Menambahkan `enctype="multipart/form-data"` pada form. Menyediakan input gambar, batasan format/ukuran, preview gambar lama, dan opsi hapus gambar
 
 ## Referensi
 - File Uploads: https://laravel.com/docs/13.x/filesystem#file-uploads

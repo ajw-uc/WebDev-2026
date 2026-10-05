@@ -16,17 +16,18 @@
                 <p class="small text-body-secondary mb-0">What's on your mind?</p>
             </div>
         </div>
-        <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">@csrf
-            @include('post._form', ['label' => false])
-            <div class="d-flex justify-content-between align-items-center gap-3">
-                <div>
-                    <span>Big ideas start with a little thought.</span>
+        <x-post.form hide-label="true">
+            <x-slot:actions>
+                <div class="d-flex justify-content-between align-items-center gap-3">
+                    <div>
+                        <span>Big ideas start with a little thought.</span>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4">Share post ↗</button>
+                    </div>
                 </div>
-                <div>
-                    <button type="submit" class="btn btn-primary rounded-pill px-4">Share post ↗</button>
-                </div>
-            </div>
-        </form>
+            </x-slot:actions>
+        </x-post.form>
     </div></section>
     <div class="d-flex align-items-center justify-content-between mb-3">
         <div>
@@ -37,7 +38,7 @@
     </div>
     <div class="d-grid gap-3">
         @foreach($posts as $post)
-            <x-post-card :post="$post"></x-post-card>
+            <x-post.card :post="$post"></x-post.card>
         @endforeach
     </div>
 
