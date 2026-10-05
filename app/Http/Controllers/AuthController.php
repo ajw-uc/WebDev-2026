@@ -57,9 +57,11 @@ class AuthController extends Controller
 
         $expectedPhrase = $request->session()->get('signup_captcha_phrase');
         if ($expectedPhrase === '' || $expectedPhrase !== $validated['captcha']) {
-            return back()->withErrors([
-                'captcha' => 'Wrong Captcha',
-            ]);
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'captcha' => 'Wrong Captcha'
+                ]);
         }
 
         $request->session()->forget('signup_captcha_phrase');
