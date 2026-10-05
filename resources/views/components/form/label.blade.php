@@ -1,3 +1,3 @@
-@if ($attributes->get('for'))
-    <label for="{{ $for }}" class="form-label fw-semibold">{{ $slot }}</label>
-@endif
+<label {{ $attributes->merge(['class' => 'form-label fw-semibold']) }}>
+    {{ $slot }}
+</label>
