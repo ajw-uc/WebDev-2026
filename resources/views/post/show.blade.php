@@ -22,7 +22,7 @@
                     </button>
                 </div>
             </div>
-            <x-post-card :post="$post"></x-post-card>
+            <x-post.card :post="$post"></x-post.card>
             <section class="card border-0 shadow-sm rounded-4 mt-4" id="comments" aria-labelledby="comments-heading">
                 <div class="card-header bg-white border-0 px-4 pt-4 pb-0 d-flex align-items-center justify-content-between">
                     <h2 class="h5 fw-bold mb-0" id="comments-heading">Comments</h2>
@@ -45,7 +45,7 @@
                         <div class="alert alert-success" role="status">{{ session('comment_status') }}</div>
                     @endif
                     @forelse ($post->comments->sortByDesc('created_at') as $comment)
-                        <x-post-comment :comment="$comment"></x-post-comment>
+                        <x-post.comment :comment="$comment"></x-post.comment>
                     @empty
                         <div class="text-center py-5">
                             <div class="fs-1 text-primary mb-2">◇</div>
