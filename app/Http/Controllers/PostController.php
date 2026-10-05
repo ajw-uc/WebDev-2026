@@ -18,14 +18,11 @@ class PostController extends Controller
         $search = trim($request->query('search', ''));
         $sort = $request->query('sort', 'latest');
 
-        // cari post berdasarkan content, username, atau nama user
-        $posts = Post::where(function (Builder $query) use ($search) {
-            $query->where('content', 'like', "%{$search}%")
-                ->orWhereHas('user', function (Builder $userQuery) use ($search) {
-                    $userQuery->where('name', 'like', "%{$search}%")
-                        ->orWhere('username', 'like', "%{$search}%");
-                });
-        })
+        $posts = Post::where('content', 'like', "%{$search}%")
+            ->orWhereHas('user', function (Builder $userQuery) use ($search) {
+                $userQuery->where('name', 'like', "%{$search}%")
+                    ->orWhere('username', 'like', "%{$search}%");
+            })
             ->orderBy('created_at', $sort === 'oldest' ? 'asc' : 'desc')
             ->paginate(10)
             ->withQueryString();
