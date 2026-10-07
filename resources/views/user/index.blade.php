@@ -57,7 +57,9 @@
     <section class="mt-5" aria-labelledby="my-posts-heading">
         <div class="d-flex align-items-center justify-content-between mb-3">
             <h2 class="h4 fw-bold mb-0" id="my-posts-heading">My posts</h2>
-            <span class="badge text-bg-light rounded-pill">{{ $posts->total() }}</span>
+            @if(!$posts->isEmpty()) 
+                <a href="{{ route('post.create') }}" class="btn btn-primary rounded-pill px-4">Create new post ↗</a>
+            @endif
         </div>
         @if ($posts->isEmpty())
             <div class="card border-0 shadow-sm rounded-4">
