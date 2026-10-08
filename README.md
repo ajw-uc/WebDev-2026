@@ -6,13 +6,6 @@ Menambahkan fitur untuk mengirim ringkasan lima post terbaru dari akun yang diik
 php artisan make:mailable FollowedUsersFeedMail
 ```
 
-## Perintah untuk membuat notification
-```
-php artisan make:notification CommentNotification
-php artisan make:notification LikeNotification
-php artisan make:notification FollowNotification
-```
-
 ## Perintah untuk menjalankan queue
 ```
 php artisan queue:work
@@ -25,17 +18,12 @@ php artisan queue:work
 - Setiap post pada email memiliki link menuju detail post.
 
 ## File terkait
-- `app/Http/Controllers/NotificationController.php` - mengelola daftar notifikasi dan penandaan read
 - `app/Http/Controllers/FollowedUsersFeedController.php` - menyediakan preview dan mengantrekan email feed untuk user terverifikasi
 - `app/Mail/FollowedUsersFeedMail.php` - mailable queued yang mengambil lima post terbaru dari akun yang diikuti
-- `app/Notifications/CommentNotification.php` - notifikasi komentar melalui database dan email queue
-- `app/Notifications/LikeNotification.php` - notifikasi like melalui database dan email queue
-- `app/Notifications/FollowNotification.php` - notifikasi follow melalui database dan email queue
+- `app/Notifications/CommentNotification.php` - menerapkan ShouldQueue
+- `app/Notifications/LikeNotification.php` - menerapkan ShouldQueue
+- `app/Notifications/FollowNotification.php` - menerapkan ShouldQueue
 - `resources/views/emails/followed-users-feed.blade.php` - template HTML email ringkasan feed
-- `resources/views/notifications/index.blade.php` - menampilkan notifikasi, state unread, waktu relatif, dan pagination
-- `resources/views/layout/default.blade.php` - menampilkan notifikasi terbaru dan link ke halaman lengkap
-- `database/migrations/2026_09_16_032220_create_notifications_table.php` - menyediakan tabel penyimpanan notifikasi database
-- `routes/web.php` - menambahkan route preview dan send feed dengan middleware `auth` serta `verified`
 
 ## Referensi
 - Mailables: https://laravel.com/docs/13.x/mail
