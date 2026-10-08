@@ -62,6 +62,8 @@ class PostController extends Controller
 
                 if ($request->hasFile('image')) {
                     $storedImage = $request->file('image')->store("post/image/{$post->id}", 'public');
+
+                    // jika berhasil, maka update kolom image di post
                     $post->image = $storedImage;
                     $post->save();
                 }
@@ -69,11 +71,14 @@ class PostController extends Controller
                 return $post;
             });
         } catch (Throwable $exception) {
+            // hapus file jika sudah berhasil disimpan
             if ($storedImage !== null) {
                 Storage::disk('public')->delete($storedImage);
             }
 
-            throw $exception;
+            return back()->withInput()->withErrors([
+                'image' => $exception->getMessage()
+            ]);
         }
 
         return redirect()->route('post.show', ['id' => $post->id]);
