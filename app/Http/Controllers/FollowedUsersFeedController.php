@@ -16,7 +16,7 @@ class FollowedUsersFeedController extends Controller
 
     public function send(Request $request): RedirectResponse
     {
-        Mail::to($request->user()->email)->queue(new FollowedUsersFeedMail($request->user()));
+        Mail::to($request->user()->email)->send(new FollowedUsersFeedMail($request->user()));
 
         return back()->with('status', 'Feed berhasil dikirim ke email Anda.');
     }
