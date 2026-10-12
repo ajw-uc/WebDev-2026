@@ -47,6 +47,7 @@ php artisan make:test ExampleTest --unit
 - `tests/Feature/ExampleTest.php` - menguji response dasar aplikasi
 - `tests/Unit/NotificationUnitTest.php` - menguji channel notification database dan mail
 - `tests/Unit/ExampleTest.php` - contoh dasar unit test Pest
+- `tests/Unit/UserUnitTest.php` - menguji tampilan username sudah ada prefix @
 
 ## Implementasi yang diuji
 - `app/Http/Controllers/NotificationController.php` - mengelola daftar notifikasi dan penandaan read
@@ -70,12 +71,6 @@ composer install
 php artisan migrate
 php artisan storage:link
 php artisan serve
-```
-
-Konfigurasikan database dan mailer pada `.env`. Untuk memproses email dan notifikasi yang masuk queue, jalankan worker pada terminal terpisah:
-
-```bash
-php artisan queue:work
 ```
 
 Preview HTML feed tersedia di route `feed.email.preview`. Pengiriman feed dilakukan melalui route `feed.email.send` untuk user yang login dan sudah memverifikasi email.
