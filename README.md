@@ -41,7 +41,7 @@ php artisan make:test ExampleTest --unit
 ```
 
 ## File test
-- `tests/Pest.php` - mengaktifkan `RefreshDatabase` untuk feature test
+- `tests/Pest.php` - mengaktifkan `RefreshDatabase`
 - `tests/Feature/AuthFeatureTest.php` - menguji login dan signup termasuk validasi CAPTCHA
 - `tests/Feature/SocialFeatureTest.php` - menguji post, komentar, like/unlike, follow/unfollow, dan update profile
 - `tests/Feature/ExampleTest.php` - menguji response dasar aplikasi
