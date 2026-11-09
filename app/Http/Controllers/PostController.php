@@ -193,6 +193,9 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         Gate::authorize('delete', $post);
+        if ($post->image) {
+            Storage::disk('public')->delete($post->image);
+        }
         $post->delete();
 
         return redirect()->route('post');
